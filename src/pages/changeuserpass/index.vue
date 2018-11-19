@@ -2,13 +2,20 @@
   <div class="xinxi">
     <div class="mod1">
       <div class="form">
-        <div><input type="text" placeholder="手机号／昵称"></div>
-        <div style="border: none"><input type="text" placeholder="请输入密码"></div>
+        <div>
+          <label>原始密码</label><input type="text" placeholder="请输入">
+        </div>
+        <div>
+          <label>输新密码</label><input type="text" placeholder="请输入">
+        </div>
+        <div style="border: none">
+          <label>确认密码</label><input type="text" placeholder="请输入">
+        </div>
       </div>
     </div>
 
     <div class="mod2">
-      <button type="button" @click="adLogin()">登录</button>
+      <button type="button">确认修改</button>
     </div>
   </div>
 </template>
@@ -18,13 +25,9 @@
     data () {
       return {}
     },
+    mounted () {
+    },
     methods: {
-      adLogin () {
-        wx.navigateTo({
-          url: '../shopguanli/main',
-          redirect: false
-        })
-      }
     }
   }
 </script>
@@ -54,14 +57,22 @@
     line-height: 49px;
     border-bottom: 1px solid #F2F2F2;
   }
-  .form div input{
-    width: 100%;
-    height: 100%;
+  .form div label{
     vertical-align: middle;
     padding-left: 20px;
+    color: #393939;
+    font-size: 14px;
+    letter-spacing: 1px;
+    float: left;
+  }
+  .form div input{
+    width: 4rem;
+    height: 49px;
+    vertical-align: middle;
     color: #8F8F8F;
     font-size: 14px;
     letter-spacing: 1px;
+    padding-left: 20px;
   }
   .mod2{
     padding-left: 24px;

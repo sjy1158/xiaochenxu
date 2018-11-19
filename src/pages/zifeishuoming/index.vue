@@ -2,13 +2,10 @@
   <div class="xinxi">
     <div class="mod1">
       <div class="form">
-        <div><input type="text" placeholder="手机号／昵称"></div>
-        <div style="border: none"><input type="text" placeholder="请输入密码"></div>
+        <div><input type="text" value="1.打给别人，对方需要安装跨业通APP吗" disabled="disabled"></div>
+        <div><input type="text" value="2.使用跨业通拨打电话需要流量吗？" disabled="disabled"></div>
+        <div style="border: none"><input type="text" value="3.对方不接通还扣平台话费吗？" disabled="disabled"></div>
       </div>
-    </div>
-
-    <div class="mod2">
-      <button type="button" @click="adLogin()">登录</button>
     </div>
   </div>
 </template>
@@ -19,12 +16,6 @@
       return {}
     },
     methods: {
-      adLogin () {
-        wx.navigateTo({
-          url: '../shopguanli/main',
-          redirect: false
-        })
-      }
     }
   }
 </script>
@@ -59,7 +50,7 @@
     height: 100%;
     vertical-align: middle;
     padding-left: 20px;
-    color: #8F8F8F;
+    color: #393939;
     font-size: 14px;
     letter-spacing: 1px;
   }

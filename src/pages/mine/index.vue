@@ -42,7 +42,7 @@
         <div class="item_Tab">
           <div class="itemtitle">
             <span>我的订单</span>
-            <span>查看更多订单</span>
+            <span @click="lookmydingdan()">查看更多订单</span>
           </div>
           <div class="tabs">
             <div @click="alldingdan()">
@@ -88,7 +88,7 @@
               <img src="/static/images/my_orderquery@3x.png" alt="">
               <p>话单查询</p>
             </div>
-            <div>
+            <div @click="zifeishuoming()">
               <img src="/static/images/my_feestatement@3x.png" alt="">
               <p>资费说明</p>
             </div>
@@ -102,7 +102,7 @@
               <img src="/static/images/collection@3x.png" alt="">
               <p>我的收藏</p>
             </div>
-            <div>
+            <div @click="maneypro()">
               <img src="/static/images/my_common_questions@3x.png" alt="">
               <p>常见问题</p>
             </div>
@@ -119,7 +119,7 @@
         <div class="aboutus_item">
           <div class="aboutus_item1" style="width: 100%;"><span>关于我们</span></div>
           <div class="aboutus_item2">
-            <div>
+            <div @click="aboutUs()">
               <img src="/static/images/my_aboutus@3x.png" alt="">
               <p>关于我们</p>
             </div>
@@ -285,6 +285,8 @@
           <img src="/static/images/kuayet.com@3x.png" alt="" style="width: 163px;height: 35px;padding-top: 15px;padding-bottom: 20px;">
         </div>
       </div>
+
+      <button @click="pay()">支付</button>
     </div>
 </template>
 
@@ -382,6 +384,61 @@
           url: '../alldingdan/main',
           redirect: false
         })
+      },
+      //跳转更多订单
+      lookmydingdan () {
+        wx.navigateTo({
+          url: '../lookadddingdan/main',
+          redirect: false
+        })
+      },
+      //跳转资费说明
+      zifeishuoming () {
+        wx.navigateTo({
+          url: '../zifeishuoming/main',
+          redirect: false
+        })
+      },
+      maneypro () {
+        wx.navigateTo({
+          url: '../changjianpro/main',
+          redirect: false
+        })
+      },
+      // 跳转关于我们
+      aboutUs () {
+        wx.navigateTo({
+          url: '../aboutus/main',
+          redirect: false
+        })
+      },
+      pay () {
+        wx.login({
+          success: function (res) {
+            if (res.code) {
+              wx.requestPayment({
+                timeStamp: '1490840662',
+                nonceStr: '5K8264ILTKCH16CQ2502SI8ZNMTM67VS',
+                package: 'prepay_id=wx2017033010242291fcfe0db70013231072',
+                signType: 'MD5',
+                paySign: '22D9B4E54AB1950F51E0649E8810ACD6',
+                success: function (res) {
+                  console.log(res)
+                }
+              })
+            }
+          }
+        })
+        // wx.requestPayment({
+        //   timeStamp: '',
+        //   nonceStr: '',
+        //   package: '',
+        //   signType: 'MD5',
+        //   paySign: '',
+        //   success: function (res) {
+        //     console.log(res)
+        //   }
+        // })
       },
       hasToken () {
         const res = this.$saveToken.getToken()

@@ -21,7 +21,9 @@ export default {
     pages: ['pages/logs/main', '^pages/index/main', 'pages/mine/main', 'pages/phone/main', 'pages/out/main', 'pages/foodday/main',
       'pages/shophome/main', 'pages/login/main', 'pages/setting/main', 'pages/changename/main', 'pages/paycode/main', 'pages/invieterlink/main',
       'pages/paydiscon/main', 'pages/changephone/main', 'pages/changepass/main', 'pages/servicecenter/main', 'pages/accountinformation/main', 'pages/adlogin/main',
-      'pages/singlequery/main', 'pages/novice/main', 'pages/feedback/main', 'pages/officialannouncement/main', 'pages/alldingdan/main'],
+      'pages/singlequery/main', 'pages/novice/main', 'pages/feedback/main', 'pages/officialannouncement/main', 'pages/alldingdan/main', 'pages/lookadddingdan/main',
+      'pages/shopguanli/main', 'pages/skychongzhi/main', 'pages/changeuserpass/main', 'pages/zifeishuoming/main', 'pages/changjianpro/main', 'pages/aboutus/main',
+      'pages/founding/main', 'pages/activity/main'],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
@@ -46,6 +48,12 @@ export default {
           text: "附近商家",
           iconPath: "static/images/control_merchant_normal@3x.png",
           selectedIconPath: "static/images/control_merchant_select@3x.png"
+        },
+        {
+          pagePath: "pages/founding/main",
+          text: "发现",
+          iconPath: "static/images/control_found_normal@3x.png",
+          selectedIconPath: "static/images/control_found_sel@3x.png"
         },
         // {
         //   pagePath: "pages/phone/main",
