@@ -29,7 +29,7 @@
       <!--tab分类列表-->
       <div class="mod4">
         <ul>
-          <li v-for="(item,index) in bigTypearr">
+          <li v-for="(item,index) in bigTypearr" @click="openList(item.bigestTypeId)">
             <img :src="item.typeImageUrl" alt="" :key="index" style="width: 25px;height: 25px;">
             <p>{{item.typeName}}</p>
           </li>
@@ -46,8 +46,8 @@
           {{item.typeName}}
         </div>
       </scroll-view>
-      <swiper :current="params.productType-1" @change="changeTab" id="swiperContent" :style="{height:height*imgUrls.length+'px'}">
-        <swiper-item>
+      <div :current="params.productType-1" @change="changeTab" id="swiperContent" style="height: auto;">
+        <div class="swiperall">
             <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;" @click="openXiangqing(item.id)">
               <img :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;">
               <div style="height: 100%;margin-left: 133px;" class="Listall">
@@ -61,8 +61,8 @@
                 <p><span>可抵:{{item.deduction}}元</span></p>
               </div>
             </div>
-        </swiper-item>
-      </swiper>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -150,6 +150,7 @@ export default {
     async getBigtype (params) {
       var bigTypearr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getPowerPurchaserBigType",params);
       this.bigTypearr = bigTypearr.list;
+      console.log(JSON.stringify(this.bigTypearr))
     },
     async getTabarr (params) {
       var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getType",params);
@@ -160,6 +161,21 @@ export default {
       console.log(id);
       wx.navigateTo({
         url: '../out/main?id=' + id,
+        redirect: false
+      })
+    },
+    //打开商品列表
+    openList (id) {
+      var name;
+      if (id=='1') {
+        name = '淘宝'
+      } else if (id=='2') {
+        name = '京东'
+      } else if (id=='3') {
+        name = '拼多多'
+      }
+      wx.navigateTo({
+        url: '../allshops/main?typeId=' + name,
         redirect: false
       })
     },
@@ -309,11 +325,12 @@ export default {
     background: #fff;
     margin-left: 90px;
   }
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    color: transparent;
-  }
+  /*::-webkit-scrollbar {*/
+    /*width: 6px;*/
+    /*height: 6px;*/
+    /*background-color: #ffffff;*/
+    /*display: none;*/
+  /*}*/
   .tabbar{
     padding: 0px 12px;
     font-size: 16px;
@@ -365,7 +382,7 @@ export default {
     border-radius: 10px;
     /*border: 10px;*/
   }
-  swiper-item p:first-child{
+  .swiperall p:first-child{
     overflow:hidden;
     text-overflow:ellipsis;
     display:-webkit-box;

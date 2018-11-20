@@ -83,7 +83,7 @@
     </div>
     <!--列表数据-->
     <div class="nearList" style="padding: 14px;">
-      <div class="nearList_item" v-for="(item,index) in nearList" :index="index" :key="index" :data-index="index" @click="openShophome()">
+      <div class="nearList_item" v-for="(item,index) in nearList" :index="index" :key="index" :data-index="index" @click="openShophome(item.shopId)">
         <div style="position: relative">
           <img :src="item.shopHeadImageUrl" alt="">
         </div>
@@ -221,9 +221,9 @@ export default {
       })
     },
     //打开商家主页
-    openShophome () {
+    openShophome (id) {
       wx.navigateTo({
-        url: '../shophome/main',
+        url: '../shophome/main?shopId=' + id,
         redirect: false
       })
     }

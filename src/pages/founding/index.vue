@@ -4,12 +4,7 @@
       <p>活动预告</p>
       <div class="scroll">
         <div>
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542622818221&di=b9345e6f544a980894eb11a6577b5e96&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F12%2F58%2F15%2F97Q58PICsji.jpg" alt="" @click="activity()">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542622912496&di=c3894b44ad1f04408f7fd4643af76ce8&imgtype=0&src=http%3A%2F%2Fpic39.nipic.com%2F20140313%2F8144208_123631373000_2.jpg" alt="" @click="activity()">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542622818221&di=b9345e6f544a980894eb11a6577b5e96&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F12%2F58%2F15%2F97Q58PICsji.jpg" alt="" @click="activity()">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542622912496&di=c3894b44ad1f04408f7fd4643af76ce8&imgtype=0&src=http%3A%2F%2Fpic39.nipic.com%2F20140313%2F8144208_123631373000_2.jpg" alt="" @click="activity()">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542622818221&di=b9345e6f544a980894eb11a6577b5e96&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F12%2F58%2F15%2F97Q58PICsji.jpg" alt="" @click="activity()">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542622912496&di=c3894b44ad1f04408f7fd4643af76ce8&imgtype=0&src=http%3A%2F%2Fpic39.nipic.com%2F20140313%2F8144208_123631373000_2.jpg" alt="" @click="activity()">
+          <img v-for="item in headerList" :src="item.image" alt="" @click="activity(item.id)">
         </div>
       </div>
     </div>
@@ -17,25 +12,11 @@
     <div class="mod2">
       <p>活动回顾</p>
       <ul>
-        <li @click="activity()">
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543218720&di=62af8c373b00a84957cb68336e54c88e&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.tjqtn.com%2Ffile%2Fupload%2F201406%2F10%2F11-20-29-39-312.jpg" alt="">
+        <li v-for="item in actList" @click="activity(item.id)">
+          <img :src="item.image" alt="">
           <div style="display: inline-block">
-            <p class="title">“梦想不死，彩旗不止”全国地面推广接力活动会-4月25日济南站</p>
-            <p class="time">2018-04-26 11:46</p>
-          </div>
-        </li>
-        <li @click="activity()">
-          <img src="https://goss.veer.com/creative/vcg/veer/800water/veer-158305631.jpg" alt="">
-          <div style="display: inline-block">
-            <p class="title">“梦想不死，彩旗不止”全国地面推广接力活动会-4月25日济南站</p>
-            <p class="time">2018-04-26 11:46</p>
-          </div>
-        </li>
-        <li @click="activity()">
-          <img src="https://goss.veer.com/creative/vcg/veer/800water/veer-302497582.jpg" alt="">
-          <div style="display: inline-block">
-            <p class="title">“梦想不死，彩旗不止”全国地面推广接力活动会-4月25日济南站</p>
-            <p class="time">2018-04-26 11:46</p>
+            <p class="title">{{item.title}}</p>
+            <p class="time">{{item.time}}</p>
           </div>
         </li>
       </ul>
@@ -46,7 +27,20 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        params: {
+          type: 0,
+          pageNum: 1,
+          num: 5
+        },
+        params2: {
+          type: 1,
+          pageNum: 1,
+          num: 5
+        },
+        headerList: [],
+        actList: []
+      }
     },
     methods: {
       activity () {
@@ -54,7 +48,31 @@
           url: '../activity/main',
           redirect: false
         })
+      },
+      async getList (params) {
+        var headerList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/activityNotice', params)
+        this.headerList = this.headerList.concat(headerList)
+      },
+      async getListact (params) {
+        var actList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/activityNotice', params)
+        this.actList = this.actList.concat(actList.list)
+        // console.log(JSON.stringify(this.actList))
       }
+    },
+    onLoad () {
+      this.getList(this.params)
+      this.getListact(this.params2)
+    },
+    onPullDownRefresh () {
+      this.headerList = []
+      this.getList(this.params)
+      this.actList = []
+      this.params2.pageNum = 1
+      this.getListact(this.params2)
+    },
+    onReachBottom () {
+      this.params2.pageNum += 1
+      this.getListact(this.params2)
     }
   }
 </script>
@@ -103,7 +121,7 @@
     display: none;
   }
   .scroll div{
-    width: 800px;
+    /*width: 800px;*/
     height: 81px;
   }
   .mod2 ul li{

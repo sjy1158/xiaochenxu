@@ -5,8 +5,8 @@
       <div class="header">
         <img src="/static/images/head_portraityuan.png" alt="">
         <div class="headertext">
-          <p>星巴克Starbucks</p>
-          <p>官方旗舰店</p>
+          <p>{{shopObj.title}}</p>
+          <p>{{shopObj.shopType}}</p>
         </div>
       </div>
     </div>
@@ -14,25 +14,10 @@
     <!--优惠券-->
     <div class="mod2">
       <ul>
-        <li>
+        <li v-for="item in shopObj.deductionList">
           <img src="/static/images/disconbg.png" alt="">
-          <div style="float: left" class="leftdis">¥100</div>
-          <div style="float: right" class="rightdis">¥10</div>
-        </li>
-        <li>
-          <img src="/static/images/disconbg.png" alt="">
-          <div style="float: left" class="leftdis">¥100</div>
-          <div style="float: right" class="rightdis">¥10</div>
-        </li>
-        <li>
-          <img src="/static/images/disconbg.png" alt="">
-          <div style="float: left" class="leftdis">¥100</div>
-          <div style="float: right" class="rightdis">¥10</div>
-        </li>
-        <li>
-          <img src="/static/images/disconbg.png" alt="">
-          <div style="float: left" class="leftdis">¥100</div>
-          <div style="float: right" class="rightdis">¥10</div>
+          <div style="float: left" class="leftdis">¥{{item.requireValue}}</div>
+          <div style="float: right" class="rightdis">¥{{item.value}}</div>
         </li>
       </ul>
     </div>
@@ -42,8 +27,8 @@
       <div class="location">
         <img src="/static/images/merchant_address_box@2x.png" alt="" class="bgimg">
         <img src="/static/images/merchant_address_location@2x.png" alt="" style="height: 17px;width: 16px;" class="logimg">
-        <div style="height: 100%;" class="locationText">
-          <span style="padding-left: 3px;">杭州市江干区新塘路58号星巴克</span>
+        <div style="height: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="locationText">
+          <span style="padding-left: 3px;">{{shopObj.specificAddress}}</span>
         </div>
         <div class="locationicons">
           <div class="daohang" style="float: left" @click="goLocation()">
@@ -72,63 +57,13 @@
         <!--明星产品-->
         <swiper-item>
           <ul class="shopcontent">
-            <li>
+            <li v-for="item in allList" style="position: relative">
               <div>
-                <img src="http://img4.imgtn.bdimg.com/it/u=3823744570,2679992710&fm=11&gp=0.jpg" alt="">
-                <p style="padding-left: 12px;padding-right: 12px;" class="title">新疆精河头茬枸杞，精选“中国枸杞之乡”</p>
-                <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;" class="discon">
-                  <span style="color:#393939;font-size: 12px;vertical-align: middle">¥288</span>
-                  <span style="color:#FF0000;font-size: 14px;float: right;vertical-align: middle">可抵<span style="font-size: 12px;">¥</span>150</span>
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <img src="http://img4.imgtn.bdimg.com/it/u=3823744570,2679992710&fm=11&gp=0.jpg" alt="">
-                <p style="padding-left: 12px;padding-right: 12px;" class="title">新疆精河头茬枸杞，精选“中国枸杞之乡”</p>
-                <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;" class="discon">
-                  <span style="color:#393939;font-size: 12px;vertical-align: middle">¥288</span>
-                  <span style="color:#FF0000;font-size: 14px;float: right;vertical-align: middle">可抵<span style="font-size: 12px;">¥</span>150</span>
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <img src="http://img4.imgtn.bdimg.com/it/u=3823744570,2679992710&fm=11&gp=0.jpg" alt="">
-                <p style="padding-left: 12px;padding-right: 12px;" class="title">新疆精河头茬枸杞，精选“中国枸杞之乡”</p>
-                <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;" class="discon">
-                  <span style="color:#393939;font-size: 12px;vertical-align: middle">¥288</span>
-                  <span style="color:#FF0000;font-size: 14px;float: right;vertical-align: middle">可抵<span style="font-size: 12px;">¥</span>150</span>
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <img src="http://img4.imgtn.bdimg.com/it/u=3823744570,2679992710&fm=11&gp=0.jpg" alt="">
-                <p style="padding-left: 12px;padding-right: 12px;" class="title">新疆精河头茬枸杞，精选“中国枸杞之乡”</p>
-                <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;" class="discon">
-                  <span style="color:#393939;font-size: 12px;vertical-align: middle">¥288</span>
-                  <span style="color:#FF0000;font-size: 14px;float: right;vertical-align: middle">可抵<span style="font-size: 12px;">¥</span>150</span>
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <img src="http://img4.imgtn.bdimg.com/it/u=3823744570,2679992710&fm=11&gp=0.jpg" alt="">
-                <p style="padding-left: 12px;padding-right: 12px;" class="title">新疆精河头茬枸杞，精选“中国枸杞之乡”</p>
-                <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;" class="discon">
-                  <span style="color:#393939;font-size: 12px;vertical-align: middle">¥288</span>
-                  <span style="color:#FF0000;font-size: 14px;float: right;vertical-align: middle">可抵<span style="font-size: 12px;">¥</span>150</span>
-                </p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <img src="http://img4.imgtn.bdimg.com/it/u=3823744570,2679992710&fm=11&gp=0.jpg" alt="">
-                <p style="padding-left: 12px;padding-right: 12px;" class="title">新疆精河头茬枸杞，精选“中国枸杞之乡”</p>
-                <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;" class="discon">
-                  <span style="color:#393939;font-size: 12px;vertical-align: middle">¥288</span>
-                  <span style="color:#FF0000;font-size: 14px;float: right;vertical-align: middle">可抵<span style="font-size: 12px;">¥</span>150</span>
+                <img :src="item.imageUrl" alt="">
+                <p style="padding-left: 12px;padding-right: 12px;" class="title">{{item.productName}}</p>
+                <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;position: absolute;bottom: 5px;width: 100%;" class="discon">
+                  <span style="color:#393939;font-size: 12px;vertical-align: middle">¥{{item.price}}</span>
+                  <span style="color:#FF0000;font-size: 14px;vertical-align: middle;padding-left: 1rem;">可抵<span style="font-size: 12px;">¥</span>{{item.subPrice}}</span>
                 </p>
               </div>
             </li>
@@ -141,25 +76,21 @@
               <p class="titlexiangqing">店家环境</p>
               <div class="box">
                 <ul>
-                  <li><img src="http://pic1.win4000.com/wallpaper/2017-11-13/5a0905bae9f95.jpg" alt=""></li>
-                  <li><img src="http://pic1.win4000.com/wallpaper/2017-11-13/5a0905bae9f95.jpg" alt=""></li>
-                  <li><img src="http://pic1.win4000.com/wallpaper/2017-11-13/5a0905bae9f95.jpg" alt=""></li>
-                  <li><img src="http://pic1.win4000.com/wallpaper/2017-11-13/5a0905bae9f95.jpg" alt=""></li>
-                  <li><img src="http://pic1.win4000.com/wallpaper/2017-11-13/5a0905bae9f95.jpg" alt=""></li>
+                  <li v-for="item in shopObj.shopImageList"><img :src="item.imageUrl" alt=""></li>
                 </ul>
               </div>
             </div>
             <div>
               <p class="titlexiangqing">服务时间</p>
-              <p class="text">9:00-10:00</p>
+              <p class="text">{{shopObj.startTime}}-{{shopObj.stopTime}}</p>
             </div>
             <div>
               <p class="titlexiangqing">商家介绍</p>
-              <p class="text">星享更同步。现在您可以通过Apple Watch打开星巴克移动应用。更便捷地 支付、查询星享卡还有查找附近门店。</p>
+              <p class="text">{{shopObj.introduce}}</p>
             </div>
             <div>
               <p class="titlexiangqing">商家公告</p>
-              <p class="text">星享更同步。现在您可以通过Apple Watch打开星巴克移动应用。更便捷地 支付、查询星享卡还有查找附近门店。</p>
+              <p class="text">{{shopObj.notice}}</p>
             </div>
           </div>
         </swiper-item>
@@ -172,13 +103,29 @@
 </template>
 
 <script>
+  import getRouter from '../../utils/getOptions'
   export default {
     data () {
       return {
-        currentTab: 0
+        currentTab: 0,
+        params: {
+          shopId: ''
+        },
+        shopObj: '',
+        allList: []
       }
     },
     methods: {
+      async getList (params) {
+        var shophome = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopInformation', params)
+        this.shopObj = shophome
+      },
+      //获取商家主页列表
+      async getallList (params) {
+        var allshopList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopProduct', params)
+        console.log(JSON.stringify(allshopList))
+        this.allList = allshopList.list
+      },
       // 电弧拨打
       callphone () {
         wx.makePhoneCall({
@@ -210,6 +157,11 @@
           url: '../paydiscon/main'
         })
       }
+    },
+    onLoad () {
+      this.params.shopId = getRouter().shopId
+      this.getList(this.params)
+      this.getallList(this.params)
     }
   }
 </script>
@@ -392,19 +344,19 @@
     /*justify-content: center;*/
   }
   .shopcontent li{
-    flex:2 1 auto;
     height: 261px;
     width: 45%;
     /*box-shadow: 5px 10px 5px #F3F3F3;*/
     margin-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 5px #F3F3F3;
     /*background: #586c94;*/
   }
   .shopcontent li div{
     border-radius: 10px;
     width: 100%;
-    box-shadow: 5px 10px 5px #F3F3F3;
   }
   .shopcontent li img{
     height: 182px;
@@ -414,6 +366,13 @@
   .shopcontent li p.title{
     color: #393939;
     font-size: 12px;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
   .shopcontent li p.discon{
 
