@@ -41,12 +41,12 @@
     <div class="contain" style="padding-top: 10px;position: relative">
       <div style="display: inline-block;position: absolute;font-size: 16px;font-weight: bold;letter-spacing: 1px;padding-left: 10px;">全部商品</div>
       <scroll-view scroll-x="true" class="top">
-        <div class="tabbar" :class="{'tabbar-bottom':params.productType-1==index}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(index)">
-          <div v-show="params.productType-1==index" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
+        <div class="tabbar" :class="{'tabbar-bottom':params.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId)">
+          <div v-show="params.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
           {{item.typeName}}
         </div>
       </scroll-view>
-      <div :current="params.productType-1" @change="changeTab" id="swiperContent" style="height: auto;">
+      <div :current="params.productType" @change="changeTab" id="swiperContent" style="height: auto;">
         <div class="swiperall">
             <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;" @click="openXiangqing(item.id)">
               <img :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;">
@@ -129,7 +129,7 @@ export default {
     },
     clickTab (e) {
       // this.params.productType = e;
-      this.params.productType = e+1;
+      this.params.productType = e;
       this.imgUrls = [];
       this.params.pageNum = 1;
       this.getList(this.params);
@@ -150,11 +150,12 @@ export default {
     async getBigtype (params) {
       var bigTypearr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getPowerPurchaserBigType",params);
       this.bigTypearr = bigTypearr.list;
-      console.log(JSON.stringify(this.bigTypearr))
     },
     async getTabarr (params) {
       var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getType",params);
       this.tabArr = tabarr.list
+      this.params.productType = this.tabArr[0].typeId
+      this.getList(this.params)
     },
     // 跳转详情
     openXiangqing (id) {

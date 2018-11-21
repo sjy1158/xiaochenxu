@@ -4,12 +4,12 @@
         <input type="text" placeholder="输入淘宝天猫商品名称／宝贝标题搜索">
     </div>
     <scroll-view scroll-x="true" class="top">
-      <div class="tabbar" :class="{'tabbar-bottom':params2.productType-1==index}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(index)">
-        <div v-show="params2.productType-1==index" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
+      <div class="tabbar" :class="{'tabbar-bottom':params2.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId)">
+        <div v-show="params2.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
         {{item.typeName}}
       </div>
     </scroll-view>
-    <div :current="params2.productType-1" @change="changeTab" id="swiperContent" :style="{height:height*imgUrls.length+'px'}">
+    <div :current="params2.productType" @change="changeTab" id="swiperContent" :style="{height:height*imgUrls.length+'px'}">
       <div class="contentListall">
         <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;box-shadow:0px 0px 8px #f2f2f2;" @click="openXiangqing(item.id)">
           <img :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;">
@@ -58,9 +58,11 @@
       async getTabarr (params) {
         var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getType", params)
         this.tabArr = tabarr.list
+        this.params2.productType = this.tabArr[0].typeId
+        this.getList(this.params2)
       },
       clickTab (id) {
-        this.params2.productType = id+1
+        this.params2.productType = id
         this.imgUrls = [];
         this.params2.pageNum = 1;
         this.getList(this.params2);
@@ -71,7 +73,9 @@
       }
     },
     onLoad () {
+      this.imgUrls = [];
       this.params.source = getRouter().typeId
+      this.params2.source = getRouter().typeId
       this.getTabarr(this.params)
       this.getList(this.params2)
     },

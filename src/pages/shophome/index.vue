@@ -13,7 +13,7 @@
 
     <!--优惠券-->
     <div class="mod2">
-      <ul>
+      <ul :style="{width:width*shopObj.deductionList.length+'px'}">
         <li v-for="item in shopObj.deductionList">
           <img src="/static/images/disconbg.png" alt="">
           <div style="float: left" class="leftdis">¥{{item.requireValue}}</div>
@@ -57,7 +57,7 @@
         <!--明星产品-->
         <swiper-item>
           <ul class="shopcontent">
-            <li v-for="item in allList" style="position: relative">
+            <li v-for="item in allList" style="position: relative" @click="showdailog()">
               <div>
                 <img :src="item.imageUrl" alt="">
                 <p style="padding-left: 12px;padding-right: 12px;" class="title">{{item.productName}}</p>
@@ -99,6 +99,36 @@
 
     <!--按钮-->
     <div style="height: 49px;background: #F08400;width: 100%;color: #FFFFFF;font-size: 18px;line-height: 49px;text-align: center;letter-spacing: 1px;position: fixed;bottom: 0px;" @click="payDiscon()">立即抵扣买单</div>
+
+    <!--底部弹框-->
+        <div :class="show?'son1':'son2'">
+          <div style="height: 120px;width: 100% ;border: 1px solid #F2F2F2">
+            <img src="http://img0.imgtn.bdimg.com/it/u=1687016623,1327106801&fm=26&gp=0.jpg" alt="" style="width: 108px;height: 108px;position: absolute;left: 15px;top: -5%;border-radius: 10px;vertical-align: middle;border: 5px solid white;box-shadow:0px 0px 8px #f2f2f2;">
+            <img src="/static/images/merchant_wrong@3x.png" alt="" style="width: 24px;height: 24px;position: absolute;right: 15px;top: 5px" @click="closedailog()">
+            <div style="position: absolute;left: 143px;top: 17px;vertical-align: middle" class="choosesize">
+              <p style="color: #FF0000;font-size: 18px;font-weight: bold;letter-spacing: 1px;">¥138</p>
+              <p style="color:#393939;font-size: 12px;letter-spacing: 1px;">本商品已用余额抵扣<span style="color: #FF0000">150元</span></p>
+              <p style="color: #393939;font-size: 12px;letter-spacing: 1px;">选择 数量 重量</p>
+            </div>
+          </div>
+
+          <div class="buynum" style="padding-left: 15px;padding-right: 15px;">
+            <div style="width: 100%;height: 37px;margin-top: 1.2rem;line-height: 37px;">
+              <span style="color: #393939;font-size: 14px;letter-spacing: 1px;vertical-align: middle">购买数量</span>
+              <div style="display: inline-block;float: right">
+                <div style="background: #F2F2F2;color: #8F8F8F;font-size: 28px;display: inline-block;width: 48px;height: 37px;text-align: center;vertical-align: middle;line-height: 37px;">-</div>
+                <span style="margin-left: 22px;vertical-align: middle">1</span>
+                <div style="background: #F2F2F2;margin-left: 22px;color: #8F8F8F;font-size: 28px;display: inline-block;width: 48px;height: 37px;text-align: center;vertical-align: middle;line-height: 37px;">+</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn" style="padding-left: 28px;padding-right: 28px;">
+            <button type="button" style="width: 100%;height: 2rem;background: #FF0000;border-radius: 50px;margin-bottom:15px;color: white;letter-spacing: 1px;font-size: 16px;line-height: 2rem;margin-top: 1.2rem;">确定</button>
+          </div>
+        </div>
+
+    <div style="width: 100%;height: 100%;background: rgba(0,0,0,0.5);position: absolute;top: 0px;left: 0px;" v-show="show"></div>
   </div>
 </template>
 
@@ -112,7 +142,9 @@
           shopId: ''
         },
         shopObj: '',
-        allList: []
+        allList: [],
+        show: false,
+        width: "110"
       }
     },
     methods: {
@@ -156,9 +188,16 @@
         wx.navigateTo({
           url: '../paydiscon/main'
         })
+      },
+      showdailog () {
+        this.show = true
+      },
+      closedailog () {
+        this.show = false
       }
     },
     onLoad () {
+      this.show = false
       this.params.shopId = getRouter().shopId
       this.getList(this.params)
       this.getallList(this.params)
@@ -202,7 +241,6 @@
     display: none;
   }
   .mod2 ul{
-    width: 800px;
     height: 39px;
   }
   .mod2 ul li{
@@ -415,5 +453,34 @@
   .box li img{
     height: 88px;
     width: 114px;
+  }
+
+ /*弹框样式*/
+  .father{
+    width: 100%;
+    height: 280px;
+  }
+  .son2{
+    display: none;
+  }
+  .son1{
+    animation: sport .2s ease-in;
+    transform: translateY(0px);
+    width: 100%;
+    height: 274px;
+    background: white;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 99999999999999;
+  }
+  @keyframes sport {
+    0% {transform: translateY(75px);opacity: 0}
+    /*25% {transform: translateY(50px);opacity: 0.5}*/
+    /*50% {transform: translateY(25px);opacity: 0.5}*/
+    100% {transform: translateY(0px);opacity: 1}
+  }
+  .choosesize p{
+    margin-bottom: 7px;
   }
 </style>
