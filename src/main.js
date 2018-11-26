@@ -23,7 +23,7 @@ export default {
       'pages/paydiscon/main', 'pages/changephone/main', 'pages/changepass/main', 'pages/servicecenter/main', 'pages/accountinformation/main', 'pages/adlogin/main',
       'pages/singlequery/main', 'pages/novice/main', 'pages/feedback/main', 'pages/officialannouncement/main', 'pages/alldingdan/main', 'pages/lookadddingdan/main',
       'pages/shopguanli/main', 'pages/skychongzhi/main', 'pages/changeuserpass/main', 'pages/zifeishuoming/main', 'pages/changjianpro/main', 'pages/aboutus/main',
-      'pages/founding/main', 'pages/activity/main', 'pages/allshops/main'],
+      'pages/founding/main', 'pages/activity/main', 'pages/allshops/main', 'pages/player/main'],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
@@ -48,6 +48,12 @@ export default {
           text: "附近商家",
           iconPath: "static/images/control_merchant_normal@3x.png",
           selectedIconPath: "static/images/control_merchant_select@3x.png"
+        },
+        {
+          pagePath: "pages/player/main",
+          text: "直播",
+          iconPath: "static/images/my_icon_normal@3x.png",
+          selectedIconPath: "static/images/my_icon_selected@3x.png"
         },
         {
           pagePath: "pages/founding/main",

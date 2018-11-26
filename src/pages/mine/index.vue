@@ -287,6 +287,10 @@
       </div>
 
       <button @click="pay()">支付</button>
+
+      <div class="container">
+        <live-player id="myplayer" src="rtmp://58.22.190.56:1936/live/pag/192.168.10.2/7302/001533/0/MAIN/TCP?cnid=2&&pnid=2&&auth=50" autoplay="true" mode="live" bindstatechange="statechange" binderror="error" style="width: 100%; height: 225px;" />
+      </div>
     </div>
 </template>
 
@@ -299,7 +303,8 @@
         params: {
           userId: ''
         },
-        userInfo: ''
+        userInfo: '',
+        player: ''
       }
     },
     methods: {
@@ -483,6 +488,7 @@
     },
     onLoad () {
       this.hasToken()
+      this.player = wx.createLivePlayerContext('myplayer')
     }
   }
 </script>
