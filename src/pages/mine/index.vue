@@ -10,7 +10,7 @@
         </div>
         <!--头像-->
         <div class="headerImg">
-          <img :src="userInfo.user.headImage" alt="" class="headertitleImg" style="vertical-align: middle;">
+            <img :src="userInfo.user.headImage" alt="" class="headertitleImg" style="vertical-align: middle;">
           <!--昵称不封-->
           <div style="width: 165px;display: inline-block;height: 53px;vertical-align: middle;padding-top: 0.2rem;padding-left: 10px;color: white">
             <p style="font-size: 16px;">
@@ -286,11 +286,6 @@
         </div>
       </div>
 
-      <button @click="pay()">支付</button>
-
-      <div class="container">
-        <live-player id="myplayer" src="rtmp://58.22.190.56:1936/live/pag/192.168.10.2/7302/001533/0/MAIN/TCP?cnid=2&&pnid=2&&auth=50" autoplay="true" mode="live" bindstatechange="statechange" binderror="error" style="width: 100%; height: 225px;" />
-      </div>
     </div>
 </template>
 
@@ -417,34 +412,6 @@
           redirect: false
         })
       },
-      pay () {
-        wx.login({
-          success: function (res) {
-            if (res.code) {
-              wx.requestPayment({
-                timeStamp: '1490840662',
-                nonceStr: '5K8264ILTKCH16CQ2502SI8ZNMTM67VS',
-                package: 'prepay_id=wx2017033010242291fcfe0db70013231072',
-                signType: 'MD5',
-                paySign: '22D9B4E54AB1950F51E0649E8810ACD6',
-                success: function (res) {
-                  console.log(res)
-                }
-              })
-            }
-          }
-        })
-        // wx.requestPayment({
-        //   timeStamp: '',
-        //   nonceStr: '',
-        //   package: '',
-        //   signType: 'MD5',
-        //   paySign: '',
-        //   success: function (res) {
-        //     console.log(res)
-        //   }
-        // })
-      },
       hasToken () {
         const res = this.$saveToken.getToken()
         this.params.userId = res.token
@@ -533,9 +500,10 @@
     top: 30px;
   }
   .headerImg .headertitleImg{
-    padding-left: 18px;
+    margin-left: 18px;
     height: 53px;
     width: 53px;
+    border-radius: 50%;
   }
   .btncontent{
     width: 244px;

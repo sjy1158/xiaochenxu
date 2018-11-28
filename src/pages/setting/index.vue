@@ -1,7 +1,7 @@
 <template>
   <div class="setTings">
     <div class="mod1" @click="chooseImage()">
-      <img :src="src" alt="">
+      <img :src="src" alt="" style="border-radius: 50%;">
       <p>点击修改头像</p>
     </div>
 
@@ -133,12 +133,16 @@
   .mod1 img{
     height: 67px;
     width: 67px;
-    padding-top: 15px;
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    margin-left: -33.5px;
   }
   .mod1 p{
-    padding-top: 8px;
+    margin-top: 85px;
     color: #8F8F8F;
     font-size: 14px;
+    text-align: center;
   }
   .mod2 div{
     width: 100%;

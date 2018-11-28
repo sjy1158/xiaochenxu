@@ -74,11 +74,11 @@
           <div class="shopxiangqing">
             <div>
               <p class="titlexiangqing">店家环境</p>
-              <div class="box">
-                <ul>
+              <scroll-view scroll-x="true" class="box">
+                <ul :style="{width:widthimg*shopObj.shopImageList.length+'px'}">
                   <li v-for="item in shopObj.shopImageList"><img :src="item.imageUrl" alt=""></li>
                 </ul>
-              </div>
+              </scroll-view>
             </div>
             <div>
               <p class="titlexiangqing">服务时间</p>
@@ -124,11 +124,9 @@
           </div>
 
           <div class="btn" style="padding-left: 28px;padding-right: 28px;">
-            <button type="button" style="width: 100%;height: 2rem;background: #FF0000;border-radius: 50px;margin-bottom:15px;color: white;letter-spacing: 1px;font-size: 16px;line-height: 2rem;margin-top: 1.2rem;">确定</button>
+            <button type="button" style="width: 100%;height: 2rem;background: #FF0000;border-radius: 50px;margin-bottom:15px;color: white;letter-spacing: 1px;font-size: 16px;line-height: 2rem;margin-top: 1.2rem;" @click="suredan()">确定</button>
           </div>
         </div>
-
-    <div style="width: 100%;height: 100%;background: rgba(0,0,0,0.5);position: absolute;top: 0px;left: 0px;" v-show="show"></div>
   </div>
 </template>
 
@@ -144,7 +142,8 @@
         shopObj: '',
         allList: [],
         show: false,
-        width: "110"
+        width: "110",
+        widthimg: '88'
       }
     },
     methods: {
@@ -194,6 +193,13 @@
       },
       closedailog () {
         this.show = false
+      },
+      //跳转确认订单
+      suredan () {
+        wx.navigateTo({
+          url: '../suredingdan/main',
+          redirect: false
+        })
       }
     },
     onLoad () {
@@ -435,7 +441,7 @@
   }
   .box{
     width: 100%;
-    height: 88px;
+    height: auto;
     margin-top: 20px;
     overflow-x:scroll;overflow-y:hidden;
   }
