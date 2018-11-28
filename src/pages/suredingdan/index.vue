@@ -76,7 +76,7 @@
     <div class="footer">
       <span style="color: #8F8F8F;font-size: 14px;letter-spacing: 1px;padding-left: 10px;">合计：</span>
       <span style="color: #FF0000;font-size: 14px;letter-spacing: 1px;">¥138</span>
-      <div style="display: inline-block;width: 160px;height: 41px;background: #FF0000;position: absolute;right: 27px;line-height: 41px;color: white;letter-spacing: 1px;top: 50%;margin-top: -20.5px;text-align: center;font-size: 16px;border-radius: 50px;" @click="pay()">提交订单</div>
+      <div style="display: inline-block;width: 160px;height: 41px;background: #FF0000;position: absolute;right: 27px;line-height: 41px;color: white;letter-spacing: 1px;top: 50%;margin-top: -20.5px;text-align: center;font-size: 16px;border-radius: 50px;" @click="getDingdan(params)">提交订单</div>
     </div>
   </div>
 </template>
@@ -87,25 +87,40 @@
     data () {
       return {
         region: citys,
-        placevalue: ''
+        placevalue: '',
+        params: {
+          userId: '502366d6',
+          word: 111,
+          addressId: 13,
+          productId: 25,
+          num: 1
+        }
       }
     },
     methods: {
+      async getDingdan (params) {
+        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/wxAppPay/appPay', params)
+        this.pay(data)
+      },
       bindRegionChange (e) {
         this.placevalue = e.target.value[0] + '-' + e.target.value[1] + '-' + e.target.value[2]
       },
-      pay () {
+      pay (data) {
+        const _this = this
         wx.login({
           success: function (res) {
             if (res.code) {
               wx.requestPayment({
-                timeStamp: '1490840662',
-                nonceStr: '5K8264ILTKCH16CQ2502SI8ZNMTM67VS',
-                package: 'prepay_id=wx2017033010242291fcfe0db70013231072',
+                timeStamp: data.timestamp,
+                nonceStr: data.noncestr,
+                package: 'prepay_id=' + data.prepayid,
                 signType: 'MD5',
-                paySign: '22D9B4E54AB1950F51E0649E8810ACD6',
+                paySign: data.sign,
                 success: function (res) {
-                  console.log(res)
+                  console.log('支付成功')
+                },
+                fail: function (res) {
+                  console.log('支付失败')
                 }
               })
             }

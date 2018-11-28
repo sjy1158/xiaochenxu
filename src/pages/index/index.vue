@@ -127,9 +127,9 @@ export default {
     tabActive (index) {
       this.shopActiveindex = index;
     },
-    clickTab (e) {
+    clickTab (id) {
       // this.params.productType = e;
-      this.params.productType = e;
+      this.params.productType = id;
       this.imgUrls = [];
       this.params.pageNum = 1;
       this.getList(this.params);

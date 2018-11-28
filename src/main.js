@@ -50,10 +50,10 @@ export default {
           selectedIconPath: "static/images/control_merchant_select@3x.png"
         },
         {
-          pagePath: "pages/player/main",
-          text: "直播",
-          iconPath: "static/images/my_icon_normal@3x.png",
-          selectedIconPath: "static/images/my_icon_selected@3x.png"
+          pagePath: "pages/phone/main",
+          text: "电话",
+          iconPath: "static/images/control_phone_normal@3x.png",
+          selectedIconPath: "static/images/control_phone_select@3x.png"
         },
         {
           pagePath: "pages/founding/main",

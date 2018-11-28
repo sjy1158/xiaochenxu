@@ -31,6 +31,12 @@ const net = {
             resolve(res.data.data);
           } else if (res.data.code == 400) {
             resolve(res.data);
+          } else {
+            wx.showToast({
+              title: '服务器繁忙',
+              icon: 'none',
+              duration: 2000
+            })
           }
         },
         fail: function (error) {
@@ -39,6 +45,11 @@ const net = {
           wx.hideNavigationBarLoading();
           wx.hideLoading();
           reject(error);//请求失败
+          wx.showToast({
+            title: '服务器繁忙',
+            icon: 'none',
+            duration: 2000
+          });
         },
         complete: function () {
           wx.stopPullDownRefresh();
