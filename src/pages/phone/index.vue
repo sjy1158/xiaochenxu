@@ -1,28 +1,73 @@
 <template>
   <div class="phonecontent">
-    <div class="mod">
-      <ul>
-        <li @click="callPhone()">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <span style="text-align: center">{{phonenum}}</span>
-          <span style="font-size: 14px!important;float: right;color: #F08400;letter-spacing: 1px;margin-right: 20px;">添加联系人</span>
-        </li>
-        <li @click="callPhone()">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <span style="text-align: center">{{phonenum}}</span>
-          <span style="font-size: 14px!important;float: right;color: #F08400;letter-spacing: 1px;margin-right: 20px;">添加联系人</span>
-        </li>
-        <li @click="callPhone()">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <span style="text-align: center">{{phonenum}}</span>
-          <span style="font-size: 14px!important;float: right;color: #F08400;letter-spacing: 1px;margin-right: 20px;">添加联系人</span>
-        </li>
-        <li @click="callPhone()">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <span style="text-align: center">{{phonenum}}</span>
-          <span style="font-size: 14px!important;float: right;color: #F08400;letter-spacing: 1px;margin-right: 20px;">添加联系人</span>
-        </li>
-      </ul>
+    <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" :style="{height:height+'px'}">
+      <div v-for="item in bannerArr" :key="index">
+        <swiper-item>
+          <img :src="item.imageUrl" class="slide-image" style="width: 100%;height: 100%;"/>
+        </swiper-item>
+      </div>
+    </swiper>
+    <!--轮播-->
+    <div class="form">
+      <div class="wrap">
+        <div>
+          <p class="num">1</p>
+          <p class="yinwen">abc</p>
+        </div>
+        <div>
+          <p class="num">2</p>
+          <p class="yinwen">ABC</p>
+        </div>
+        <div>
+          <p class="num">3</p>
+          <p class="yinwen">DEF</p>
+        </div>
+      </div>
+      <div class="wrap">
+        <div>
+          <p class="num">4</p>
+          <p class="yinwen">GHI</p>
+        </div>
+        <div>
+          <p class="num">5</p>
+          <p class="yinwen">JKL</p>
+        </div>
+        <div>
+          <p class="num">6</p>
+          <p class="yinwen">MNO</p>
+        </div>
+      </div>
+      <div class="wrap">
+        <div>
+          <p class="num">7</p>
+          <p class="yinwen">PQRS</p>
+        </div>
+        <div>
+          <p class="num">8</p>
+          <p class="yinwen">TUV</p>
+        </div>
+        <div>
+          <p class="num">9</p>
+          <p class="yinwen">WXYZ</p>
+        </div>
+      </div>
+      <div class="wrap">
+        <div>
+          <img src="/static/images/control_phone_normal@3x.png" alt="">
+          <p class="yinwen" style="color: #393939!important;font-size: 12px!important;">通话记录</p>
+        </div>
+        <div style="line-height: 65px!important;">
+          <p class="num">0</p>
+        </div>
+        <div style="line-height: 65px!important;">
+          <img src="/static/images/control_phone_normal@3x.png" alt="">
+        </div>
+      </div>
+      <div class="wrap">
+        <div style="line-height: 65px;">
+          <img src="/static/images/telephone_call_button@3x.png" alt="" style="width: 40px;height: 40px;position: absolute;top: 50%;margin-top: -20px;left: 50%;margin-left: -20px">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -36,10 +81,25 @@
           userId: this.$saveToken.getToken().token,
           caller: '18868457449',
           callee: '13782509632'
-        }
+        },
+        params2: {
+          userId: this.$saveToken.getToken().token
+        },
+        indicatorDots: true,
+        autoplay: true,
+        interval: 5000,
+        duration: 900,
+        circular: true,
+        height: '',
+        bannerArr: []
       }
     },
     methods: {
+      async getBanner (params) {
+        var bannerArr = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getImageUrl', params)
+        this.bannerArr = bannerArr.list
+        // console.log(bannerArr.list);
+      },
       callPhone () {
         const _this = this
         wx.showActionSheet({
@@ -59,7 +119,28 @@
             }
           }
         })
+      },
+      getHeight (res) {
+        const _this = this
+        var query = wx.createSelectorQuery()
+        query.select('.form').boundingClientRect(function (rect) {
+          _this.height = res.windowHeight - rect.height
+        }).exec()
       }
+    },
+    onPullDownRefresh () {
+      this.getBanner(this.params2)
+    },
+    onLoad () {
+      const _this = this
+      this.getHeight()
+      wx.getSystemInfo({
+        success: function (res) {
+          _this.getHeight(res)
+          // this.height = res.windowHeight
+        }
+      })
+      this.getBanner(this.params2)
     }
   }
 </script>
@@ -106,4 +187,44 @@
   ul li span{
     vertical-align: middle;
   }
+  .form{
+    position: fixed;
+    height: auto;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    background: white;
+  }
+  .wrap{
+    display: flex;
+  }
+  .wrap div{
+    flex: 1;
+    height: 65px;
+    text-align: center;
+    line-height: 60px;
+    position: relative;
+  }
+  .wrap div img{
+    width: 16px;
+    height: 16px;
+  }
+  .wrap div p.num{
+    color: #4A4A4A;
+    font-size: 30px;
+  }
+  .wrap div p.yinwen{
+    color: #8F8F8F;
+    position: absolute;
+    top: 50px;
+    font-size: 14px;
+    height: 14px;
+    width: 80px;
+    left: 50%;
+    margin-left: -40px;
+    line-height: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
 </style>

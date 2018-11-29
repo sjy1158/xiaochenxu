@@ -24,7 +24,14 @@
       <div style="position: absolute;top: 52px;z-index: 99999999999999999;width: 92%;padding-left: 4%;padding-right: 4%;">
         <input type="text" style="height: 28px;" placeholder="输入商品名称／宝贝标题搜索">
       </div>
-      <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular">
+      <div style="padding-left: 7%;padding-right: 7%;">
+        <div style="width: 86%;height: 30px;position: absolute;top: 75px;z-index: 99999999999999;" class="hotall">
+          <ul :style="{width:width*hotarr.length+'px'}">
+            <li v-for="item in hotarr">{{item}}</li>
+          </ul>
+        </div>
+      </div>
+      <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" style="width: 100%;height: 200px!important;">
         <div v-for="item in bannerArr" :key="index">
           <swiper-item>
             <image :src="item.advertiseImageUrl" class="slide-image" />
@@ -126,6 +133,8 @@ export default {
       str: '',
       //banner
       bannerArr: [],
+      hotarr: [],
+      width: '40',
       indicatorDots: true,
       autoplay: true,
       interval: 5000,
@@ -143,13 +152,17 @@ export default {
   methods: {
     //获取banner
     async getBanner (params) {
-      var bannerArr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getBanner",params);
+      var bannerArr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/getShopAdvertiseImage",params);
       this.bannerArr = bannerArr.list;
       // console.log(bannerArr.list);
     },
     async getTabtype () {
       var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/getShopTypeByLevel?level=1",{});
       this.tabArr = tabarr.list.slice(0,10);
+    },
+    async getHot () {
+      var hotarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/getHotWord",{});
+      this.hotarr = hotarr.list
     },
     getDate () {
       var date = new Date().getMonth() + 1 + '月' + new Date().getDate() + '日';
@@ -236,28 +249,55 @@ export default {
     this.getlocation();
     var params = {
       source: '电商购'
-    };
-    this.getBanner(params);
-    this.getTabtype();
-    this.getHeaderLine();
-    this.date = this.getDate();
+    }
+    this.getBanner(params)
+    this.getHot()
+    this.getTabtype()
+    this.getHeaderLine()
+    this.date = this.getDate()
   },
   onPullDownRefresh () {
-    wx.showNavigationBarLoading();
-    this.getlocation();
-    this.bannerArr = [];
+    wx.showNavigationBarLoading()
+    this.getlocation()
+    this.bannerArr = []
     var params = {
       source: '电商购'
-    };
-    this.getBanner(params);
-    this.tabArr = [];
-    this.getTabtype();
-    this.getHeaderLine();
+    }
+    this.getBanner(params)
+    this.hotarr = []
+    this.getHot()
+    this.tabArr = []
+    this.getTabtype()
+    this.getHeaderLine()
   }
 }
 </script>
 
 <style>
+  .hotall{
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  .hotall::-webkit-scrollbar{
+    display: none;
+  }
+  .hotall ul{
+    width: auto;
+    height: 30px;
+  }
+  .hotall ul li{
+    height: 30px;
+    display: inline-block;
+    /*margin-left: 15px;*/
+    line-height: 30px;
+    font-size: 12px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-right: 10px;
+    /*position: relative;*/
+  }
+  /*热词语*/
   .titlelocation{
     width: 100%;
     height: 40px;

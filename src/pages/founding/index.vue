@@ -4,7 +4,7 @@
       <p>活动预告</p>
       <div class="scroll">
         <div>
-          <img v-for="item in headerList" :src="item.image" alt="" @click="activity(item.id)">
+          <img v-for="item in headerList" :src="item.image" alt="" @click="activity(params.type,item.id)">
         </div>
       </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="mod2">
       <p>活动回顾</p>
       <ul>
-        <li v-for="item in actList" @click="activity(item.id)">
+        <li v-for="item in actList" @click="activity(params2.type,item.id)">
           <img :src="item.image" alt="">
           <div style="display: inline-block">
             <p class="title">{{item.title}}</p>
@@ -43,9 +43,9 @@
       }
     },
     methods: {
-      activity () {
+      activity (type,id) {
         wx.navigateTo({
-          url: '../activity/main',
+          url: '../activity/main?id=' + id + '&type=' + type,
           redirect: false
         })
       },

@@ -19,7 +19,45 @@
 </template>
 
 <script>
+  import getRouter from '../../utils/getOptions'
   export default {
+    data () {
+      return {
+        params: {
+          type: '',
+          id: ''
+        },
+        dataobj: {}
+      }
+    },
+    methods: {
+      async getActive (params) {
+        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/FindActivityDetalis', params)
+        console.log(data)
+        data.activityNotice.time = this.changeTime(data.activityNotice.time)
+        data.activityNotice.detalis = JSON.parse(data.activityNotice.detalis)
+        this.dataobj = data.activityNotice;
+      },
+      changeTime (time){
+        var weekarry = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+        var time = new Date(time);
+        var month = time.getMonth()+1;
+        month = month<10?"0"+month:month;
+        var hours = time.getHours()<10?"0"+time.getHours():time.getHours();
+        var minues = time.getMinutes()<10?"0"+time.getMinutes():time.getMinutes();
+        var second = time.getSeconds()<10?"0"+time.getSeconds():time.getSeconds();
+        // 星期五 2018-05-25 13:44:54
+        //   var date = weekarry[time.getDay()]+time.getFullYear()+'-'+month+'-'+time.getDate()+hours+":"+minues+":"+second;
+        this.str = "<span>"+weekarry[time.getDay()]+'&nbsp;'+time.getFullYear()+'-'+month+'-'+time.getDate()+"&nbsp;"+hours+":"+minues+":"+second+"</span>"
+        // return date;
+      }
+    },
+    onLoad () {
+      this.params.type = getRouter().type
+      this.params.id = getRouter().id
+      this.getActive(this.params)
+      // this.getActive()
+    }
   }
 </script>
 

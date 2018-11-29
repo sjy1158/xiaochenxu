@@ -11,8 +11,8 @@
       <div class="name" style="margin-top: 10px;" @click="changePhone(userInfo.user.phoneId)"><label>修改手机号：</label><input type="text" v-model="userInfo.user.phoneId" disabled="disabled"><span>修改</span></div>
       <div class="name" @click="changePass(userInfo.user.phoneId)"><label>修改密码：</label><input type="password" placeholder="某某某" v-model="userInfo.user.password" disabled="disabled"><span>修改</span></div>
       <div class="name" style="margin-top: 10px;">
-        <label>清除缓存：</label><input type="text" value="82.2M" disabled="disabled">
-        <span style="color: #F08400">清除缓存</span>
+        <label>清除缓存：</label><input type="text" v-model="currentSize" disabled="disabled">
+        <span style="color: #F08400" @click="cleanSys()">清除缓存</span>
       </div>
     </div>
 
@@ -28,6 +28,7 @@
       return {
         src: '/static/images/my_head@3x.png',
         userInfo: '',
+        currentSize: '',
         params: {
           userId: ''
         }
@@ -104,12 +105,37 @@
         const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getUserInformation', params)
         this.userInfo = data
         this.src = this.userInfo.user.headImage
+      },
+      getSys () {
+        var res = wx.getStorageInfoSync()
+        this.currentSize = res.currentSize + 'kb'
+      },
+      //清除缓存
+      cleanSys () {
+        const _this = this
+        wx.showModal({
+          title: '提示',
+          content: '是否清除缓存？',
+          success: function (res) {
+            if (res.confirm) {
+              wx.clearStorageSync()
+              wx.showToast({
+                title: '清除成功',
+                icon: 'none'
+              })
+              _this.currentSize = '0kb'
+            } else {
+              return
+            }
+          }
+        })
       }
     },
     onLoad () {
       const data = this.$saveToken.getToken()
       this.params.userId = data.token
       this.getUserinfo(this.params)
+      this.getSys()
     }
   }
 </script>
