@@ -16,7 +16,11 @@
     </div>
     <div class="success" style="margin-top: 10px;font-size: 16px;color: white;text-align: center;letter-spacing: 1px;">
       呼叫成功 正在接通 请稍后
-      <span class="dotting"></span>
+      <div class="threedot">
+        <div class="point one"></div>
+        <div class="point two"></div>
+        <div class="point three"></div>
+      </div>
     </div>
 
     <button style="font-size: 16px;letter-spacing: 1px;color: white;height: 50px;width: 165px;background: red;position:absolute;line-height: 50px;border-radius: 50px;bottom: 59px;left: 50%;margin-left: -82.5px;">返回等待接听</button>
@@ -177,22 +181,27 @@
     font-size: 34px;
     margin-top: 20px;
   }
-  /*但个点*/
-.dotting {
-  display: inline-block; width: 10px; min-height: 2px;
-  padding-right: 2px;
-  border-left: 2px solid currentColor; border-right: 2px solid currentColor;
-  background-color: currentColor; background-clip: content-box;
-  box-sizing: border-box;
-  animation: dot 4s infinite step-start both;
-}
-.dotting:before { content: '…'; } /* IE8 */
-.dotting::before { content: ''; }
-:root .dotting { margin-left: 2px; padding-left: 2px; } /* IE9+ */
 
-@keyframes dot {
-  25% { border-color: transparent; background-color: transparent; }          /* 0个点 */
-  50% { border-right-color: transparent; background-color: transparent; }    /* 1个点 */
-  75% { border-right-color: transparent; }                                   /* 2个点 */
+.threedot{
+  display: inline-block;
+}
+.point{
+  width:5px;
+  height:5px;
+  background:white;
+  border-radius:50%;
+  float:left;
+  margin-right:5px;
+  animation:myAnima 1.2s ease-in-out infinite;
+}
+.two{
+  animation-delay: 200ms;
+}
+.three{
+  animation-delay: 400ms;
+}
+@keyframes myAnima{
+  from {opacity: 0.8}
+  to{opacity: 0}
 }
 </style>

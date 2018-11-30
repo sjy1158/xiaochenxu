@@ -10,7 +10,7 @@
     <!--轮播-->
     <div class="form">
       <div class="wrap">
-        <input v-show="clickshow==true" type="text" v-model="params.callee" maxlength="11" style="width: 100%;text-align: center;font-size:26px;height: 50px;line-height: 50px;letter-spacing: 1px;">
+        <input v-show="clickshow==true" disabled="disabled" type="text" v-model="params.callee" maxlength="11" style="width: 100%;text-align: center;font-size:26px;height: 50px;line-height: 50px;letter-spacing: 1px;">
       </div>
       <div class="wrap">
         <div @click="numClick(1)">
