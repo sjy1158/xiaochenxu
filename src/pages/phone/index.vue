@@ -1,6 +1,6 @@
 <template>
   <div class="phonecontent">
-    <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" :style="{height:height+'px'}">
+    <swiper v-show="clickshow==false" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" class="" :style="{height:height+'px'}">
       <div v-for="item in bannerArr" :key="index">
         <swiper-item>
           <img :src="item.imageUrl" class="slide-image" style="width: 100%;height: 100%;"/>
@@ -10,62 +10,65 @@
     <!--轮播-->
     <div class="form">
       <div class="wrap">
-        <div>
+        <input v-show="clickshow==true" type="text" v-model="params.callee" maxlength="11" style="width: 100%;text-align: center;font-size:26px;height: 50px;line-height: 50px;letter-spacing: 1px;">
+      </div>
+      <div class="wrap">
+        <div @click="numClick(1)">
           <p class="num">1</p>
           <p class="yinwen">abc</p>
         </div>
-        <div>
+        <div @click="numClick(2)">
           <p class="num">2</p>
           <p class="yinwen">ABC</p>
         </div>
-        <div>
+        <div @click="numClick(3)">
           <p class="num">3</p>
           <p class="yinwen">DEF</p>
         </div>
       </div>
       <div class="wrap">
-        <div>
+        <div @click="numClick(4)">
           <p class="num">4</p>
           <p class="yinwen">GHI</p>
         </div>
-        <div>
+        <div @click="numClick(5)">
           <p class="num">5</p>
           <p class="yinwen">JKL</p>
         </div>
-        <div>
+        <div @click="numClick(6)">
           <p class="num">6</p>
           <p class="yinwen">MNO</p>
         </div>
       </div>
       <div class="wrap">
-        <div>
+        <div @click="numClick(7)">
           <p class="num">7</p>
           <p class="yinwen">PQRS</p>
         </div>
-        <div>
+        <div @click="numClick(8)">
           <p class="num">8</p>
           <p class="yinwen">TUV</p>
         </div>
-        <div>
+        <div @click="numClick(9)">
           <p class="num">9</p>
           <p class="yinwen">WXYZ</p>
         </div>
       </div>
       <div class="wrap">
         <div>
-          <img src="/static/images/control_phone_normal@3x.png" alt="">
+          <img src="/static/images/telephone_call_records@3x.png" alt="">
           <p class="yinwen" style="color: #393939!important;font-size: 12px!important;">通话记录</p>
         </div>
-        <div style="line-height: 65px!important;">
+        <div style="line-height: 65px!important;" @click="numClick(0)">
           <p class="num">0</p>
         </div>
-        <div style="line-height: 65px!important;">
-          <img src="/static/images/control_phone_normal@3x.png" alt="">
+        <div style="line-height: 65px!important;" @click="deletenum()">
+          <img src="/static/images/telephone_cancellation@3x.png" alt="" style="width: 20px!important;">
         </div>
       </div>
       <div class="wrap">
         <div style="line-height: 65px;">
-          <img src="/static/images/telephone_call_button@3x.png" alt="" style="width: 40px;height: 40px;position: absolute;top: 50%;margin-top: -20px;left: 50%;margin-left: -20px">
+          <img src="/static/images/telephone_call_button@3x.png" alt="" style="width: 40px;height: 40px;position: absolute;top: 50%;margin-top: -20px;left: 50%;margin-left: -20px" @click="call()">
         </div>
       </div>
     </div>
@@ -80,7 +83,7 @@
         params: {
           userId: this.$saveToken.getToken().token,
           caller: '18868457449',
-          callee: '13782509632'
+          callee: ''
         },
         params2: {
           userId: this.$saveToken.getToken().token
@@ -91,7 +94,9 @@
         duration: 900,
         circular: true,
         height: '',
-        bannerArr: []
+        bannerArr: [],
+        numarr: [],
+        clickshow: false
       }
     },
     methods: {
@@ -99,6 +104,42 @@
         var bannerArr = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getImageUrl', params)
         this.bannerArr = bannerArr.list
         // console.log(bannerArr.list);
+      },
+      numClick (num) {
+        this.clickshow = true
+        if (this.params.callee.length!=11) {
+          this.params.callee += num
+        } else {
+          return false
+        }
+      },
+      //删除最后一位字符
+      deletenum () {
+        if (this.params.callee.length!=1) {
+          this.params.callee = this.params.callee.substring(0, this.params.callee.length - 1)
+        } else {
+          this.clickshow = false
+          this.params.callee = ''
+        }
+      },
+      call () {
+        if (!(/^1[34578]\d{9}$/.test(this.params.callee))) {
+          wx.showToast({
+            title: '手机号码有误',
+            icon: 'none'
+          })
+          return false
+        } else {
+          this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/doPhone', this.params)
+          wx.showToast({
+            title: '呼叫成功',
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '../waitlisten/main?phonenum=' + this.params.callee,
+            redirect: false
+          })
+        }
       },
       callPhone () {
         const _this = this
