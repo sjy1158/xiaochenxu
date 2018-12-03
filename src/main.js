@@ -29,7 +29,7 @@ export default {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black',
-      enablePullDownRefresh: true,
+      enablePullDownRefresh: true
     },
     tabBar: {
       color: "#474747",

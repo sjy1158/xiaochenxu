@@ -59,7 +59,7 @@
           <ul class="shopcontent">
             <li v-for="item in allList" style="position: relative" @click="showdailog()">
               <div>
-                <img :src="item.imageUrl" alt="">
+                <img class="srtImg" :src="item.imageUrl" alt="">
                 <p style="padding-left: 12px;padding-right: 12px;" class="title">{{item.productName}}</p>
                 <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;position: absolute;bottom: 5px;width: 100%;" class="discon">
                   <span style="color:#393939;font-size: 12px;vertical-align: middle">¥{{item.price}}</span>
@@ -488,5 +488,23 @@
   }
   .choosesize p{
     margin-bottom: 7px;
+  }
+
+  /*懒加载*/
+  .srtImg{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>

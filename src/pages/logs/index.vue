@@ -97,7 +97,7 @@
         <div style="font-size: 12px;position: absolute;left: 5.5rem;" class="itemText">
           <p>{{item.title}}</p>
           <p style="width: 50%;margin-top: 0.2rem;">
-            <img src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;">
+            <img class="srtImg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;">
             <span style="font-size: 10px;color: #393939;padding-left: 6px;">{{item.shopType}}</span>
             <span style="font-size: 10px;color: #393939;padding-left: 17px;">人均消费{{item.averageMoney}}元</span>
             <span style="float: right;font-size: 10px;color: #393939;vertical-align: middle">{{item.distance}}m</span>
@@ -530,5 +530,23 @@ export default {
   }
   .nearList_item:last-child{
     margin-bottom: 0px!important;
+  }
+
+  /*懒加载*/
+  .srtImg{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>

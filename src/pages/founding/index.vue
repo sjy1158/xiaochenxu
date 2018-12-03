@@ -4,7 +4,7 @@
       <p>活动预告</p>
       <div class="scroll">
         <div>
-          <img v-for="item in headerList" :src="item.image" alt="" @click="activity(params.type,item.id)">
+          <img class="srtImg" v-for="item in headerList" :src="item.image" alt="" @click="activity(params.type,item.id)">
         </div>
       </div>
     </div>
@@ -13,7 +13,7 @@
       <p>活动回顾</p>
       <ul>
         <li v-for="item in actList" @click="activity(params2.type,item.id)">
-          <img :src="item.image" alt="">
+          <img class="srtImg" :src="item.image" alt="">
           <div style="display: inline-block">
             <p class="title">{{item.title}}</p>
             <p class="time">{{item.time}}</p>
@@ -148,5 +148,22 @@
     color: #717171!important;
     font-size: 12px;
     font-weight: normal!important;
+  }
+
+  .srtImg{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>

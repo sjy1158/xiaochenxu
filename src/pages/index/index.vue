@@ -30,7 +30,7 @@
       <div class="mod4">
         <ul>
           <li v-for="(item,index) in bigTypearr" @click="openList(item.bigestTypeId)">
-            <img :src="item.typeImageUrl" alt="" :key="index" style="width: 25px;height: 25px;">
+            <img class="srtImg" :src="item.typeImageUrl" alt="" :key="index" style="width: 25px;height: 25px;">
             <p>{{item.typeName}}</p>
           </li>
         </ul>
@@ -49,7 +49,7 @@
       <div :current="params.productType" @change="changeTab" id="swiperContent" style="height: auto;">
         <div class="swiperall">
             <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;" @click="openXiangqing(item.id)">
-              <img :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;">
+              <img class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;">
               <div style="height: 100%;margin-left: 133px;" class="Listall">
                 <p style="font-size: 12px;">
                   <img v-if="item.source=='京东'" src="/static/images/jingdong@3x.png" alt="">
@@ -140,7 +140,9 @@ export default {
     },
     async getList (params) {
       var List = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getProductListByType",params);
-      this.imgUrls = this.imgUrls.concat(List.list)
+      for (var i = 0; i<List.list.length;i++) {
+        this.imgUrls.push(List.list[i])
+      }
     },
     async getBanner (params) {
       var bannerArr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getBanner",params);
@@ -389,5 +391,24 @@ export default {
     display:-webkit-box;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
+  }
+
+
+  /*懒加载*/
+  .srtImg{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>
