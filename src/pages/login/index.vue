@@ -25,6 +25,7 @@
 
 <script>
   import CryptoJS from 'crypto-js'
+  import getRouter from '../../utils/getOptions'
   export default {
     data () {
       return {
@@ -32,11 +33,13 @@
           phoneId: '',
           password: ''
         },
-        password: ''
+        password: '',
+        url: ''
       }
     },
     methods: {
       async Login (params) {
+        const _this = this
         const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userOperation/login', params)
         if (data.code == 400) {
           wx.showToast({
@@ -52,7 +55,7 @@
             success: function (res) {
               setTimeout(function () {
                 wx.switchTab({
-                  url: '../mine/main',
+                  url: _this.url,
                   success: function (res) {
                     const page = getCurrentPages().pop()
                     page.onLoad()
@@ -90,6 +93,9 @@
           this.Login(this.params)
         }
       }
+    },
+    onLoad () {
+      this.url = getRouter().url
     }
   }
 </script>

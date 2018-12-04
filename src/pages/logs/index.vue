@@ -217,7 +217,7 @@ export default {
         url: 'http://apis.map.qq.com/ws/geocoder/v1/?location='+lat+','+lng+'&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
         success: function (res) {
           if (res.statusCode==200) {
-            console.log(res.data.result.address_component.city);
+            console.log(res.data.result.address_component);
             _this.city = res.data.result.address_component.city
             // console.log(res.data.result.address_component.city)
           }else{

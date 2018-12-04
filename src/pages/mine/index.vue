@@ -417,7 +417,7 @@
         this.params.userId = res.token
         if (res.token == undefined) {
           wx.navigateTo({
-            url: '../login/main',
+            url: '../login/main?url=' + '../mine/main',
             redirect: false
           })
         } else {

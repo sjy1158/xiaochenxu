@@ -27,8 +27,8 @@
       <div class="location">
         <img src="/static/images/merchant_address_box@2x.png" alt="" class="bgimg">
         <img src="/static/images/merchant_address_location@2x.png" alt="" style="height: 17px;width: 16px;" class="logimg">
-        <div style="height: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="locationText">
-          <span style="padding-left: 3px;">{{shopObj.specificAddress}}</span>
+        <div style="height: 100%;white-space: nowrap;overflow:hidden;text-overflow: ellipsis;" class="locationText">
+          <div style="padding-left: 3px;width: auto;margin-left: -2.5rem;" class="local">{{shopObj.specificAddress}}</div>
         </div>
         <div class="locationicons">
           <div class="daohang" style="float: left" @click="goLocation()">
@@ -150,11 +150,11 @@
       async getList (params) {
         var shophome = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopInformation', params)
         this.shopObj = shophome
+        this.getLocation(shophome.specificAddress,shophome.latitude,shophome.longitude)
       },
       //获取商家主页列表
       async getallList (params) {
         var allshopList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopProduct', params)
-        console.log(JSON.stringify(allshopList))
         this.allList = allshopList.list
       },
       // 电弧拨打
@@ -163,15 +163,16 @@
           phoneNumber: '18868457449'
         })
       },
-      goLocation () {
-        wx.getLocation({//获取当前经纬度
-          type: 'wgs84', //返回可以用于wx.openLocation的经纬度，官方提示bug: iOS 6.3.30 type 参数不生效，只会返回 wgs84 类型的坐标信息
+      goLocation (name, lat, long) {
+        wx.getLocation({
+          type: 'gcj02',
           success: function (res) {
-            wx.openLocation({//​使用微信内置地图查看位置。
-              latitude: 22.5542080000,//要去的纬度-地址
-              longitude: 113.8878770000,//要去的经度-地址
-              name: "宝安中心A地铁口",
-              address:'宝安中心A地铁口'
+            wx.openLocation({
+              latitude: lat,
+              longitude: long,
+              name: '余杭区阿里',
+              address: '余杭区阿里',
+              scale: 28
             })
           }
         })
@@ -207,11 +208,21 @@
       this.params.shopId = getRouter().shopId
       this.getList(this.params)
       this.getallList(this.params)
+      this.scrollText()
     }
   }
 </script>
 
 <style scoped>
+  .marquee {
+    　white-space: nowrap;
+  　　overflow:-webkit-marquee;
+  　　width: 170px;
+  　　-webkit-marquee-direction:left;
+  　　-webkit-marquee-speed:normal;
+  　　-webkit-marquee-style:scroll;
+  　　-webkit-marquee-repetition:1;
+  }
   .mod1{
     padding: 20px 20px 30px 20px;
   }
@@ -506,5 +517,18 @@
     to {
       opacity: 1;
     }
+  }
+
+  /*文字跑马灯*/
+  .local{
+    -webkit-animation: horse 5s linear 10s forwards;
+  }
+
+  @-webkit-keyframes horse
+  {
+    0%   {margin-left:-2.5rem;}
+    47%  {margin-left:220px;}
+    48%  {margin-left:220px;}
+    100% {margin-left:0px;}
   }
 </style>

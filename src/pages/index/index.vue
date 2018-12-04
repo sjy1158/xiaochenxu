@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  data: function() {
+  data () {
     return {
       params: {
         pageNum: 1,
@@ -320,7 +320,7 @@ export default {
   }
 
   .top{
-    width: 90%;
+    width: 75%;
     text-align: center;
     /*line-height: 42px;*/
     white-space: nowrap;

@@ -81,12 +81,12 @@
       return {
         phonenum: '1881881989',
         params: {
-          userId: this.$saveToken.getToken().token,
+          userId: '',
           caller: '18868457449',
           callee: ''
         },
         params2: {
-          userId: this.$saveToken.getToken().token
+          userId: ''
         },
         indicatorDots: true,
         autoplay: true,
@@ -167,22 +167,40 @@
         query.select('.form').boundingClientRect(function (rect) {
           _this.height = res.windowHeight - rect.height
         }).exec()
+      },
+      //判断token
+      hasToken () {
+        const _this = this
+        const res = this.$saveToken.getToken()
+        this.params.userId = res.token
+        this.params2.userId = res.token
+        if (res.token == undefined) {
+          wx.navigateTo({
+            url: '../login/main?url=' + '../phone/main',
+            redirect: false
+          })
+        } else {
+          _this.getHeight()
+          wx.getSystemInfo({
+            success: function (res) {
+              _this.getHeight(res)
+              // this.height = res.windowHeight
+            }
+          })
+          this.getBanner(_this.params2)
+        }
       }
     },
     onPullDownRefresh () {
-      this.getBanner(this.params2)
+      this.hasToken()
     },
     onLoad () {
-      const _this = this
-      this.getHeight()
-      wx.getSystemInfo({
-        success: function (res) {
-          _this.getHeight(res)
-          // this.height = res.windowHeight
-        }
-      })
-      this.getBanner(this.params2)
+      this.hasToken()
     }
+    // 底部点击事件
+    // onTabItemTap (options) {
+    //   console.log(11111111111)
+    // }
   }
 </script>
 
