@@ -1,6 +1,6 @@
 <template>
     <div class="centerMine">
-      <div v-if="params.userId!=undefined">
+      <div>
       <!--头部-->
       <div class="headertitle">
         <img src="/static/images/my_bg@3x.png" alt="" class="bgtitle">
@@ -31,7 +31,7 @@
               <img src="/static/images/my_balance@3x.png" alt="">
             </div>
             <div style="float: right;">
-              <div>在线充值</div>
+              <div @click="inlinechongzhi()">在线充值</div>
               <img src="/static/images/my_balance@3x.png" alt="">
             </div>
           </div>
@@ -144,148 +144,6 @@
         <img src="/static/images/kuayet.com@3x.png" alt="" style="width: 163px;height: 35px;padding-top: 15px;padding-bottom: 20px;">
       </div>
       </div>
-
-
-      <!--没有token值得时候显示-->
-      <div v-else>
-        <!--头部-->
-        <div class="headertitle">
-          <img src="/static/images/my_bg@3x.png" alt="" class="bgtitle">
-          <!--设置按钮-->
-          <div class="settingicon" @click="openLogin()">
-            <img src="/static/images/my_settings@3x.png" alt="">
-          </div>
-          <!--头像-->
-          <div class="headerImg">
-            <img src="/static/images/my_head@3x.png" alt="" class="headertitleImg" style="vertical-align: middle" @click="openLogin()">
-            <!--昵称不封-->
-            <div style="width: 165px;display: inline-block;height: 53px;vertical-align: middle;padding-left: 10px;color: white;line-height: 50px;" @click="openLogin()">
-              <p style="font-size: 16px;">
-                <span style="vertical-align: middle">立即登录</span>
-              </p>
-            </div>
-            <!--昵称ending-->
-            <!--按钮组-->
-            <div class="btncontent">
-              <div style="float: left;" @click="openLogin()">
-                <div>余额：未登录</div>
-                <img src="/static/images/my_balance@3x.png" alt="">
-              </div>
-              <div style="float: right;" @click="openLogin()">
-                <div>在线充值</div>
-                <img src="/static/images/my_balance@3x.png" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--我的订单-->
-        <div class="dingdanTab">
-          <div class="item_Tab">
-            <div class="itemtitle">
-              <span>我的订单</span>
-              <span @click="openLogin()">查看更多订单</span>
-            </div>
-            <div class="tabs">
-              <div @click="openLogin()">
-                <img src="/static/images/my_all_icon@3x.png" alt="">
-                <p>全部</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_paid_icon@3x.png" alt="">
-                <p>已付款</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_settled_icon@3x.png" alt="">
-                <p>已结算</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_hasexpired_icon@3x.png" alt="">
-                <p>已失效</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--邀请链接-->
-        <div class="linkHref">
-          <div class="link_item">
-            <img src="/static/images/bg@3x.png" alt="">
-            <button class="golink" @click="openLogin()">分享邀请链接</button>
-            <!--<div style="" class="golink" @click="goLink()">获取邀请链接</div>-->
-          </div>
-        </div>
-        <!--管理员登录-->
-        <div class="guanliLogin">
-          <div class="guanli_item">
-            <div class="guanli_item1">
-              <div @click="openLogin()">
-                <img src="/static/images/mine_administrator@3x.png" alt="">
-                <p>管理员登录</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_accountinformation@3x.png" alt="">
-                <p>账户信息</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_orderquery@3x.png" alt="">
-                <p>话单查询</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_feestatement@3x.png" alt="">
-                <p>资费说明</p>
-              </div>
-            </div>
-            <div class="guanli_item2">
-              <div @click="openLogin()">
-                <img src="/static/images/my_beginnerstrategy@3x.png" alt="">
-                <p>新手攻略</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/collection@3x.png" alt="">
-                <p>我的收藏</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_common_questions@3x.png" alt="">
-                <p>常见问题</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_customer_service@3x.png" alt="">
-                <p>客服中心</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--关于我们-->
-        <div class="aboutus">
-          <div class="aboutus_item">
-            <div class="aboutus_item1" style="width: 100%;"><span>关于我们</span></div>
-            <div class="aboutus_item2">
-              <div @click="openLogin()">
-                <img src="/static/images/my_aboutus@3x.png" alt="">
-                <p>关于我们</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_announcement@3x.png" alt="">
-                <p>官方公告</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_praise@3x.png" alt="">
-                <p>好评鼓励</p>
-              </div>
-              <div @click="openLogin()">
-                <img src="/static/images/my_feedback@3x.png" alt="">
-                <p>意见反馈</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--kuayetonglogo-->
-        <div style="width: 100%;text-align: center">
-          <img src="/static/images/kuayet.com@3x.png" alt="" style="width: 163px;height: 35px;padding-top: 15px;padding-bottom: 20px;">
-        </div>
-      </div>
-
     </div>
 </template>
 
@@ -412,6 +270,13 @@
           redirect: false
         })
       },
+      // 在线充值
+      inlinechongzhi () {
+        wx.navigateTo({
+          url: '../inline/main',
+          redirect: false
+        })
+      },
       hasToken () {
         const res = this.$saveToken.getToken()
         this.params.userId = res.token
@@ -453,9 +318,8 @@
     onPullDownRefresh () {
       this.hasToken()
     },
-    onLoad () {
+    onShow () {
       this.hasToken()
-      this.player = wx.createLivePlayerContext('myplayer')
     }
   }
 </script>

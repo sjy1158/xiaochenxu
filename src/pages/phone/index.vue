@@ -105,6 +105,24 @@
         this.bannerArr = bannerArr.list
         // console.log(bannerArr.list);
       },
+      async callMe (params) {
+        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/doPhone', params)
+        if (data.code==400){
+          wx.showToast({
+            title: data.msg,
+            icon: 'none'
+          })
+        } else {
+          wx.showToast({
+            title: '呼叫成功',
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '../waitlisten/main?phonenum=' + params.callee,
+            redirect: false
+          })
+        }
+      },
       numClick (num) {
         this.clickshow = true
         if (this.params.callee.length!=11) {
@@ -130,15 +148,7 @@
           })
           return false
         } else {
-          this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/doPhone', this.params)
-          wx.showToast({
-            title: '呼叫成功',
-            icon: 'none'
-          })
-          wx.navigateTo({
-            url: '../waitlisten/main?phonenum=' + this.params.callee,
-            redirect: false
-          })
+          this.callMe(this.params)
         }
       },
       callPhone () {
@@ -194,12 +204,12 @@
     onPullDownRefresh () {
       this.hasToken()
     },
-    onLoad () {
+    onShow () {
       this.hasToken()
     }
-    // 底部点击事件
+    // // 底部点击事件
     // onTabItemTap (options) {
-    //   console.log(11111111111)
+    //   this.hasToken()
     // }
   }
 </script>

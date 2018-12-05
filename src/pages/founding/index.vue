@@ -59,7 +59,11 @@
         // console.log(JSON.stringify(this.actList))
       }
     },
-    onLoad () {
+    // onLoad () {
+    //   this.getList(this.params)
+    //   this.getListact(this.params2)
+    // },
+    onShow () {
       this.getList(this.params)
       this.getListact(this.params2)
     },
