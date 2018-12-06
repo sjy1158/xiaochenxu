@@ -2,8 +2,8 @@
   <div>
     <div class="mod1">
       <div>
-        <input type="text" value="13024135878" disabled="true">
-        <img src="/static/images/merchant_wrong@3x.png" alt="">
+        <input type="text" v-model="params.phoneId">
+        <img src="/static/images/merchant_wrong@3x.png" alt="" @click="cleanValue()">
       </div>
       <p>默认号码</p>
     </div>
@@ -14,18 +14,18 @@
         <ul>
           <li>
             <div>
-              <input type="text" placeholder="请输入充值卡卡号">
+              <input type="text" v-model="params.cardId" placeholder="请输入充值卡卡号">
             </div>
           </li>
           <li>
             <div>
-              <input type="text" placeholder="请输入充值卡密码">
+              <input type="text" v-model="params.password" placeholder="请输入充值卡密码">
             </div>
           </li>
         </ul>
       </div>
       <div class="btn">
-        <button>充值</button>
+        <button @click="cradchongzhi()">充值</button>
       </div>
     </div>
     <!--在线充值-->
@@ -89,16 +89,50 @@
 </template>
 
 <script>
+  import getRouter from '../../utils/getOptions'
   export default {
     data () {
       return {
-        choseIndex: 0
+        choseIndex: 0,
+        params: {
+          cardId: '',
+          password: '',
+          phoneId: ''
+        }
       }
     },
     methods: {
       choseNum (num) {
         this.choseIndex = num
+      },
+      //清空
+      cleanValue () {
+        this.params.phoneId = ''
+      },
+      async cradchongzhi () {
+        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/phoneRecharge', this.params)
+        if (this.params.cardId!=''&&this.params.password!='') {
+          if (data.code == 400) {
+            wx.showToast({
+              title: data.msg,
+              icon: 'none'
+            })
+          } else {
+            wx.showToast({
+              title: '充值成功',
+              icon: 'none'
+            })
+          }
+        } else {
+          wx.showToast({
+            title: '请输入正确卡号和密码',
+            icon: 'none'
+          })
+        }
       }
+    },
+    onShow () {
+      this.params.phoneId = getRouter().phonenum
     }
   }
 </script>

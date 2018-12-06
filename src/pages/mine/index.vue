@@ -273,7 +273,7 @@
       // 在线充值
       inlinechongzhi () {
         wx.navigateTo({
-          url: '../inline/main',
+          url: '../inline/main?phonenum=' + this.userInfo.user.phoneId,
           redirect: false
         })
       },
