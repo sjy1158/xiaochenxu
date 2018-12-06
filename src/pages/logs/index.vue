@@ -2,14 +2,14 @@
   <div>
     <div class="titlelocation" style="display: none;">
       <span>{{city}}</span>
-      <img src="/static/images/down.png" alt="" class="downicon">
-      <img src="/static/images/scan.png" alt="" style="width: 16px;height: 16px;" @click="openScan">
+      <image lazy-load="true" src="/static/images/down.png" alt="" class="downicon"></image>
+      <image lazy-load="true" src="/static/images/scan.png" alt="" style="width: 16px;height: 16px;" @click="openScan"></image>
     </div>
 
     <div class="bannerSlider">
       <div style="position: absolute;top: 20px;z-index: 99999999999999999;width: 92%;padding-left: 4%;padding-right: 4%;height: 35px;">
         <div style="width: 100px;height: 35px;float: left" class="location">
-          <img src="/static/images/positioning.png" style="width: 10px;height: 15px;" alt=""><span>{{city}}</span>
+          <image lazy-load="true" class="img1" src="/static/images/positioning.png" style="width: 10px;height: 15px;" alt=""></image><span>{{city}}</span>
         </div>
         <div style="height: 35px;float: right;display: flex">
           <div style="flex: 1;color: #ffffff;text-align: center;line-height: 12px;">
@@ -17,7 +17,7 @@
             <p style="font-size: 8px;">晴夜</p>
           </div>
           <div style="flex: 1;padding-left: 7px;">
-            <img src="/static/images/business_weather@2x.png" alt="" style="width: 18px;height: 20px;">
+            <image lazy-load="true" src="/static/images/business_weather@2x.png" alt="" style="width: 18px;height: 20px;"></image>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
       <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" style="width: 100%;height: 200px!important;">
         <div v-for="item in bannerArr" :key="index">
           <swiper-item>
-            <image :src="item.advertiseImageUrl" class="slide-image" />
+            <image lazy-load="true" :src="item.advertiseImageUrl" class="slide-image"></image>
           </swiper-item>
         </div>
       </swiper>
@@ -43,7 +43,7 @@
     <div class="menulist" style="">
       <ul>
         <li v-for = "item in tabArr" @click = "openFood(item.id)">
-          <img :src="item.imageUrl" alt="">
+          <image lazy-load="true" :src="item.imageUrl" alt="" class="tabimg"></image>
           <p>{{item.name}}</p>
         </li>
       </ul>
@@ -52,15 +52,15 @@
     <!--商家头条-->
     <div class="shoptitle" style="padding-left: 20px;padding-right: 20px;padding-top: 11px;padding-bottom: 11px;">
       <div style="width: 100%;">
-        <img src="/static/images/business_business_headlines@2x.png" alt="" style="width: 27px;height: 28px;">
-        <img src="/static/images/head_portraityuan.png" alt="" style="width:34px;height: 34px;padding-left: 7px;">
+        <image lazy-load="true" class="img6" src="/static/images/business_business_headlines@2x.png" alt="" style="width: 27px;height: 28px;"></image>
+        <image lazy-load="true" class="img6" src="/static/images/head_portraityuan.png" alt="" style="width:34px;height: 34px;padding-left: 7px;"></image>
         <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
           <swiper-item class="swiper-item" v-for="item in headerList">
             <p style="font-size: 0.7rem;">{{item.headline}}</p>
             <p style="font-size: 0.7rem;color: #393939">@{{item.headline}}</p>
           </swiper-item>
         </swiper>
-        <img src="/static/images/merchant_notice@2x.png" alt="" style="width: 16px;height: 14px;margin-left: 0.8rem;">
+        <image lazy-load="true" class="img6" src="/static/images/merchant_notice@2x.png" alt="" style="width: 16px;height: 14px;margin-left: 0.8rem;"></image>
         <span style="color: #717171;font-size: 12px;float: right;line-height: 2.2rem;">{{date}}</span>
       </div>
     </div>
@@ -69,7 +69,7 @@
     <div style="width: 100%;height:10px;background: #F2F2F2"></div>
     <!--附近商家-->
     <div style="background: white;width: 100%;text-align: center">
-      <img src="/static/images/merchants_nearby_merchants@3x.png" alt="" style="width: 106px;height: 15px;padding: 15px 0px 10px 0px;">
+      <image lazy-load="true" src="/static/images/merchants_nearby_merchants@3x.png" alt="" style="width: 106px;height: 15px;padding: 15px 0px 10px 0px;"></image>
     </div>
     <!--附近商家列表-->
     <div class="nearbyShops">
@@ -92,12 +92,12 @@
     <div class="nearList" style="padding: 14px;">
       <div class="nearList_item" v-for="(item,index) in nearList" :index="index" :key="index" :data-index="index" @click="openShophome(item.shopId)">
         <div style="position: relative">
-          <img :src="item.shopHeadImageUrl" alt="">
+          <image lazy-load="true" :src="item.shopHeadImageUrl" class="itemimg srtImg" alt=""></image>
         </div>
         <div style="font-size: 12px;position: absolute;left: 5.5rem;" class="itemText">
           <p>{{item.title}}</p>
           <p style="width: 50%;margin-top: 0.2rem;">
-            <img class="srtImg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;">
+            <image class="itemimg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;"></image>
             <span style="font-size: 10px;color: #393939;padding-left: 6px;">{{item.shopType}}</span>
             <span style="font-size: 10px;color: #393939;padding-left: 17px;">人均消费{{item.averageMoney}}元</span>
             <span style="float: right;font-size: 10px;color: #393939;vertical-align: middle">{{item.distance}}m</span>
@@ -429,7 +429,7 @@ export default {
     color: #393910;
     font-weight: normal;
   }
-  .menulist ul li img{
+  .menulist ul li .tabimg{
     height: 25px!important;
     width: 25px!important;
   }
@@ -441,11 +441,11 @@ export default {
     vertical-align: middle;
     letter-spacing: 2px;
   }
-  .location img{
+  .location .img1{
     vertical-align: middle;
   }
   /*商家头条英文*/
-  .shoptitle img{
+  .shoptitle .img6{
     vertical-align: middle;
   }
   .swiper_container{
@@ -487,7 +487,7 @@ export default {
     height: 70px;
     /*background: yellow;*/
   }
-  .nearList_item img{
+  .nearList_item .itemimg{
     height: 70px;
     width: 70px;
     border-radius: 10px;
@@ -499,7 +499,7 @@ export default {
     font-size: 14px;
     font-weight: bold;
   }
-  .itemText p:nth-child(2) img{
+  .itemText p:nth-child(2) .itemimg{
     vertical-align: middle;
   }
   .itemText p:nth-child(2) span{

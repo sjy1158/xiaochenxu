@@ -8,7 +8,7 @@
       <div style="width: 100%;height: 80px;margin-top: 43px;">
         <div style="position: relative">
           <div class="num">+86</div>
-          <input type="text" placeholder="输入手机号码" v-model="params.phoneId" style="padding-left: 40px;" class="phoneinput">
+          <input type="number" placeholder="输入手机号码" focus="true" v-model="params.phoneId" style="padding-left: 40px;" class="phoneinput">
         </div>
         <div>
           <input type="password" placeholder="输入密码" v-model="password" style="margin-top: 19px;">

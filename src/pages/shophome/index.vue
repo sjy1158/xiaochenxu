@@ -3,7 +3,7 @@
     <!--商家主页头部-->
     <div class="mod1">
       <div class="header">
-        <img src="/static/images/head_portraityuan.png" alt="">
+        <image lazy-load="true" class="img1" src="/static/images/head_portraityuan.png" alt=""></image>
         <div class="headertext">
           <p>{{shopObj.title}}</p>
           <p>{{shopObj.shopType}}</p>
@@ -15,7 +15,7 @@
     <div class="mod2">
       <ul :style="{width:width*shopObj.deductionList.length+'px'}">
         <li v-for="item in shopObj.deductionList">
-          <img src="/static/images/disconbg.png" alt="">
+          <image lazy-load="true" class="img2" src="/static/images/disconbg.png" alt=""></image>
           <div style="float: left" class="leftdis">¥{{item.requireValue}}</div>
           <div style="float: right" class="rightdis">¥{{item.value}}</div>
         </li>
@@ -25,18 +25,18 @@
     <!--定位-->
     <div class="mod3">
       <div class="location">
-        <img src="/static/images/merchant_address_box@2x.png" alt="" class="bgimg">
-        <img src="/static/images/merchant_address_location@2x.png" alt="" style="height: 17px;width: 16px;" class="logimg">
+        <image lazy-load="true" src="/static/images/merchant_address_box@2x.png" alt="" class="bgimg"></image>
+        <image lazy-load="true" src="/static/images/merchant_address_location@2x.png" alt="" style="height: 17px;width: 16px;" class="logimg"></image>
         <div style="height: 100%;white-space: nowrap;overflow:hidden;text-overflow: ellipsis;" class="locationText">
           <div style="padding-left: 3px;width: auto;margin-left: -2.5rem;" class="local">{{shopObj.specificAddress}}</div>
         </div>
         <div class="locationicons">
           <div class="daohang" style="float: left" @click="goLocation()">
-            <img src="/static/images/merchant_address_navigation@2x.png" alt="">
+            <image class="img3" lazy-load="true" src="/static/images/merchant_address_navigation@2x.png" alt=""></image>
           </div>
           <div style="width: 1px;height: 21px;position: absolute;background: #D9D9D9;left: 50%;margin-left: -0.5px;top: 50%;margin-top: -10.5px;"></div>
           <div class="dianhua" style="float: right" @click="callphone()">
-            <img src="/static/images/merchant_address_telephone@2x.png" alt="">
+            <image class="img3" src="/static/images/merchant_address_telephone@2x.png" alt=""></image>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
           <ul class="shopcontent">
             <li v-for="item in allList" style="position: relative" @click="showdailog()">
               <div>
-                <img class="srtImg" :src="item.imageUrl" alt="">
+                <image lazy-load="true" class="imgcontent srtImg" :src="item.imageUrl" alt=""></image>
                 <p style="padding-left: 12px;padding-right: 12px;" class="title">{{item.productName}}</p>
                 <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;position: absolute;bottom: 5px;width: 100%;" class="discon">
                   <span style="color:#393939;font-size: 12px;vertical-align: middle">¥{{item.price}}</span>
@@ -76,7 +76,7 @@
               <p class="titlexiangqing">店家环境</p>
               <scroll-view scroll-x="true" class="box">
                 <ul :style="{width:widthimg*shopObj.shopImageList.length+'px'}">
-                  <li v-for="item in shopObj.shopImageList"><img :src="item.imageUrl" alt=""></li>
+                  <li v-for="item in shopObj.shopImageList"><image :src="item.imageUrl" class="imgslide srtImg" alt=""></image></li>
                 </ul>
               </scroll-view>
             </div>
@@ -103,8 +103,9 @@
     <!--底部弹框-->
         <div :class="show?'son1':'son2'">
           <div style="height: 120px;width: 100% ;border: 1px solid #F2F2F2">
-            <img src="http://img0.imgtn.bdimg.com/it/u=1687016623,1327106801&fm=26&gp=0.jpg" alt="" style="width: 108px;height: 108px;position: absolute;left: 15px;top: -5%;border-radius: 10px;vertical-align: middle;border: 5px solid white;box-shadow:0px 0px 8px #f2f2f2;">
-            <img src="/static/images/merchant_wrong@3x.png" alt="" style="width: 24px;height: 24px;position: absolute;right: 15px;top: 5px" @click="closedailog()">
+            <image lazy-load="true" src="http://img0.imgtn.bdimg.com/it/u=1687016623,1327106801&fm=26&gp=0.jpg" alt="" style="width: 108px;height: 108px;position: absolute;left: 15px;top: -5%;border-radius: 10px;vertical-align: middle;border: 5px solid white;box-shadow:0px 0px 8px #f2f2f2;">
+            </image>
+            <image lazy-load="true" src="/static/images/merchant_wrong@3x.png" alt="" style="width: 24px;height: 24px;position: absolute;right: 15px;top: 5px" @click="closedailog()"></image>
             <div style="position: absolute;left: 143px;top: 17px;vertical-align: middle" class="choosesize">
               <p style="color: #FF0000;font-size: 18px;font-weight: bold;letter-spacing: 1px;">¥138</p>
               <p style="color:#393939;font-size: 12px;letter-spacing: 1px;">本商品已用余额抵扣<span style="color: #FF0000">150元</span></p>
@@ -230,7 +231,7 @@
     width: 100%;
     height: 48px;
   }
-  .mod1 img{
+  .mod1 .img1{
     height: 48px;
     width: 48px;
     vertical-align: middle;
@@ -298,7 +299,7 @@
     /*top: 0px;*/
     /*float: right;*/
   /*}*/
-  .mod2 ul li img{
+  .mod2 ul li .img2{
     height: 100%;
     width: 100%;
   }
@@ -341,7 +342,7 @@
     top: 0px;
     right: 0px;
   }
-  .locationicons img{
+  .locationicons .img3{
     height: 12px;
     width: 12px;
     padding-bottom: 4px;
@@ -413,7 +414,7 @@
     border-radius: 10px;
     width: 100%;
   }
-  .shopcontent li img{
+  .shopcontent li .imgcontent{
     height: 182px;
     width: 100%;
     border-radius: 10px 10px 0px 0px;
@@ -467,7 +468,7 @@
     display: inline-block;
     margin-right: 15px;
   }
-  .box li img{
+  .box li .imgslide{
     height: 88px;
     width: 114px;
   }

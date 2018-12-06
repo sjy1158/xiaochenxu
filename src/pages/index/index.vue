@@ -6,7 +6,7 @@
           <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular">
             <div v-for="item in bannerArr" :key="index">
               <swiper-item>
-                <image :src="item.advertiseImageUrl" class="slide-image" />
+                <image lazy-load="true" :src="item.advertiseImageUrl" class="slide-image" />
               </swiper-item>
             </div>
           </swiper>
@@ -30,7 +30,8 @@
       <div class="mod4">
         <ul>
           <li v-for="(item,index) in bigTypearr" @click="openList(item.bigestTypeId)">
-            <img class="srtImg" :src="item.typeImageUrl" alt="" :key="index" style="width: 25px;height: 25px;">
+            <image style="width: 25px;height: 25px;" lazy-load="true" :src="item.typeImageUrl"></image>
+            <!--<img class="srtImg" :src="item.typeImageUrl" alt="" :key="index" style="width: 25px;height: 25px;">-->
             <p>{{item.typeName}}</p>
           </li>
         </ul>
@@ -49,7 +50,7 @@
       <div :current="params.productType" @change="changeTab" id="swiperContent" style="height: auto;">
         <div class="swiperall">
             <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;" @click="openXiangqing(item.id)">
-              <img class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;">
+              <image lazy-load="true" class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;"></image>
               <div style="height: 100%;margin-left: 133px;" class="Listall">
                 <p style="font-size: 12px;">
                   <img v-if="item.source=='京东'" src="/static/images/jingdong@3x.png" alt="">

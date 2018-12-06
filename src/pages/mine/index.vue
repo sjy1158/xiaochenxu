@@ -3,14 +3,14 @@
       <div>
       <!--头部-->
       <div class="headertitle">
-        <img src="/static/images/my_bg@3x.png" alt="" class="bgtitle">
+        <image lazy-load="true" src="/static/images/my_bg@3x.png" alt="" class="bgtitle"></image>
         <!--设置按钮-->
         <div class="settingicon" @click="shezhi()">
-          <img src="/static/images/my_settings@3x.png" alt="">
+          <image  lazy-load="true" class="img1" src="/static/images/my_settings@3x.png" alt=""></image>
         </div>
         <!--头像-->
         <div class="headerImg">
-            <img :src="userInfo.user.headImage" alt="" class="headertitleImg" style="vertical-align: middle;">
+          <image  lazy-load="true" :src="userInfo.user.headImage" alt="" class="headertitleImg" style="vertical-align: middle;"></image>
           <!--昵称不封-->
           <div style="width: 165px;display: inline-block;height: 53px;vertical-align: middle;padding-top: 0.2rem;padding-left: 10px;color: white">
             <p style="font-size: 16px;">
@@ -23,16 +23,16 @@
             </p>
           </div>
           <!--昵称ending-->
-          <img src="/static/images/my_become_partner@3x.png" alt="" style="width: 81px;height: 32px;float: right;position: absolute;bottom:0.1rem;right: 18px;">
+          <image lazy-load="true" src="/static/images/my_become_partner@3x.png" alt="" style="width: 81px;height: 32px;float: right;position: absolute;bottom:0.1rem;right: 18px;"></image>
           <!--按钮组-->
           <div class="btncontent">
             <div style="float: left;">
               <div>余额：{{userInfo.user.balance}}</div>
-              <img src="/static/images/my_balance@3x.png" alt="">
+              <image lazy-load="true" class="img2" src="/static/images/my_balance@3x.png" alt=""></image>
             </div>
             <div style="float: right;">
               <div @click="inlinechongzhi()">在线充值</div>
-              <img src="/static/images/my_balance@3x.png" alt="">
+              <image lazy-load="true" class="img2" src="/static/images/my_balance@3x.png" alt=""></image>
             </div>
           </div>
         </div>
@@ -46,19 +46,19 @@
           </div>
           <div class="tabs">
             <div @click="alldingdan()">
-              <img src="/static/images/my_all_icon@3x.png" alt="">
+              <image lazy-load="true" class="img3" src="/static/images/my_all_icon@3x.png" alt=""></image>
               <p>全部</p>
             </div>
             <div>
-              <img src="/static/images/my_paid_icon@3x.png" alt="">
+              <image lazy-load="true" class="img3" src="/static/images/my_paid_icon@3x.png" alt=""></image>
               <p>已付款</p>
             </div>
             <div>
-              <img src="/static/images/my_settled_icon@3x.png" alt="">
+              <image lazy-load="true" class="img3" src="/static/images/my_settled_icon@3x.png" alt=""></image>
               <p>已结算</p>
             </div>
             <div>
-              <img src="/static/images/my_hasexpired_icon@3x.png" alt="">
+              <image lazy-load="true" class="img3" src="/static/images/my_hasexpired_icon@3x.png" alt=""></image>
               <p>已失效</p>
             </div>
           </div>
@@ -67,7 +67,7 @@
       <!--邀请链接-->
       <div class="linkHref">
         <div class="link_item">
-          <img src="/static/images/bg@3x.png" alt="">
+          <image lazy-load="true" class="img4" src="/static/images/bg@3x.png" alt=""></image>
           <button class="golink" open-type='share'>分享邀请链接</button>
           <!--<div style="" class="golink" @click="goLink()">获取邀请链接</div>-->
         </div>
@@ -77,37 +77,37 @@
         <div class="guanli_item">
           <div class="guanli_item1">
             <div @click="adLogin()">
-              <img src="/static/images/mine_administrator@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/mine_administrator@3x.png" alt=""></image>
               <p>管理员登录</p>
             </div>
             <div @click="zhanghu()">
-              <img src="/static/images/my_accountinformation@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_accountinformation@3x.png" alt=""></image>
               <p>账户信息</p>
             </div>
             <div @click="singlEquery()">
-              <img src="/static/images/my_orderquery@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_orderquery@3x.png" alt=""></image>
               <p>话单查询</p>
             </div>
             <div @click="zifeishuoming()">
-              <img src="/static/images/my_feestatement@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_feestatement@3x.png" alt=""></image>
               <p>资费说明</p>
             </div>
           </div>
           <div class="guanli_item2">
             <div @click="addnovice()">
-              <img src="/static/images/my_beginnerstrategy@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_beginnerstrategy@3x.png" alt=""></image>
               <p>新手攻略</p>
             </div>
             <div>
-              <img src="/static/images/collection@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/collection@3x.png" alt=""></image>
               <p>我的收藏</p>
             </div>
             <div @click="maneypro()">
-              <img src="/static/images/my_common_questions@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_common_questions@3x.png" alt=""></image>
               <p>常见问题</p>
             </div>
             <div @click="openService()">
-              <img src="/static/images/my_customer_service@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_customer_service@3x.png" alt=""></image>
               <p>客服中心</p>
             </div>
           </div>
@@ -120,19 +120,19 @@
           <div class="aboutus_item1" style="width: 100%;"><span>关于我们</span></div>
           <div class="aboutus_item2">
             <div @click="aboutUs()">
-              <img src="/static/images/my_aboutus@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_aboutus@3x.png" alt=""></image>
               <p>关于我们</p>
             </div>
             <div @click="guanfang()">
-              <img src="/static/images/my_announcement@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_announcement@3x.png" alt=""></image>
               <p>官方公告</p>
             </div>
             <div>
-              <img src="/static/images/my_praise@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_praise@3x.png" alt=""></image>
               <p>好评鼓励</p>
             </div>
             <div @click="feedback()">
-              <img src="/static/images/my_feedback@3x.png" alt="">
+              <image lazy-load="true" class="img5" src="/static/images/my_feedback@3x.png" alt=""></image>
               <p>意见反馈</p>
             </div>
           </div>
@@ -141,7 +141,7 @@
 
       <!--kuayetonglogo-->
       <div style="width: 100%;text-align: center">
-        <img src="/static/images/kuayet.com@3x.png" alt="" style="width: 163px;height: 35px;padding-top: 15px;padding-bottom: 20px;">
+        <image lazy-load="true" src="/static/images/kuayet.com@3x.png" alt="" style="width: 163px;height: 35px;padding-top: 15px;padding-bottom: 20px;"></image>
       </div>
       </div>
     </div>
@@ -350,7 +350,7 @@
     left: 0px;
     top: 10px;
   }
-  .settingicon img{
+  .settingicon .img1{
     height: 20px;
     width: 20px;
     float: right;
@@ -415,7 +415,7 @@
     /*margin-left: -50px;*/
     /*z-index: 99999999;*/
   /*}*/
-  .btncontent div img{
+  .btncontent div .img2{
     height: 100%;
     width: 100%;
     position: absolute;
@@ -466,7 +466,7 @@
     font-size: 12px;
     color: #393939;
   }
-  .tabs div img{
+  .tabs div .img3{
     width: 25px;
     height: 25px;
     padding-top: 16px;
@@ -484,7 +484,7 @@
     border-radius: 14px;
     position: relative;
   }
-  .linkHref .link_item img{
+  .linkHref .link_item .img4{
     height: 100%;
     width: 100%;
   }
@@ -523,7 +523,7 @@
     flex: 1;
     text-align: center;
   }
-  .guanli_item1 img,.guanli_item2 img,.aboutus_item2 img{
+  .guanli_item1 .img5,.guanli_item2 .img5,.aboutus_item2 .img5{
     height: 25px;
     width: 25px;
     padding-top: 15px;

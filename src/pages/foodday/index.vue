@@ -9,7 +9,7 @@
       <scroll-view scroll-x class="top">
         <div class="tabbar" v-for="(item,index) in headerArr" @click="tabClick(item.id,index)">
           <div v-show="headerIndex == index" style="width: 11px;height: 2px;background: #F08400;position: absolute;bottom: -1px;left: 50%;margin-left: -5.5px;"></div>
-          <img :src="item.imageUrl" alt="" style="border-radius: 50%;" :class="headerIndex == index?'activeTab':''">
+          <image lazy-load="true" class="imgcontent srtImg" :src="item.imageUrl" alt="" style="border-radius: 50%;" :class="headerIndex == index?'activeTab':''"></image>
           <p :class="headerIndex == index?'activeName':''">{{item.name}}</p>
         </div>
       </scroll-view>
@@ -35,12 +35,12 @@
     <div class="nearList" style="padding: 14px;">
       <div class="nearList_item" v-for="item in contentList">
         <div style="position: relative">
-          <img :src="item.shopHeadImageUrl" alt="">
+          <image lazy-load="true" class="listImg srtImg" :src="item.shopHeadImageUrl" alt=""></image>
         </div>
         <div style="font-size: 12px;position: absolute;left: 5.5rem;" class="itemText">
           <p>{{item.title}}</p>
           <p style="width: 50%;margin-top: 0.2rem;">
-            <img src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;">
+            <image lazy-load="true" class="listImg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;"></image>
             <span style="font-size: 10px;color: #393939;padding-left: 6px;">{{item.shopType}}</span>
             <span style="font-size: 10px;color: #393939;padding-left: 17px;">人均消费{{item.averageMoney}}元</span>
             <span style="float: right;font-size: 10px;color: #393939;vertical-align: middle">{{item.distance}}m</span>
@@ -164,7 +164,7 @@
     margin-right: 20px;
     text-align: center;
   }
-  .tabbar img{
+  .tabbar .imgcontent{
     height: 48px;
     width: 48px;
   }
@@ -184,7 +184,7 @@
     height: 70px;
     /*background: yellow;*/
   }
-  .nearList_item img{
+  .nearList_item .listImg{
     height: 70px;
     width: 70px;
     border-radius: 10px;
@@ -196,7 +196,7 @@
     font-size: 14px;
     font-weight: bold;
   }
-  .itemText p:nth-child(2) img{
+  .itemText p:nth-child(2) .listImg{
     vertical-align: middle;
   }
   .itemText p:nth-child(2) span{
@@ -236,5 +236,21 @@
   }
   .contentactive{
     color: #F08400!important;
+  }
+  .srtImg{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>
