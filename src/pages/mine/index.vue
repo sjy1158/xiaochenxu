@@ -37,62 +37,100 @@
           </div>
         </div>
       </div>
+
+      </div>
       <!--我的订单-->
-      <div class="dingdanTab">
+      <div class="dingdanTab" style="position: relative;z-index: 99999999999999">
         <div class="item_Tab">
-          <div class="itemtitle">
-            <span>我的订单</span>
-            <span @click="lookmydingdan()">查看更多订单</span>
+          <div class="itemtitle tabs">
+            <div>
+              <p style="color: #393939;font-size: 14px;letter-spacing: 1px;margin-top: 13px;">今日预估(元)</p>
+              <p style="color: #393939;font-size: 20px;font-weight: bold;letter-spacing: 1px;">{{userInfo.jinriyugu}}</p>
+            </div>
+            <div>
+              <p style="color: #393939;font-size: 14px;letter-spacing: 1px;margin-top: 13px;">累计收益(元)</p>
+              <p style="color: #393939;font-size: 20px;font-weight: bold;letter-spacing: 1px;">{{userInfo.leijishouyi}}</p>
+            </div>
+            <!--<span>我的订单</span>-->
+            <!--<span @click="lookmydingdan()">查看更多订单</span>-->
           </div>
           <div class="tabs">
-            <div @click="alldingdan()">
-              <image lazy-load="true" class="img3" src="/static/images/my_all_icon@3x.png" alt=""></image>
-              <p>全部</p>
+            <div>
+              <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.ketixian}}</p>
+              <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">可提现额(元)</p>
             </div>
             <div>
-              <image lazy-load="true" class="img3" src="/static/images/my_paid_icon@3x.png" alt=""></image>
-              <p>已付款</p>
+              <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.benyueyugu}}</p>
+              <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">本月预估(元)</p>
             </div>
             <div>
-              <image lazy-load="true" class="img3" src="/static/images/my_settled_icon@3x.png" alt=""></image>
-              <p>已结算</p>
+              <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.shangyueyugu}}</p>
+              <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">上月预估(元)</p>
             </div>
             <div>
-              <image lazy-load="true" class="img3" src="/static/images/my_hasexpired_icon@3x.png" alt=""></image>
-              <p>已失效</p>
+              <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.shangyuejiesuan}}</p>
+              <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">上月结算(元)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position: relative">
+        <div class="newTab" style="width: 100%;height: 187px;background: white;margin-top: -101px;">
+          <div style="height: 88px;width: 100%;position: absolute;bottom: 0px;" class="newTabdis">
+            <div style="position: relative;line-height: 0px;">
+              <image lazy-load="true" class="img5" src="/static/images/my_phone@3x.png" alt=""></image>
+              <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;left: 0px;padding-top: 6px;">通话管理</p>
+            </div>
+            <div style="position: relative;line-height: 0">
+              <image lazy-load="true" class="img5" src="/static/images/my_team@3x.png" alt=""></image>
+              <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;padding-top: 6px;">我的团队</p>
+            </div>
+            <div @click="alldingdan()" style="position: relative;line-height: 0">
+              <image lazy-load="true" class="img5" src="/static/images/my_order@3x.png" alt=""></image>
+              <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;padding-top: 6px;">我的订单</p>
+            </div>
+            <div style="position: relative">
+              <button open-type="share" style="background: white;height: 100%;line-height: 0">
+                <image lazy-load="true" class="img5" src="/static/images/my_friends@3x.png" alt=""></image>
+                <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;left: 0px;padding-top: 6px;">邀请好友</p>
+                <!--<image lazy-load="true" class="img5" src="/static/images/my_friends@3x.png" alt=""></image>-->
+                <!--<p>邀请好友</p>-->
+              </button>
             </div>
           </div>
         </div>
       </div>
       <!--邀请链接-->
-      <div class="linkHref">
-        <div class="link_item">
-          <image lazy-load="true" class="img4" src="/static/images/bg@3x.png" alt=""></image>
-          <button class="golink" open-type='share'>分享邀请链接</button>
-          <!--<div style="" class="golink" @click="goLink()">获取邀请链接</div>-->
-        </div>
-      </div>
+      <!--<div class="linkHref">-->
+        <!--<div class="link_item">-->
+          <!--<image lazy-load="true" class="img4" src="/static/images/bg@3x.png" alt=""></image>-->
+          <!--<button class="golink" open-type='share'>分享邀请链接</button>-->
+          <!--&lt;!&ndash;<div style="" class="golink" @click="goLink()">获取邀请链接</div>&ndash;&gt;-->
+        <!--</div>-->
+      <!--</div>-->
       <!--管理员登录-->
       <div class="guanliLogin">
         <div class="guanli_item">
-          <div class="guanli_item1">
-            <div @click="adLogin()">
-              <image lazy-load="true" class="img5" src="/static/images/mine_administrator@3x.png" alt=""></image>
-              <p>管理员登录</p>
-            </div>
-            <div @click="zhanghu()">
-              <image lazy-load="true" class="img5" src="/static/images/my_accountinformation@3x.png" alt=""></image>
-              <p>账户信息</p>
-            </div>
-            <div @click="singlEquery()">
-              <image lazy-load="true" class="img5" src="/static/images/my_orderquery@3x.png" alt=""></image>
-              <p>话单查询</p>
-            </div>
-            <div @click="zifeishuoming()">
-              <image lazy-load="true" class="img5" src="/static/images/my_feestatement@3x.png" alt=""></image>
-              <p>资费说明</p>
-            </div>
-          </div>
+          <div class="aboutus_item1" style="width: 100%;"><span style="font-weight: bold">常用工具</span></div>
+          <!--<div class="guanli_item1">-->
+            <!--<div @click="adLogin()">-->
+              <!--<image lazy-load="true" class="img5" src="/static/images/mine_administrator@3x.png" alt=""></image>-->
+              <!--<p>管理员登录</p>-->
+            <!--</div>-->
+            <!--<div @click="zhanghu()">-->
+              <!--<image lazy-load="true" class="img5" src="/static/images/my_accountinformation@3x.png" alt=""></image>-->
+              <!--<p>账户信息</p>-->
+            <!--</div>-->
+            <!--<div @click="singlEquery()">-->
+              <!--<image lazy-load="true" class="img5" src="/static/images/my_orderquery@3x.png" alt=""></image>-->
+              <!--<p>话单查询</p>-->
+            <!--</div>-->
+            <!--<div @click="zifeishuoming()">-->
+              <!--<image lazy-load="true" class="img5" src="/static/images/my_feestatement@3x.png" alt=""></image>-->
+              <!--<p>资费说明</p>-->
+            <!--</div>-->
+          <!--</div>-->
           <div class="guanli_item2">
             <div @click="addnovice()">
               <image lazy-load="true" class="img5" src="/static/images/my_beginnerstrategy@3x.png" alt=""></image>
@@ -117,7 +155,7 @@
       <!--关于我们-->
       <div class="aboutus">
         <div class="aboutus_item">
-          <div class="aboutus_item1" style="width: 100%;"><span>关于我们</span></div>
+          <div class="aboutus_item1" style="width: 100%;"><span style="font-weight: bold">关于我们</span></div>
           <div class="aboutus_item2">
             <div @click="aboutUs()">
               <image lazy-load="true" class="img5" src="/static/images/my_aboutus@3x.png" alt=""></image>
@@ -423,7 +461,7 @@
     top: 0px;
   }
   .dingdanTab{
-    height: 125px;
+    height: 145px;
     padding: 0px 12px;
     margin-top: -44px;
     position: relative;
@@ -433,14 +471,19 @@
     width: 100%;
     background: white;
     border-radius: 14px;
+    box-shadow: 2px 2px 2px 2px #F3F3F3;
   }
   .itemtitle{
-    height: 44px;
+    height: 72.5px;
     width: 100%;
     /*background: black;*/
     border-radius: 14px 14px 0px 0px;
     border-bottom: 1px solid #F2F2F2;
-    line-height: 44px;
+    display: flex;
+  }
+  .itemtitle div{
+    flex: 1;
+    text-align: center;
   }
   .itemtitle span:first-child{
     font-size: 14px;
@@ -498,14 +541,14 @@
   }
   /*管理员登录*/
   .guanliLogin{
-    height: 163px;
+    height: 116px;
     /*width: 100%;*/
     margin-top: 10px;
     padding: 0 12px;
   }
   .guanliLogin .guanli_item{
     width: 100%;
-    height: 163px;
+    height: 116px;
     background: white;
     border-radius: 14px;
   }
@@ -522,6 +565,12 @@
   .guanli_item1 div,.guanli_item2 div,.aboutus_item2 div{
     flex: 1;
     text-align: center;
+  }
+  .aboutus_item2 div p{
+    padding-top: 6px;
+  }
+  .guanli_item2 div p{
+    padding-top: 6px;
   }
   .guanli_item1 .img5,.guanli_item2 .img5,.aboutus_item2 .img5{
     height: 25px;
@@ -545,5 +594,39 @@
     font-size: 14px;
     color: #393939;
     padding: 15px;
+  }
+
+  /*新tab*/
+  .bottomTab{
+    display: flex;
+    height: 88px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+  }
+  .bottomTab div{
+    flex: 1;
+    text-align: center;
+    line-height: 88px;
+  }
+  .newTabdis{
+    display: flex;
+  }
+  .newTabdis div,.newTabdis button{
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    color: #FF0000;
+  }
+  .newTabdis button::after{
+    border: none;
+  }
+  .newTabdis div .img5,.newTabdis button .img5{
+    width: 25px;
+    height: 25px;
+    margin-top: 21px;
+  }
+  .newTabdis div p,.newTabdis button p{
+    /*padding-top: 6px;*/
   }
 </style>
