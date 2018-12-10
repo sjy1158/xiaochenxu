@@ -1,124 +1,109 @@
 <template>
   <div class="alldingdan">
+    <div style="height:20px;width: 100%;background: white;padding-bottom: 10px;padding-top: 10px;">
+      <div class="tabcut">
+        <div :class="tabcurrentTab==0?'tabcut2':''" @click="tabCut(0)">电商购</div>
+        <div style="border-radius: 0px 20px 20px 0px;" :class="tabcurrentTab==1?'tabcut2':''" @click="tabCut(1)">商家</div>
+      </div>
+    </div>
+    <div v-show="tabcurrentTab==0">
     <scroll-view scroll-x class="top">
-      <div class="tabbar" :class="currentTab==0?'activeTab':''" @click="tabClick(0)">
-        <div v-show="currentTab==0" style="width: 10px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left: -5px;bottom: 0px;"></div>
-        线下订单
+      <div class="tabbar" :class="params.type==0?'activeTab':''" @click="tabClick(0)">
+        <div v-show="params.type==0" style="width: 28px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left: -14px;bottom: 0px;"></div>
+        全部
       </div>
-      <div class="tabbar" :class="currentTab==1?'activeTab':''" @click="tabClick(1)">
-        <div v-show="currentTab==1" style="width: 10px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left: -5px;bottom: 0px;"></div>
-        线上订单
+      <div class="tabbar" :class="params.type==1?'activeTab':''" @click="tabClick(1)">
+        <div v-show="params.type==1" style="width: 28px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left:-14px;bottom: 0px;"></div>
+        已付款
       </div>
-      <div class="tabbar" :class="currentTab==2?'activeTab':''" @click="tabClick(2)">
-        <div v-show="currentTab==2" style="width: 10px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left: -5px;bottom: 0px;"></div>
-        商城订单
+      <div class="tabbar" :class="params.type==2?'activeTab':''" @click="tabClick(2)">
+        <div v-show="params.type==2" style="width: 28px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left: -14px;bottom: 0px;"></div>
+        已结算
+      </div>
+      <div class="tabbar" :class="params.type==3?'activeTab':''" @click="tabClick(3)">
+        <div v-show="params.type==3" style="width: 28px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left: -14px;bottom: 0px;"></div>
+        已失效
       </div>
     </scroll-view>
-    <swiper :current="currentTab" @change="changeTab" id="swiperContent" style="padding-left: 30px;padding-right: 20px;background: white">
-      <swiper-item>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-      </swiper-item>
-      <swiper-item>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-      </swiper-item>
-      <swiper-item>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
-          </div>
-        </div>
-        <div class="tabcontent">
-          <img src="/static/images/my_head@3x.png" alt="">
-          <div class="titlecon">
-            <p class="title">星巴克Starbucks（新塘路2店）</p>
-            <p class="discon"><span>消费:1999.00元</span><span>抵扣:1999.00元</span><span style="margin-right: 0px!important;">实付:1999.00元</span></p>
-            <p class="time">2018-12-23 12:00</p>
+    <swiper :current="params.type" @change="changeTab" id="swiperContent" :style="{height:height}">
+      <swiper-item v-for="(item, index) in list" :index="index" :key="index" :data-index="index">
+        <div class="swiperItem" v-for="(itemName, idx) in item.list" :key="idx" :data-index="idx">
+          <div class="swipercontent">
+            <div class="swiperleft">
+              <img :src="itemName.image" alt="">
+            </div>
+            <div class="swiperright">
+              <p style="color: #393939;font-size: 12px;letter-spacing: 1px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{itemName.leixing}}{{itemName.name}}</p>
+              <p style="color: #8F8F8F;font-size: 10px;margin-top: 0.2rem;">创建日<span style="padding-left: 5px;">{{itemName.time}}</span></p>
+              <p style="color: #8F8F8F;font-size: 10px;margin-top: 0.2rem">
+                订单号<span style="padding-left: 5px;">{{itemName.orderId}}</span>
+                <span style="margin-left: 6px;padding-left: 10px;padding-right: 10px;padding-top: 1px;padding-bottom: 1px;border: 1px solid #8F8F8F;border-radius: 10px;">复制</span>
+              </p>
+              <div style="color: #393939;font-size: 10px;margin-top: 0.3rem;display: flex">
+                <div style="flex: 1">消费：￥{{itemName.xiaofei}}</div>
+                <div style="flex: 1">抵扣：￥{{itemName.dikou}}</div>
+                <div style="flex: 1;color: #FF0000">预估佣金：￥{{itemName.yongjin}}</div>
+              </div>
+            </div>
           </div>
         </div>
       </swiper-item>
     </swiper>
-    <p style="color: #8F8F8F;font-size: 12px;text-align: center;letter-spacing: 1px;">已显示全部内容</p>
+    </div>
+
+    <div v-show="tabcurrentTab==1">
+      <div class="tabcontent2">
+        <div class="tabcontentitem">
+          <div class="tabcontentleft">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+          </div>
+          <div class="tabcontentright">
+            <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
+            <p style="color: #393939;font-size: 10px;" class="disconall"><span>消费：￥12.3</span><span>抵扣：￥2.0</span><span>实付：￥10.3</span></p>
+            <p style="color: #FF0000;font-size: 10px;">(奖励) 结算佣金：￥3.2</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabcontent2">
+        <div class="tabcontentitem">
+          <div class="tabcontentleft">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+          </div>
+          <div class="tabcontentright">
+            <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
+            <p style="color: #393939;font-size: 10px;" class="disconall"><span>消费：￥12.3</span><span>抵扣：￥2.0</span><span>实付：￥10.3</span></p>
+            <p style="color: #FF0000;font-size: 10px;">(奖励) 结算佣金：￥3.2</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabcontent2">
+        <div class="tabcontentitem">
+          <div class="tabcontentleft">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+          </div>
+          <div class="tabcontentright">
+            <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
+            <p style="color: #393939;font-size: 10px;" class="disconall"><span>消费：￥12.3</span><span>抵扣：￥2.0</span><span>实付：￥10.3</span></p>
+            <p style="color: #FF0000;font-size: 10px;">(奖励) 结算佣金：￥3.2</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabcontent2">
+        <div class="tabcontentitem">
+          <div class="tabcontentleft">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+          </div>
+          <div class="tabcontentright">
+            <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
+            <p style="color: #393939;font-size: 10px;" class="disconall"><span>消费：￥12.3</span><span>抵扣：￥2.0</span><span>实付：￥10.3</span></p>
+            <p style="color: #FF0000;font-size: 10px;">(奖励) 结算佣金：￥3.2</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -126,16 +111,47 @@
   export default {
     data () {
       return {
-        currentTab: 0
+        currentTab: 0,
+        tabcurrentTab: 0,
+        params: {
+          userId: '572e69d1',
+          pageNum: 1,
+          num: 5,
+          type: 0
+        },
+        height: '',
+        list: []
       }
     },
     methods: {
+      async getList (params, index) {
+        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/allOrder', params)
+        this.list.push(data)
+        this.list[index].list.concat(this.list[index].list)
+        this.height = 132 * this.list[index].list.length + 'px'
+        console.log(this.height)
+      },
       changeTab (e) {
-        this.currentTab = e.mp.detail.current
+        this.params.type = e.mp.detail.current
+        this.getList(this.params, this.params.type)
       },
       tabClick (index) {
-        this.currentTab = index
+        this.params.type = index
+        this.getList(this.params, this.params.type)
+      },
+      tabCut (index) {
+        this.tabcurrentTab = index
       }
+    },
+    onLoad () {
+      this.getList(this.params, this.params.type)
+    },
+    onReachBottom () {
+      wx.showLoading({
+        title:'玩命加载中'
+      });
+      this.params.pageNum+=1;
+      this.getList(this.params, this.params.type);
     }
   }
 </script>
@@ -144,7 +160,7 @@
   .alldingdan{
     width: 100%;
     height: 100%;
-    background-color: #F2F2F2;
+    background-color: #F1F0F0;
     /*position: fixed;*/
     position:absolute;
   }
@@ -153,8 +169,8 @@
   }
   .top{
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     /*text-align: center;*/
     /*line-height: 42px;*/
     background: #fff;
@@ -162,10 +178,12 @@
     border-bottom: 1px solid #F2F2F2;
     color: #393939;
     font-size: 14px;
+    letter-spacing: 1px;
     /*margin-left: 90px;*/
   }
   .tabbar{
-    width: 33.33%;
+    flex: 1;
+    width: 25%;
     display: inline-block;
     text-align: center;
     position: relative;
@@ -174,7 +192,6 @@
     color: #F08400!important;
   }
   #swiperContent{
-    height: 400px;
     /*padding-left: 10px;*/
     /*padding-right: 10px;*/
   }
@@ -226,5 +243,128 @@
     font-size: 10px;
     float: right;
     margin-top: 10px;
+  }
+
+  .swiperItem{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 10px;
+    background: white;
+    margin-bottom: 10px;
+  }
+  .swiperItem .swipercontent{
+    height: 106px;
+    width: 100%;
+    /*background: #0bb20c;*/
+    position: relative;
+    /*margin-bottom: 10px;*/
+    /*background: red;*/
+  }
+  .swiperleft{
+    height: 90px;
+    width: 90px;
+  }
+  .swiperleft img{
+    height: 100%;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .swiperright{
+    height: 79px;
+    width: 70%;
+    position: absolute;
+    left: 100px;
+    margin-top: -39.5px;
+  }
+  @media (max-width: 1500px) {
+    .swiperright{
+      top: 43%;
+    }
+    .disconall span{
+      margin-right: 30px;
+    }
+    .tabcontentright p{
+      margin-bottom:0px;
+    }
+  }
+  @media (min-width: 700px) and (max-width: 1000px) {
+    .swiperright{
+      top: 43%;
+    }
+    .disconall span{
+      margin-right: 30px;
+    }
+    .tabcontentright p{
+      margin-bottom:0px;
+    }
+  }
+  @media (min-width: 350px) and (max-width: 700px) {
+    .swiperright{
+      top: 50%;
+    }
+    .disconall span{
+      margin-right: 33px;
+    }
+    .tabcontentright p{
+      margin-bottom:4px;
+    }
+  }
+  .tabcut{
+    display: flex;
+    width: 110px;
+    margin:  0 auto;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border: 2px solid #F08400;
+    border-radius: 20px;
+    color: #F08400;
+  }
+  .tabcut div{
+    flex: 1;
+    width: 50%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 20px 0px 0px 20px;
+  }
+
+  .tabcut2{
+    color: white;background: #F08400
+  }
+
+  /*商家tab*/
+  .tabcontent2{
+    padding-left: 10px;
+    padding-right: 10px;
+    background: white;
+  }
+  .tabcontent2:first-child{
+    border-top: 1px solid #EDEDED;
+  }
+  .tabcontentitem{
+    height: 70px;
+    width: 100%;
+    /*background: red;*/
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .tabcontentleft{
+    height: 55px;
+    width: 55px;
+  }
+  .tabcontentleft img{
+    width: 100%;
+    height: 100%;
+    margin-top: 5px;
+  }
+  .tabcontentright{
+    height: 55px;
+    position: absolute;
+    top: 5px;
+    left: 75px;
+  }
+  .tabcontentright p{
+    letter-spacing: 1px;
   }
 </style>
