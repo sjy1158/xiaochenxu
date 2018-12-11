@@ -94,10 +94,10 @@
         <div style="position: relative">
           <image lazy-load="true" :src="item.shopHeadImageUrl" class="itemimg srtImg" alt=""></image>
         </div>
-        <div style="font-size: 12px;position: absolute;left: 5.5rem;" class="itemText">
+        <div style="font-size: 12px;position: absolute;left: 5.5rem;border-bottom: 1px solid #F2F2F2;padding-bottom: 5px;" class="itemText">
           <p>{{item.title}}</p>
           <p style="width: 50%;margin-top: 0.2rem;">
-            <image class="itemimg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;"></image>
+            <image lazy-load="true" class="itemimg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;"></image>
             <span style="font-size: 10px;color: #393939;padding-left: 6px;">{{item.shopType}}</span>
             <span style="font-size: 10px;color: #393939;padding-left: 17px;">人均消费{{item.averageMoney}}元</span>
             <span style="float: right;font-size: 10px;color: #393939;vertical-align: middle">{{item.distance}}m</span>
@@ -269,6 +269,14 @@ export default {
     this.tabArr = []
     this.getTabtype()
     this.getHeaderLine()
+  },
+  //上拉加载
+  onReachBottom () {
+    wx.showLoading({
+      title: '玩命加载中'
+    })
+    this.params.pageNum += 1
+    this.getNearList(this.params)
   }
 }
 </script>

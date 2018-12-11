@@ -25,37 +25,42 @@
         已失效
       </div>
     </scroll-view>
-    <swiper :current="params.type" @change="changeTab" id="swiperContent" :style="{height:height}">
-      <swiper-item v-for="(item, index) in list" :index="index" :key="index" :data-index="index">
-        <div class="swiperItem" v-for="(itemName, idx) in item.list" :key="idx" :data-index="idx">
+    <div :current="params.type" @change="changeTab" id="swiperContent">
+      <swiper-item :style="{height:132*list.length+'px'}">
+        <div class="swiperItem" v-for="(item, index) in list" :key="index" :data-index="index">
           <div class="swipercontent">
             <div class="swiperleft">
-              <img :src="itemName.image" alt="">
+              <image class="img1" lazy-load="true" :src="item.image" alt="">
+              </image>
             </div>
             <div class="swiperright">
-              <p style="color: #393939;font-size: 12px;letter-spacing: 1px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{itemName.leixing}}{{itemName.name}}</p>
-              <p style="color: #8F8F8F;font-size: 10px;margin-top: 0.2rem;">创建日<span style="padding-left: 5px;">{{itemName.time}}</span></p>
+              <p style="color: #393939;font-size: 12px;letter-spacing: 1px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.leixing}}{{item.name}}</p>
+              <p style="color: #8F8F8F;font-size: 10px;margin-top: 0.2rem;">创建日<span style="padding-left: 5px;">{{item.time}}</span></p>
               <p style="color: #8F8F8F;font-size: 10px;margin-top: 0.2rem">
-                订单号<span style="padding-left: 5px;">{{itemName.orderId}}</span>
-                <span style="margin-left: 6px;padding-left: 10px;padding-right: 10px;padding-top: 1px;padding-bottom: 1px;border: 1px solid #8F8F8F;border-radius: 10px;">复制</span>
+                订单号<span style="padding-left: 5px;">{{item.orderId}}</span>
+                <span style="margin-left: 6px;padding-left: 10px;padding-right: 10px;padding-top: 1px;padding-bottom: 1px;border: 1px solid #8F8F8F;border-radius: 10px;" @click="fuzhi(item.orderId)">复制</span>
               </p>
               <div style="color: #393939;font-size: 10px;margin-top: 0.3rem;display: flex">
-                <div style="flex: 1">消费：￥{{itemName.xiaofei}}</div>
-                <div style="flex: 1">抵扣：￥{{itemName.dikou}}</div>
-                <div style="flex: 1;color: #FF0000">预估佣金：￥{{itemName.yongjin}}</div>
+                <div style="flex: 1">消费：￥{{item.xiaofei}}</div>
+                <div style="flex: 1">抵扣：￥{{item.dikou}}</div>
+                <div style="flex: 1;color: #FF0000">预估佣金：￥{{item.yongjin}}</div>
               </div>
             </div>
           </div>
         </div>
       </swiper-item>
-    </swiper>
+      <div v-show="sum==0" style="width: 100%;height: 100%;background: #F1F0F0;position: fixed;">
+        <img src="/static/images/zanwushuju@3x.png" alt="" style="height: 82px;width: 100px;position: absolute;left: 50%;margin-left: -50px;top: 40%;margin-top: -41px;">
+      </div>
+    </div>
     </div>
 
     <div v-show="tabcurrentTab==1">
       <div class="tabcontent2">
         <div class="tabcontentitem">
           <div class="tabcontentleft">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            <image class="img2" lazy-load="true" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            </image>
           </div>
           <div class="tabcontentright">
             <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
@@ -68,7 +73,8 @@
       <div class="tabcontent2">
         <div class="tabcontentitem">
           <div class="tabcontentleft">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            <image class="img2" lazy-load="true" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            </image>
           </div>
           <div class="tabcontentright">
             <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
@@ -81,7 +87,8 @@
       <div class="tabcontent2">
         <div class="tabcontentitem">
           <div class="tabcontentleft">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            <image class="img2" lazy-load="true" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            </image>
           </div>
           <div class="tabcontentright">
             <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
@@ -94,7 +101,8 @@
       <div class="tabcontent2">
         <div class="tabcontentitem">
           <div class="tabcontentleft">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            <image class="img2" lazy-load="true" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544418451567&di=dfd939939c234c6364fc9a09a6d3b3cd&imgtype=0&src=http%3A%2F%2Fpic39.photophoto.cn%2F20160528%2F1155115744471988_b.jpg" alt="">
+            </image>
           </div>
           <div class="tabcontentright">
             <p style="font-size: 12px;color: #393939">店铺名店铺名<span style="color: #393939;font-size: 10px;float: right">10-31 20:08</span></p>
@@ -114,44 +122,63 @@
         currentTab: 0,
         tabcurrentTab: 0,
         params: {
-          userId: '572e69d1',
+          userId: '',
           pageNum: 1,
           num: 5,
           type: 0
         },
         height: '',
+        sum: '',
         list: []
       }
     },
     methods: {
-      async getList (params, index) {
+      async getList (params) {
         var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/allOrder', params)
-        this.list.push(data)
-        this.list[index].list.concat(this.list[index].list)
-        this.height = 132 * this.list[index].list.length + 'px'
-        console.log(this.height)
+        this.sum = data.sum
+        for (var i = 0; i < data.list.length; i++) {
+          this.list.push(data.list[i])
+        }
       },
-      changeTab (e) {
-        this.params.type = e.mp.detail.current
-        this.getList(this.params, this.params.type)
-      },
+      // changeTab (e) {
+      //   this.params.type = e.mp.detail.current
+      //   this.getList(this.params)
+      // },
       tabClick (index) {
+        this.list = []
+        this.params.pageNum = 1
         this.params.type = index
-        this.getList(this.params, this.params.type)
+        this.getList(this.params)
       },
       tabCut (index) {
         this.tabcurrentTab = index
+      },
+      //复制订单号
+      fuzhi (code) {
+        const _this = this;
+        wx.setClipboardData({
+          data: code,
+          success: function (res) {
+          }
+        })
       }
     },
     onLoad () {
-      this.getList(this.params, this.params.type)
+      this.params.userId = this.$saveToken.getToken().token
+      this.getList(this.params)
+    },
+    //刷新
+    onPullDownRefresh () {
+      this.list = []
+      this.params.pageNum = 1
+      this.getList(this.params)
     },
     onReachBottom () {
       wx.showLoading({
-        title:'玩命加载中'
-      });
-      this.params.pageNum+=1;
-      this.getList(this.params, this.params.type);
+        title: '玩命加载中'
+      })
+      this.params.pageNum += 1
+      this.getList(this.params)
     }
   }
 </script>
@@ -192,6 +219,7 @@
     color: #F08400!important;
   }
   #swiperContent{
+    background-color: #F1F0F0;
     /*padding-left: 10px;*/
     /*padding-right: 10px;*/
   }
@@ -265,7 +293,7 @@
     height: 90px;
     width: 90px;
   }
-  .swiperleft img{
+  .swiperleft .img1{
     height: 100%;
     width: 100%;
     margin-top: 8px;
@@ -353,7 +381,7 @@
     height: 55px;
     width: 55px;
   }
-  .tabcontentleft img{
+  .tabcontentleft .img2{
     width: 100%;
     height: 100%;
     margin-top: 5px;

@@ -41,7 +41,7 @@
     <div style="height: 10px;background: #F2F2F2;width: 100%;"></div>
     <div class="contain" style="padding-top: 10px;position: relative">
       <div style="display: inline-block;position: absolute;font-size: 16px;font-weight: bold;letter-spacing: 1px;padding-left: 10px;">全部商品</div>
-      <scroll-view scroll-x="true" class="top">
+      <scroll-view scroll-x="true" class="top" scroll-with-animation="true">
         <div class="tabbar" :class="{'tabbar-bottom':params.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId)">
           <div v-show="params.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
           {{item.typeName}}
@@ -129,6 +129,11 @@ export default {
       this.shopActiveindex = index;
     },
     clickTab (id) {
+      wx.getSystemInfo({
+        success: function (res) {
+          console.log(res.windowWidth)
+        }
+      })
       // this.params.productType = e;
       this.params.productType = id;
       this.imgUrls = [];

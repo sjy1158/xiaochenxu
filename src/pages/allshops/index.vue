@@ -3,8 +3,8 @@
     <div class="mod1">
         <input type="text" placeholder="输入淘宝天猫商品名称／宝贝标题搜索">
     </div>
-    <scroll-view scroll-x="true" class="top">
-      <div class="tabbar" :class="{'tabbar-bottom':params2.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId)">
+    <scroll-view scroll-x="true" class="top" @scroll="scroll" :scroll-left="scrollLeft">
+      <div class="tabbar" :class="{'tabbar-bottom':params2.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId, index)">
         <div v-show="params2.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
         {{item.typeName}}
       </div>
@@ -48,6 +48,7 @@
         tabArr: [],
         imgUrls: [],
         height: "127",
+        scrollLeft: 0
       }
     },
     methods: {
@@ -63,7 +64,7 @@
         this.params2.productType = this.tabArr[0].typeId
         this.getList(this.params2)
       },
-      clickTab (id) {
+      clickTab (id, index) {
         this.params2.productType = id
         this.imgUrls = [];
         this.params2.pageNum = 1;
