@@ -21,7 +21,6 @@
       }
     },
     methods: {
-
     },
     onLoad () {
       this.phone = getRouter().phoneid.replace(/^(\d{3})\d{4}(\d+)/, '$1****$2')

@@ -3,7 +3,7 @@
     <div class="mod1">
         <input type="text" placeholder="输入淘宝天猫商品名称／宝贝标题搜索">
     </div>
-    <scroll-view scroll-x="true" class="top" @scroll="scroll" :scroll-left="scrollLeft">
+    <scroll-view scroll-x="true" class="top" @scroll="scroll" :scroll-left="scrollLeft" :scroll-with-animation="animate">
       <div class="tabbar" :class="{'tabbar-bottom':params2.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId, index)">
         <div v-show="params2.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
         {{item.typeName}}
@@ -40,15 +40,16 @@
         params2: {
           pageNum: 1,
           num: 8,
-          source: "淘宝",
-          bigTypeName: "",
+          source: '淘宝',
+          bigTypeName: '',
           productType: 1,
-          productName: ""
+          productName: ''
         },
         tabArr: [],
         imgUrls: [],
-        height: "127",
-        scrollLeft: 0
+        height: '127',
+        scrollLeft: 0,
+        animate: true
       }
     },
     methods: {
@@ -65,6 +66,17 @@
         this.getList(this.params2)
       },
       clickTab (id, index) {
+        const _this = this
+        if (index > 5) {
+          var query = wx.createSelectorQuery()
+          query.select('.tabbar').boundingClientRect(function (rect) {
+            _this.scrollLeft = rect.width * index
+          }).exec()
+        } else {
+          this.scrollLeft = 0
+        }
+        // var cur = e.target.dataset.current
+        // console.log(cur)
         this.params2.productType = id
         this.imgUrls = [];
         this.params2.pageNum = 1;
@@ -80,7 +92,7 @@
       this.params.source = getRouter().typeId
       this.params2.source = getRouter().typeId
       this.getTabarr(this.params)
-      this.getList(this.params2)
+      // this.getList(this.params2)
     },
     onPullDownRefresh () {
       this.imgUrls = [];

@@ -1,11 +1,11 @@
 <template>
   <div class="changename">
     <div class="mod2">
-      <div class="name"><label>昵称：</label><input type="text" v-model="name"><span>修改</span></div>
+      <div class="name"><label>昵称：</label><input type="text" v-model="params.nickName"><span>修改</span></div>
     </div>
 
     <div class="mod3">
-      <button type="button">确认修改</button>
+      <button type="button" @click="changeName">确认修改</button>
     </div>
   </div>
 </template>
@@ -15,14 +15,52 @@
   export default {
     data () {
       return {
-        name: ''
+        params: {
+          nickName: '',
+          userId: ''
+        }
       }
     },
     methods: {
+      async changeName () {
+        if (this.params.nickName != '') {
+          const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/changeUserNickName', this.params)
+          if (data.code == 400) {
+            wx.showToast({
+              title: data.msg,
+              icon: 'none',
+              duration: 2000
+            })
+          } else {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'none',
+              duration: 2000,
+              success: function (res) {
+                setTimeout(function () {
+                  let pages = getCurrentPages()
+                  let prevPage = pages[pages.length - 2]
+                  prevPage.onLoad()
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 2000)
+              }
+            })
+          }
+        } else {
+          wx.showToast({
+            title: '请输入修改的用户名',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
     },
     onLoad () {
-      const name = getRouter().name
-      this.name = name
+      const data = this.$saveToken.getToken()
+      this.params.userId = data.token
+      this.params.nickName = getRouter().name
     }
   }
 </script>

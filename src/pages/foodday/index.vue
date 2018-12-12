@@ -6,7 +6,7 @@
     </div>
 
     <div style=" border-bottom: 1px solid #F2F2F2;width: 100%;">
-      <scroll-view scroll-x class="top">
+      <scroll-view scroll-x class="top" :scroll-left="scrollLeft" :scroll-with-animation="animate">
         <div class="tabbar" v-for="(item,index) in headerArr" @click="tabClick(item.id,index)">
           <div v-show="headerIndex == index" style="width: 11px;height: 2px;background: #F08400;position: absolute;bottom: -1px;left: 50%;margin-left: -5.5px;"></div>
           <image lazy-load="true" class="imgcontent srtImg" :src="item.imageUrl" alt="" style="border-radius: 50%;" :class="headerIndex == index?'activeTab':''"></image>
@@ -16,7 +16,7 @@
     </div>
 
     <div style=" border-bottom: 1px solid #F2F2F2;width: 100%;height: 46px;line-height: 42px;">
-      <scroll-view scroll-x class="top2" style="padding-left: 20px;">
+      <scroll-view scroll-x class="top2" :scroll-with-animation="animate" style="padding-left: 20px;">
         <div class="tabbar" :class="params2.mark==0?'contentactive':''" @click="contentClick(0)">
           <div v-show="params2.mark==0" style="height: 2px;width: 11px;background: #F08400;position: absolute;bottom: -1px;left: 50%;margin-left: -5.5px;"></div>
           <span>距离最近</span>
@@ -77,7 +77,9 @@
         headerArr: [],
         contentList: [],
         headerIndex: 0,
-        contentIndex: 0
+        contentIndex: 0,
+        animate: true,
+        scrollLeft: 0
       }
     },
     methods: {
@@ -95,6 +97,15 @@
       },
       // 头部切换
       tabClick (id, index) {
+        const _this = this
+        if (index > 2) {
+          var query = wx.createSelectorQuery()
+          query.select('.tabbar').boundingClientRect(function (rect) {
+            _this.scrollLeft = rect.width * index
+          }).exec()
+        } else {
+          this.scrollLeft = 0
+        }
         this.headerIndex = index
         this.contentList = []
         this.params2.pageNum = 1
