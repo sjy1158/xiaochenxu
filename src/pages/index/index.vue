@@ -1,70 +1,123 @@
 <template>
   <div>
     <div class="content">
-      <div class="page">
+      <div style="position: fixed;left: 0px;z-index: 99999999999999999999;width: 100%;background: white;top: 0px;">
+        <div class="mod2">
+          <image lazy-load="true" src="/static/images/search@3x.png" alt="" style="width: 18px;height: 18px;position: absolute;left: 20px;top: 50%;margin-top: -9px;" @click="search">
+          </image>
+          <ul>
+            <li @click="showList(1,'京东',2)" v-bind:class="activeIndex==1 ? 'active':''">
+              <div v-show="activeIndex==1" style="height: 2px;width: 26px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -13px;"></div>
+              京东
+            </li>
+            <li @click="showList(0,'淘宝',1)" v-bind:class="activeIndex==0 ? 'active':''">
+              <div v-show="activeIndex==0" style="height: 2px;width: 26px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -13px;"></div>
+              淘宝
+            </li>
+            <li @click="showList(2,'拼多多',3)" v-bind:class="activeIndex==2 ? 'active':''">
+              <div v-show="activeIndex==2" style="height: 2px;width: 26px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -13px;"></div>
+              拼多多
+            </li>
+          </ul>
+          <image lazy-load="true" src="/static/images/flicking@3x.png" alt="" style="width: 18px;height: 18px;position: absolute;right: 20px;top: 50%;margin-top: -9px;">
+          </image>
+        </div>
+
+        <scroll-view scroll-x="true" class="top" :scroll-left="scrollLeft" :scroll-with-animation="animate">
+          <div class="tabbar" :class="{'tabbar-bottom':params.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId, index)">
+            <div v-show="params.productType==item.typeId" style="height: 1px;width: 28px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -14px;"></div>
+            {{item.typeName}}
+          </div>
+        </scroll-view>
+      </div>
+
+      <div class="page" style="height: 166px!important;margin-top: 71px;">
         <div class="page__bd page__bd_spacing">
-          <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular">
+          <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="rgba(143, 143, 143, 1)" :duration="duration" :circular="circular">
             <div v-for="item in bannerArr" :key="index">
               <swiper-item>
-                <image lazy-load="true" :src="item.advertiseImageUrl" class="slide-image" />
+                <image lazy-load="true" :src="item.advertiseImageUrl" class="slide-image">
+                </image>
               </swiper-item>
             </div>
           </swiper>
         </div>
       </div>
-      <div class="mod2">
-        <img v-show="activeIndex==0" src="/static/images/2@3x.png" alt="">
-        <img v-show="activeIndex==1" src="/static/images/1@3x.png" alt="">
-        <img v-show="activeIndex==2" src="/static/images/chose3.png" alt="">
-        <ul>
-          <li @click="showList(0,'淘宝',1)" v-bind:class="activeIndex==0 ? 'active':''">淘宝</li>
-          <li @click="showList(1,'京东',2)" v-bind:class="activeIndex==1 ? 'active':''">京东</li>
-          <li @click="showList(2,'拼多多',3)" v-bind:class="activeIndex==2 ? 'active':''">拼多多</li>
-        </ul>
-      </div>
       <!--搜索框-->
-      <div class="mod3">
-          <input type="search" v-model="value" placeholder="输入淘宝天猫商品名称／宝贝标题搜索" @confirm="confirm($event)">
-      </div>
+      <!--<div class="mod3">-->
+          <!--<input type="search" v-model="value" placeholder="输入淘宝天猫商品名称／宝贝标题搜索" @confirm="confirm($event)">-->
+      <!--</div>-->
       <!--tab分类列表-->
       <div class="mod4">
         <ul>
           <li v-for="(item,index) in bigTypearr" @click="openList(item.bigestTypeId)">
-            <image style="width: 25px;height: 25px;" lazy-load="true" :src="item.typeImageUrl"></image>
+            <image lazy-load="true" style="width: 25px;height: 25px;" :src="item.typeImageUrl"></image>
             <!--<img class="srtImg" :src="item.typeImageUrl" alt="" :key="index" style="width: 25px;height: 25px;">-->
             <p>{{item.typeName}}</p>
           </li>
         </ul>
       </div>
+
+
+      <div>
+        <image lazy-load="true" v-for="item in adlist" :src="item" alt="" style="width:100%;height: 95px;">
+        </image>
+      </div>
+
+    </div>
+    <!--顶部ending-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!--列表数据-->
+    <div style="height: 10px;background: #F2F2F2;width: 100%;"></div>
+
+    <!--精选商品图片-->
+    <div style="height: 59px;width: 100%;position: relative">
+      <image lazy-load="true" src="/static/images/kuayetong@3x.png" style="width:164px;height: 28px;position: absolute;left: 50%;margin-left: -82px;top: 50%;margin-top: -14px;">
+      </image>
     </div>
 
-    <div style="height: 10px;background: #F2F2F2;width: 100%;"></div>
-    <div class="contain" style="padding-top: 10px;position: relative">
-      <div style="display: inline-block;position: absolute;font-size: 16px;font-weight: bold;letter-spacing: 1px;padding-left: 10px;">全部商品</div>
-      <scroll-view scroll-x="true" class="top" :scroll-left="scrollLeft" :scroll-with-animation="animate">
-        <div class="tabbar" :class="{'tabbar-bottom':params.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId, index)">
-          <div v-show="params.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
-          {{item.typeName}}
-        </div>
-      </scroll-view>
-      <div :current="params.productType" @change="changeTab" id="swiperContent" style="height: auto;">
-        <div class="swiperall">
-            <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;" @click="openXiangqing(item.id)">
-              <image lazy-load="true" class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;"></image>
-              <div style="height: 100%;margin-left: 133px;" class="Listall">
-                <p style="font-size: 12px;">
-                  <img v-if="item.source=='京东'" src="/static/images/jingdong@3x.png" alt="">
-                  <img v-if="item.source=='淘宝'" src="http://pa8vmyrlm.bkt.clouddn.com/taobao@3x.png" alt="">
-                  <img v-if="item.source=='拼多多'" src="/static/images/pinduoduo@3x.png" alt="">
-                  <span>{{item.name}}</span>
-                </p>
-                <p>{{item.source}}价:<span style="font-size: 14px;color: #FF0000">{{item.price}}</span>元<span style="float: right">销量：{{item.salesVolume}}件</span></p>
-                <p><span>可抵:{{item.deduction}}元</span></p>
+    <!--数据列表-->
+    <div style="padding: 0px 5px;height: auto">
+      <div class="contnetList">
+        <ul>
+          <li v-for="item in imgUrls" @click="openXiangqing(item.id)">
+              <image lazy-load="true" src="/static/images/bgre.png" style="" class="img"></image>
+              <image lazy-load="true" :src="item.imageUrl" class="img1 srtImg"></image>
+              <p style="font-size: 12px;" class="shopname">
+                <image v-if="item.source=='京东'" lazy-load="true" src="/static/images/jingdong@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
+                <image v-if="item.source=='淘宝'" lazy-load="true" src="http://pa8vmyrlm.bkt.clouddn.com/taobao@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
+                <image v-if="item.source=='拼多多'" lazy-load="true" src="/static/images/pinduoduo@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
+                <span style="vertical-align: middle;letter-spacing: 1px;margin-left: 6px;">{{item.name}}</span>
+              </p>
+              <p class="shopname1" style="font-size: 10px;">
+                <span>抵后价: <span style="color: #FF0000;font-size: 12px;">¥{{item.price}}</span></span>
+                <span style="float: right;color: #717171;font-size: 10px;">销量: {{item.salesVolume}}件</span>
+              </p>
+              <div class="discon">
+                <image lazy-load="true" src="/static/images/deduction_bg@3x.png" class="img2"></image>
+                <div style="color: white;height: 20px;position: absolute;left: 0px;font-size: 12px;text-align: center" class="disconmoney">可抵 : {{item.deduction}}</div>
               </div>
-            </div>
-        </div>
+          </li>
+        </ul>
       </div>
+      <!--<div :current="params.productType" @change="changeTab" id="swiperContent" style="height: auto;">-->
+        <!--<div class="swiperall">-->
+            <!--<div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;" @click="openXiangqing(item.id)">-->
+              <!--<image lazy-load="true" class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;"></image>-->
+              <!--<div style="height: 100%;margin-left: 133px;" class="Listall">-->
+                <!--<p style="font-size: 12px;">-->
+                  <!--<img v-if="item.source=='京东'" src="/static/images/jingdong@3x.png" alt="">-->
+                  <!--<img v-if="item.source=='淘宝'" src="http://pa8vmyrlm.bkt.clouddn.com/taobao@3x.png" alt="">-->
+                  <!--<img v-if="item.source=='拼多多'" src="/static/images/pinduoduo@3x.png" alt="">-->
+                  <!--<span>{{item.name}}</span>-->
+                <!--</p>-->
+                <!--<p>{{item.source}}价:<span style="font-size: 14px;color: #FF0000">{{item.price}}</span>元<span style="float: right">销量：{{item.salesVolume}}件</span></p>-->
+                <!--<p><span>可抵:{{item.deduction}}元</span></p>-->
+              <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
+    <!--列表ending-->
   </div>
 </template>
 
@@ -99,6 +152,7 @@ export default {
       height: "127",
       imgUrls: [],
       bannerArr: [],
+      adlist: [],
       nav: [{
         name: "充值记录"
       }, {
@@ -151,22 +205,26 @@ export default {
       this.params.productType = e.mp.detail.current+1;
     },
     async getList (params) {
-      var List = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getProductListByType",params);
+      var List = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getProductListByType",params)
       for (var i = 0; i<List.list.length;i++) {
         this.imgUrls.push(List.list[i])
       }
     },
     async getBanner (params) {
-      var bannerArr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getBanner",params);
-      this.bannerArr = bannerArr.list;
+      var bannerArr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getBanner",params)
+      console.log(JSON.stringify(bannerArr))
+      let adlist = []
+      adlist.push(bannerArr.advertiseList[0].image)
+      this.adlist = adlist
+      this.bannerArr = bannerArr.list
       // console.log(bannerArr.list);
     },
     async getBigtype (params) {
-      var bigTypearr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getPowerPurchaserBigType",params);
+      var bigTypearr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getPowerPurchaserBigType",params)
       this.bigTypearr = bigTypearr.list;
     },
     async getTabarr (params) {
-      var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getType",params);
+      var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getType",params)
       this.tabArr = tabarr.list
       this.params.productType = this.tabArr[0].typeId
       this.getList(this.params)
@@ -176,6 +234,13 @@ export default {
       console.log(id);
       wx.navigateTo({
         url: '../out/main?id=' + id,
+        redirect: false
+      })
+    },
+    //跳转搜做
+    search () {
+      wx.navigateTo({
+        url: '../searchshop/main',
         redirect: false
       })
     },
@@ -245,7 +310,7 @@ export default {
 <style scoped>
   .slide-image {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
   }
   .mod2{
     position: relative;
@@ -258,9 +323,10 @@ export default {
   }
   .mod2 ul{
     display: flex;
-    width: 100%;
+    width: 200px;
     position: absolute;
-    left: 0px;
+    left: 50%;
+    margin-left: -100px;
     top: 0px;
   }
   .mod2 ul li{
@@ -268,12 +334,15 @@ export default {
     text-align: center;
     font-size: 16px;
     line-height: 36px;
+    letter-spacing: 1px;
+    font-weight: bold;
     color: #717171;
+    position: relative;
   }
   .active{
-    background-image: -webkit-gradient(linear, 0 0, 0 bottom, to(rgba(234, 101, 10, 1)), from(rgba(246, 199, 156, 1)));
+    color: #393939!important;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /*-webkit-text-fill-color: transparent;*/
   }
   .mod3{
     padding: 19px 24px;
@@ -290,6 +359,7 @@ export default {
   }
   .mod4 ul{
     display: flex;
+    margin-top: 10px;
     padding-bottom: 20px;
   }
   .mod4 ul li{
@@ -332,13 +402,13 @@ export default {
   }
 
   .top{
-    width: 75%;
+    width: 100%;
     text-align: center;
     /*line-height: 42px;*/
     white-space: nowrap;
-    position: relative;
     background: #fff;
-    margin-left: 90px;
+    margin-top: 9px;
+    /*margin-left: 90px;*/
   }
   /*::-webkit-scrollbar {*/
     /*width: 6px;*/
@@ -348,14 +418,19 @@ export default {
   /*}*/
   .tabbar{
     padding: 0px 12px;
-    font-size: 16px;
+    height: 26px;
+    font-size: 14px;
+    line-height: 27px;
     padding-bottom: 3px!important;
     /*height: 42px;*/
     display: inline-block;
-    color: #393939;
+    color: #717171;
     position: relative;
+    letter-spacing: 1px;
+    font-weight: bold;
   }
   .tabbar-bottom{
+    font-size: 16px;
     color: #F08400;
     /*border-bottom: 2px solid #F08400;*/
   }
@@ -405,7 +480,127 @@ export default {
     -webkit-line-clamp:2;
   }
 
-
+  /*列表*/
+  .contnetList{
+    width: 100%;
+    height: auto;
+    /*background: red;*/
+  }
+  .contnetList ul{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    /*flex-direction:column;*/
+  }
+  .contnetList ul li{
+    position: relative;
+    /*float: left;*/
+    /*flex: 1;*/
+    width: 50%;
+  }
+  .contnetList ul li .img1{
+    position: absolute;
+    left: 50%;
+    margin-left: -45%;
+    top: 0px;
+    width: 90%;
+    height: 182px;
+    border-radius: 5px 5px 0px 0px;
+  }
+  .shopname{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    position: absolute;
+    width: 84%;
+    left: 50%;
+    margin-left: -42%;
+    top: 191px;
+  }
+  .shopname1{
+    position: absolute;
+    width: 84%;
+    left: 50%;
+    /*top: 235px;*/
+    margin-left: -42%;
+  }
+  .discon{
+    position: absolute;
+    width: 50%;
+    /*width: 76px;*/
+    height: 20px;
+    left: 8%;
+    /*background: #0bb20c;*/
+    font-size: 12px;
+    color: white;
+    letter-spacing: 1px;
+    text-align: center;
+    /*width: 84%;*/
+  }
+  .discon .img2{
+    width: 76px;
+    height: 20px;
+    position: absolute;
+    left: 0px;
+    /*left:8%;*/
+  }
+  .img{
+    width: 100%;
+  }
+  @media (max-width: 1500px) {
+    .shopname1{
+      top: 245px;
+    }
+    .discon{
+      top: 277px;
+    }
+    .img{
+      height: 320px;
+    }
+    .disconmoney{
+      width: 76px;
+    }
+    /*.disconmoney{*/
+      /*width: 100px;*/
+    /*}*/
+  }
+  @media (min-width: 700px) and (max-width: 1000px) {
+    .shopname1{
+      top: 227px;
+    }
+    .discon{
+      top: 277px;
+    }
+    .img{
+      height: 320px;
+    }
+    .disconmoney{
+      width: 76px;
+    }
+    /*.disconmoney{*/
+      /*width: 100px;*/
+    /*}*/
+  }
+  @media (min-width: 350px) and (max-width: 700px) {
+    .shopname1{
+      top: 235px;
+    }
+    .discon{
+      top: 260px;
+    }
+    .img{
+      height: 300px;
+    }
+    .disconmoney{
+      width: 76px;
+    }
+    /*.img2{*/
+      /*width: 76px;*/
+    /*}*/
+  }
   /*懒加载*/
   .srtImg{
     -webkit-animation-duration: 1s;

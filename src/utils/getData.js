@@ -1,7 +1,7 @@
 const net = {
   get(url, data) {
     wx.showLoading({
-      title: '拼命加载中',//数据请求前loading，提高用户体
+      title: '加载中',//数据请求前loading，提高用户体
     })
     return new Promise((resolve, reject) => {
       wx.request({
@@ -62,7 +62,7 @@ const net = {
   },
   post(url, data) {
     wx.showLoading({
-      title: '拼命加载中',
+      title: '加载中',
     })
     return new Promise((resolve, reject) => {
       wx.request({
