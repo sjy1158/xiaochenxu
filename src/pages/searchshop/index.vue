@@ -1,14 +1,13 @@
 <template>
     <div>
       <div class="search">
-        <div style="width: 50px;height: 17px;position: absolute;left: 20px;top: 50%;margin-top: -8.5px;" @click="quxiao">
-          <image src="/static/images/Triangle@3x.png" style="width: 7px;height: 17px;position: absolute;left: 20px;top: 50%;margin-top: -8.5px;" alt="">
-          </image>
+        <div style="position: absolute;left: 20px;top: 0px;letter-spacing: 1px;font-size: 16px;color: #393939" @click="quxiao">
+          返回
         </div>
         <div class="searchinput">
           <input type="text" placeholder="输入宝贝标题或关键词搜索">
         </div>
-        <div style="position: absolute;right: 20px;top: 0px;letter-spacing: 1px;font-size: 16px;color: #393939" @click="quxiao">取消</div>
+        <div style="position: absolute;right: 20px;top: 0px;letter-spacing: 1px;font-size: 16px;color: #393939">搜索</div>
       </div>
 
       <div class="tabbars">
