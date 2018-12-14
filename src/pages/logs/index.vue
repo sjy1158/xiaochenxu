@@ -31,10 +31,10 @@
           </ul>
         </div>
       </div>
-      <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" style="width: 100%;height: 200px!important;">
+      <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="rgba(143, 143, 143, 1)" style="width: 100%;height: 200px!important;">
         <div v-for="item in bannerArr" :key="index">
           <swiper-item>
-            <image lazy-load="true" :src="item.advertiseImageUrl" class="slide-image"></image>
+            <image v-if="item.advertiseImageUrl" lazy-load="true" :src="item.advertiseImageUrl" class="slide-image"></image>
           </swiper-item>
         </div>
       </swiper>
@@ -43,7 +43,7 @@
     <div class="menulist" style="">
       <ul>
         <li v-for = "item in tabArr" @click = "openFood(item.id)">
-          <image lazy-load="true" :src="item.imageUrl" alt="" class="tabimg"></image>
+          <image v-if="item.imageUrl" lazy-load="true" :src="item.imageUrl" alt="" class="tabimg"></image>
           <p>{{item.name}}</p>
         </li>
       </ul>
@@ -92,7 +92,7 @@
     <div class="nearList" style="padding: 14px;">
       <div class="nearList_item" v-for="(item,index) in nearList" :index="index" :key="index" :data-index="index" @click="openShophome(item.shopId)">
         <div style="position: relative">
-          <image lazy-load="true" :src="item.shopHeadImageUrl" class="itemimg srtImg" alt=""></image>
+          <image v-if="item.shopHeadImageUrl" lazy-load="true" :src="item.shopHeadImageUrl" class="itemimg srtImg" alt=""></image>
         </div>
         <div style="font-size: 12px;position: absolute;left: 5.5rem;border-bottom: 1px solid #F2F2F2;padding-bottom: 5px;" class="itemText">
           <p>{{item.title}}</p>

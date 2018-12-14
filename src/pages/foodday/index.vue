@@ -9,7 +9,7 @@
       <scroll-view scroll-x class="top" :scroll-left="scrollLeft" :scroll-with-animation="animate">
         <div class="tabbar" v-for="(item,index) in headerArr" @click="tabClick(item.id,index)">
           <div v-show="headerIndex == index" style="width: 11px;height: 2px;background: #F08400;position: absolute;bottom: -1px;left: 50%;margin-left: -5.5px;"></div>
-          <image lazy-load="true" class="imgcontent srtImg" :src="item.imageUrl" alt="" style="border-radius: 50%;" :class="headerIndex == index?'activeTab':''"></image>
+          <image v-if="item.imageUrl" lazy-load="true" class="imgcontent srtImg" :src="item.imageUrl" alt="" style="border-radius: 50%;" :class="headerIndex == index?'activeTab':''"></image>
           <p :class="headerIndex == index?'activeName':''">{{item.name}}</p>
         </div>
       </scroll-view>
@@ -35,7 +35,7 @@
     <div class="nearList" style="padding: 14px;">
       <div class="nearList_item" v-for="item in contentList">
         <div style="position: relative">
-          <image lazy-load="true" class="listImg srtImg" :src="item.shopHeadImageUrl" alt=""></image>
+          <image v-if="item.shopHeadImageUrl" lazy-load="true" class="listImg srtImg" :src="item.shopHeadImageUrl" alt=""></image>
         </div>
         <div style="font-size: 12px;position: absolute;left: 5.5rem;" class="itemText">
           <p>{{item.title}}</p>

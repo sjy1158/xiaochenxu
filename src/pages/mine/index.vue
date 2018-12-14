@@ -43,11 +43,11 @@
       <div class="dingdanTab" style="position: relative;z-index: 99999999999999">
         <div class="item_Tab">
           <div class="itemtitle tabs">
-            <div>
+            <div @click="openIncome">
               <p style="color: #393939;font-size: 14px;letter-spacing: 1px;margin-top: 13px;">今日预估(元)</p>
               <p style="color: #393939;font-size: 20px;font-weight: bold;letter-spacing: 1px;">{{userInfo.jinriyugu}}</p>
             </div>
-            <div>
+            <div @click="openIncome">
               <p style="color: #393939;font-size: 14px;letter-spacing: 1px;margin-top: 13px;">累计收益(元)</p>
               <p style="color: #393939;font-size: 20px;font-weight: bold;letter-spacing: 1px;">{{userInfo.leijishouyi}}</p>
             </div>
@@ -55,19 +55,19 @@
             <!--<span @click="lookmydingdan()">查看更多订单</span>-->
           </div>
           <div class="tabs">
-            <div>
+            <div @click="openIncome">
               <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.ketixian}}</p>
               <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">可提现额(元)</p>
             </div>
-            <div>
+            <div @click="openIncome">
               <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.benyueyugu}}</p>
               <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">本月预估(元)</p>
             </div>
-            <div>
+            <div @click="openIncome">
               <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.shangyueyugu}}</p>
               <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">上月预估(元)</p>
             </div>
-            <div>
+            <div @click="openIncome">
               <p style="color: #393939;font-size: 14px;letter-spacing: 1px;font-weight: bold;margin-top: 0.9rem;">{{userInfo.shangyuejiesuan}}</p>
               <p style="color: #8F8F8F;font-size: 10px;letter-spacing: 1px;">上月结算(元)</p>
             </div>
@@ -312,6 +312,13 @@
       inlinechongzhi () {
         wx.navigateTo({
           url: '../inline/main?phonenum=' + this.userInfo.user.phoneId,
+          redirect: false
+        })
+      },
+      //跳转我的收益
+      openIncome () {
+        wx.navigateTo({
+          url: '../myincome/main?name=' + this.userInfo.user.userType,
           redirect: false
         })
       },

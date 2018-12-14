@@ -3,7 +3,7 @@
     <swiper v-show="clickshow==false" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" :circular="circular" class="" :style="{height:height+'px'}">
       <div v-for="item in bannerArr" :key="index">
         <swiper-item>
-          <image lazy-load="true" :src="item.imageUrl" class="slide-image srtImg" style="width: 100%;height: 100%;"></image>
+          <image v-if="item.imageUrl" lazy-load="true" :src="item.imageUrl" class="slide-image srtImg" style="width: 100%;height: 100%;"></image>
         </swiper-item>
       </div>
     </swiper>

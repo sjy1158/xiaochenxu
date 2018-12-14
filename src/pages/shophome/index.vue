@@ -59,7 +59,7 @@
           <ul class="shopcontent">
             <li v-for="item in allList" style="position: relative" @click="showdailog()">
               <div>
-                <image lazy-load="true" class="imgcontent srtImg" :src="item.imageUrl" alt=""></image>
+                <image v-if="item.imageUrl" lazy-load="true" class="imgcontent srtImg" :src="item.imageUrl" alt=""></image>
                 <p style="padding-left: 12px;padding-right: 12px;" class="title">{{item.productName}}</p>
                 <p style="padding-left: 12px;padding-right: 12px;height: 1.4rem;line-height: 1.4rem;position: absolute;bottom: 5px;width: 100%;" class="discon">
                   <span style="color:#393939;font-size: 12px;vertical-align: middle">¥{{item.price}}</span>
@@ -76,7 +76,7 @@
               <p class="titlexiangqing">店家环境</p>
               <scroll-view scroll-x="true" class="box">
                 <ul :style="{width:widthimg*shopObj.shopImageList.length+'px'}">
-                  <li v-for="item in shopObj.shopImageList"><image :src="item.imageUrl" class="imgslide srtImg" alt=""></image></li>
+                  <li v-for="item in shopObj.shopImageList"><image v-if="item.imageUrl" lazy-load="true" :src="item.imageUrl" class="imgslide srtImg" alt=""></image></li>
                 </ul>
               </scroll-view>
             </div>

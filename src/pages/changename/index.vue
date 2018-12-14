@@ -118,4 +118,39 @@
     color: white;
     margin-top: 31px;
   }
+  /*列表*/
+  .contnetList ul{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    /*flex-direction:column;*/
+  }
+  .contnetList ul li{
+    position: relative;
+    /*float: left;*/
+    /*flex: 1;*/
+    width: 50%;
+  }
+  .contnetList ul li .img1{
+    position: absolute;
+    left: 50%;
+    margin-left: -45%;
+    top: 0px;
+    width: 90%;
+    height: 182px;
+    border-radius: 5px 5px 0px 0px;
+  }
+  .shopname{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    position: absolute;
+    width: 84%;
+    left: 50%;
+    margin-left: -42%;
+    top: 191px;
+  }
 </style>

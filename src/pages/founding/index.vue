@@ -4,7 +4,7 @@
       <p>活动预告</p>
       <div class="scroll">
         <div>
-          <image lazy-load="true" class="img1 srtImg" v-for="item in headerList" :src="item.image" alt="" @click="activity(params.type,item.id)"></image>
+          <image v-if="item.image" lazy-load="true" class="img1 srtImg" v-for="item in headerList" :src="item.image" alt="" @click="activity(params.type,item.id)"></image>
         </div>
       </div>
     </div>
@@ -13,7 +13,7 @@
       <p>活动回顾</p>
       <ul>
         <li v-for="item in actList" @click="activity(params2.type,item.id)">
-          <image lazy-load="true" class="img2 srtImg" :src="item.image" alt=""></image>
+          <image v-if="item.image" lazy-load="true" class="img2 srtImg" :src="item.image" alt=""></image>
           <div style="display: inline-block">
             <p class="title">{{item.title}}</p>
             <p class="time">{{item.time}}</p>

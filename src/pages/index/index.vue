@@ -36,7 +36,7 @@
           <swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="rgba(143, 143, 143, 1)" :duration="duration" :circular="circular">
             <div v-for="item in bannerArr" :key="index">
               <swiper-item>
-                <image lazy-load="true" :src="item.advertiseImageUrl" class="slide-image">
+                <image v-if="item.advertiseImageUrl" lazy-load="true" :src="item.advertiseImageUrl" class="slide-image">
                 </image>
               </swiper-item>
             </div>
@@ -51,7 +51,7 @@
       <div class="mod4">
         <ul>
           <li v-for="(item,index) in bigTypearr" @click="openList(item.bigestTypeId)">
-            <image lazy-load="true" style="width: 25px;height: 25px;" :src="item.typeImageUrl"></image>
+            <image v-if="item.typeImageUrl" lazy-load="true" style="width: 25px;height: 25px;" :src="item.typeImageUrl"></image>
             <!--<img class="srtImg" :src="item.typeImageUrl" alt="" :key="index" style="width: 25px;height: 25px;">-->
             <p>{{item.typeName}}</p>
           </li>
@@ -60,7 +60,7 @@
 
 
       <div>
-        <image lazy-load="true" v-for="item in adlist" :src="item" alt="" style="width:100%;height: 95px;">
+        <image v-if="item" lazy-load="true" v-for="item in adlist" :src="item" alt="" style="width:100%;height: 95px;">
         </image>
       </div>
 
@@ -81,7 +81,7 @@
         <ul>
           <li v-for="item in imgUrls" @click="openXiangqing(item.id)">
               <image lazy-load="true" src="/static/images/bgre.png" style="" class="img"></image>
-              <image lazy-load="true" :src="item.imageUrl" class="img1 srtImg"></image>
+              <image v-if="item.imageUrl" lazy-load="true" :src="item.imageUrl" class="img1 srtImg"></image>
               <p style="font-size: 12px;" class="shopname">
                 <image v-if="item.source=='京东'" lazy-load="true" src="/static/images/jingdong@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
                 <image v-if="item.source=='淘宝'" lazy-load="true" src="http://pa8vmyrlm.bkt.clouddn.com/taobao@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
@@ -99,23 +99,6 @@
           </li>
         </ul>
       </div>
-      <!--<div :current="params.productType" @change="changeTab" id="swiperContent" style="height: auto;">-->
-        <!--<div class="swiperall">-->
-            <!--<div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;" @click="openXiangqing(item.id)">-->
-              <!--<image lazy-load="true" class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;"></image>-->
-              <!--<div style="height: 100%;margin-left: 133px;" class="Listall">-->
-                <!--<p style="font-size: 12px;">-->
-                  <!--<img v-if="item.source=='京东'" src="/static/images/jingdong@3x.png" alt="">-->
-                  <!--<img v-if="item.source=='淘宝'" src="http://pa8vmyrlm.bkt.clouddn.com/taobao@3x.png" alt="">-->
-                  <!--<img v-if="item.source=='拼多多'" src="/static/images/pinduoduo@3x.png" alt="">-->
-                  <!--<span>{{item.name}}</span>-->
-                <!--</p>-->
-                <!--<p>{{item.source}}价:<span style="font-size: 14px;color: #FF0000">{{item.price}}</span>元<span style="float: right">销量：{{item.salesVolume}}件</span></p>-->
-                <!--<p><span>可抵:{{item.deduction}}元</span></p>-->
-              <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
     </div>
     <!--列表ending-->
   </div>

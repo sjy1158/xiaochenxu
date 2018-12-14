@@ -12,7 +12,7 @@
     <div :current="params2.productType" @change="changeTab" id="swiperContent" :style="{height:height*imgUrls.length+'px'}">
       <div class="contentListall">
         <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;box-shadow:0px 0px 8px #f2f2f2;" @click="openXiangqing(item.id)">
-          <image lazy-load="true" class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;"></image>
+          <image v-if="item.imageUrl" lazy-load="true" class="srtImg" :src="item.imageUrl" alt="" style="width: 117px;height: 117px;float: left;"></image>
           <div style="height: 100%;margin-left: 133px;" class="Listall">
             <p style="font-size: 12px;">
               <img v-if="item.source=='京东'" src="/static/images/jingdong@3x.png" alt="">
