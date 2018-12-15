@@ -150,6 +150,11 @@
               url: '../alldingdan/main',
               redirect: false
             })
+          case 1 :
+            wx.navigateTo({
+              url: '../shopincome/main',
+              redirect: false
+            })
         }
       }
     },
@@ -304,7 +309,7 @@
   .timetab li{
     flex: 1;
     text-align: center;
-    line-height: 31px;
+    line-height: 30px;
     letter-spacing: 1px;
     color: #F08400;
     border: 1px solid #F08400;

@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div class="mod1">
-        <input type="text" placeholder="输入淘宝天猫商品名称／宝贝标题搜索">
-    </div>
-    <scroll-view scroll-x="true" class="top" @scroll="scroll" :scroll-left="scrollLeft" :scroll-with-animation="animate">
-      <div class="tabbar" :class="{'tabbar-bottom':params2.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId, index)">
-        <div v-show="params2.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
-        {{item.typeName}}
+    <div style="position: fixed;width: 100%;z-index: 9999999999;background: white;left: 0px;top: 0px;">
+      <div class="mod1">
+          <input type="text" placeholder="输入淘宝天猫商品名称／宝贝标题搜索">
       </div>
-    </scroll-view>
+      <scroll-view scroll-x="true" class="top" @scroll="scroll" :scroll-left="scrollLeft" :scroll-with-animation="animate">
+        <div class="tabbar" :class="{'tabbar-bottom':params2.productType==item.typeId}" v-for="(item,index) in tabArr" :key="index" @click="clickTab(item.typeId, index)">
+          <div v-show="params2.productType==item.typeId" style="height: 2px;width: 12px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -6px;"></div>
+          {{item.typeName}}
+        </div>
+      </scroll-view>
+    </div>
     <div :current="params2.productType" @change="changeTab" id="swiperContent" :style="{height:height*imgUrls.length+'px'}">
       <div class="contentListall">
         <div v-for="item in imgUrls" style="height: 117px;padding: 5px 8px;box-shadow:0px 0px 8px #f2f2f2;" @click="openXiangqing(item.id)">
@@ -88,7 +90,8 @@
       }
     },
     onLoad () {
-      this.imgUrls = [];
+      this.imgUrls = []
+      this.scrollLeft = 0
       this.params.source = getRouter().typeId
       this.params2.source = getRouter().typeId
       this.getTabarr(this.params)
@@ -108,7 +111,9 @@
 
 <style scoped>
   #swiperContent{
-    margin-top: 15px;
+    /*margin-top: 15px;*/
+    position: absolute;
+    top: 1.7rem;
   }
   .tabbar-bottom{
     color: #F08400!important;

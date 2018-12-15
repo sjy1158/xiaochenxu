@@ -24,7 +24,7 @@ export default {
       'pages/singlequery/main', 'pages/novice/main', 'pages/feedback/main', 'pages/officialannouncement/main', 'pages/alldingdan/main', 'pages/lookadddingdan/main',
       'pages/shopguanli/main', 'pages/skychongzhi/main', 'pages/changeuserpass/main', 'pages/zifeishuoming/main', 'pages/changjianpro/main', 'pages/aboutus/main',
       'pages/founding/main', 'pages/activity/main', 'pages/allshops/main', 'pages/player/main', 'pages/suredingdan/main', 'pages/waitlisten/main', 'pages/inline/main',
-      'pages/searchshop/main', 'pages/myincome/main'],
+      'pages/searchshop/main', 'pages/myincome/main', 'pages/shopincome/main'],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
