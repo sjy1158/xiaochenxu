@@ -91,22 +91,27 @@
     <!--列表数据-->
     <div class="nearList" style="padding: 14px;">
       <div class="nearList_item" v-for="(item,index) in nearList" :index="index" :key="index" :data-index="index" @click="openShophome(item.shopId)">
-        <div style="position: relative">
+        <div style="">
           <image v-if="item.shopHeadImageUrl" lazy-load="true" :src="item.shopHeadImageUrl" class="itemimg srtImg" alt=""></image>
         </div>
-        <div style="font-size: 12px;position: absolute;left: 5.5rem;border-bottom: 1px solid #F2F2F2;padding-bottom: 5px;" class="itemText">
+        <div style="font-size: 12px;position: absolute;border-bottom: 1px solid #F2F2F2;width: 70%;height: 70px;" class="itemText">
           <p>{{item.title}}</p>
-          <p style="width: 50%;margin-top: 0.2rem;">
+          <p>
             <image lazy-load="true" class="itemimg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;"></image>
             <span style="font-size: 10px;color: #393939;padding-left: 6px;">{{item.shopType}}</span>
             <span style="font-size: 10px;color: #393939;padding-left: 17px;">人均消费{{item.averageMoney}}元</span>
             <span style="float: right;font-size: 10px;color: #393939;vertical-align: middle">{{item.distance}}m</span>
           </p>
-          <div class="discon" style="margin-top: 0.3rem;">
-            <div>
-              <span v-for="(itemName, idx) in item.deductionList" :key="idx" :data-index="idx">{{itemName.requireValue}}抵{{itemName.value}}</span>
+          <scroll-view scroll-x="true" class="top2">
+            <div class="tabbar2" v-for="(itemName, idx) in item.deductionList" :key="idx" :data-index="idx" style="font-size: 10px!important;">
+              {{itemName.requireValue}}抵{{itemName.value}}
             </div>
-          </div>
+          </scroll-view>
+          <!--<div class="discon" style="margin-top: 0.3rem;">-->
+            <!--<div style="font-size: 10px;">-->
+              <!--<span v-for="(itemName, idx) in item.deductionList" :key="idx" :data-index="idx" style="font-size: 10px!important;">{{itemName.requireValue}}抵{{itemName.value}}</span>-->
+            <!--</div>-->
+          <!--</div>-->
         </div>
       </div>
     </div>
@@ -478,11 +483,58 @@ export default {
     background: #fff;
     border-bottom: 1px solid #F2F2F2;
   }
+  .top2{
+    display: flex;
+    /*text-align: center;*/
+    /*line-height: 42px;*/
+    white-space: nowrap;
+    background: #fff;
+    position: absolute;
+    padding-bottom: 10px;
+    /*bottom: 0px;*/
+    /*border-bottom: 1px solid #F2F2F2;*/
+  }
+  @media (max-width: 1500px) {
+    .top2{
+      bottom: 0px;
+    }
+    .itemText{
+      left: 84px;
+    }
+  }
+  @media (min-width: 700px) and (max-width: 1000px) {
+    .top2{
+      bottom: 0px;
+    }
+    .itemText{
+      left: 84px;
+    }
+  }
+  @media (min-width: 350px) and (max-width: 700px) {
+    .top2{
+      bottom: -10px;
+    }
+    .itemText{
+      left: 94px;
+    }
+  }
   .tabbar{
     font-size: 12px;
     padding-bottom: 10px!important;
     /*height: 42px;*/
     color: #393939;
+    flex: 1;
+    position: relative;
+  }
+  .tabbar2{
+    font-size: 10px;
+    margin-right: 10px;
+    padding: 0px 5px;
+    border: 1px solid #F08400;
+    border-radius: 5px;
+    /*padding-bottom: 10px!important;*/
+    /*height: 42px;*/
+    color: #FF0000;
     flex: 1;
     position: relative;
   }
@@ -493,6 +545,7 @@ export default {
   /*数据列表*/
   .nearList_item{
     height: 70px;
+    position: relative;
     /*background: yellow;*/
   }
   .nearList_item .itemimg{
@@ -519,10 +572,9 @@ export default {
     border-radius: 5px;
     border:1px solid #F08400;
     margin-right: 10px;
-    font-size: 10px;
   }
   .discon{
-    width: 500px;
+    width: 90%;
     margin-top: 0.2rem;
     /*overflow-x: hidden;*/
     overflow-x: scroll;
@@ -531,7 +583,7 @@ export default {
     display: none;
   }
   .discon div{
-    width: 530px;
+    font-size: 10px;
   }
   .nearList_item{
     margin-bottom: 25px;

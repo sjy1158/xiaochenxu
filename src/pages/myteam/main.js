@@ -6,6 +6,6 @@ app.$mount()
 
 export default {
   config: {
-    navigationBarTitleText: '通话管理'
+    navigationBarTitleText: '我的团队'
   }
 }

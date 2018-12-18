@@ -55,7 +55,7 @@
               <div class="content_item1">
                 <p>名称名称</p>
                 <p>今天<span>14:20</span></p>
-                <div class="zhuanfa" @click="getQrcode">
+                <div class="zhuanfa">
                   <img src="/static/images/merchant_notice@2x.png" style="height: 11px;width: 11px;vertical-align: middle" alt="">
                   <span style="font-size: 12px;color: #F08400;vertical-align: middle;margin-left: 3px;">15</span>
                 </div>
@@ -71,10 +71,14 @@
           </div>
           <!--单个tabend&#45;&#45;&#45;&#45;&#45;&#45;-->
         </div>
+        <!--<canvas style="width: 600px; height: 900px;" canvas-id="firstCanvas"></canvas>-->
+        <!--<img :src="canvasUrl" alt="">-->
+        <!--<canvas canvas-id="shareCanvas" style="width:600px;height:900px"></canvas>-->
+        <!--<img src="http://api.kuayet.com/pc/qrcode.jpg" @click="getPri('http://api.kuayet.com/pc/qrcode.jpg')" style="width: 50px;height: 50px;position: absolute;z-index: 99999999999999999" alt="">-->
       </div>
       <!--活动素材end-->
     </div>
-    <image :src="'data:image/png;base64,' + src" style="margin-top: 400px;height: 200px;width: 200px;"></image>
+    <!--<image :src="'data:image/png;base64,' + src" style="margin-top: 400px;height: 200px;width: 200px;"></image>-->
   </div>
 </template>
 
@@ -102,7 +106,8 @@
           'http://img4.imgtn.bdimg.com/it/u=307412156,3167897666&fm=26&gp=0.jpg',
           'http://pic9.photophoto.cn/20081127/0036036860920845_b.jpg'
         ],
-        src: ''
+        src: '',
+        canvasUrl: ''
       }
     },
     methods: {
@@ -121,33 +126,12 @@
         this.actList = this.actList.concat(actList.list)
         // console.log(JSON.stringify(this.actList))
       },
-      getQrcode () {
-        const _this = this
-        wx.request({
-          url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx797b23981e852e89&secret=591c167ac392f69675605264542e375c',
-          methods: 'post',
-          success: function (res) {
-            _this.getImage(res.data.access_token)
-          }
+      getqrcode () {
+        wx.navigateTo({
+          url: '../qrcode/main',
+          redirect: false
         })
       },
-      getImage (acctoken) {
-        const _this = this
-        wx.request({
-          url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=' + acctoken,
-          data: {
-            scene: '000',
-            page: '../founding/main'
-          },
-          method: 'POST',
-          responseType: 'arraybuffer',
-          success: function (res) {
-            console.log(JSON.stringify(res))
-            _this.src = wx.arrayBufferToBase64(res.data)
-          }
-        })
-      },
-      // 头部选择
       tabClick (type) {
         this.type = type
       },
@@ -159,16 +143,41 @@
         wx.previewImage({
           urls: this.imgList
         })
+      },
+      // canvas
+      getCanvas () {
+        const _this = this
+        // const wxGetImageInfo = promisify(wx.getImageInfo)
+        wx.getImageInfo({
+          src: 'http://image.tupian114.com/20130511/11494201.jpg',
+          success: function (res) {
+            const ctx = wx.createCanvasContext('firstCanvas')
+            // 底图
+            ctx.drawImage(res.path, 0, 0, 600, 900)
+            // 作者名称
+            ctx.setTextAlign('center')    // 文字居中
+            ctx.setFillStyle('#000000')  // 文字颜色：黑色
+            ctx.setFontSize(22)         // 文字字号：22px
+            ctx.fillText("作者：张杰", 600 / 2, 500)
+            const qrImgSize = 100
+            ctx.drawImage('/static/images/qrcode.jpg', (600 - qrImgSize) / 5, 530, qrImgSize, qrImgSize)
+            ctx.stroke()
+            ctx.draw()
+          }
+        })
       }
     },
     // onLoad () {
     //   this.getList(this.params)
     //   this.getListact(this.params2)
     // },
+    onReady () {
+    },
     onLoad () {
       this.type = 0
       this.getList(this.params)
       this.getListact(this.params2)
+      this.getCanvas()
     },
     onPullDownRefresh () {
       this.headerList = []

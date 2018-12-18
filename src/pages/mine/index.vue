@@ -78,11 +78,11 @@
       <div style="position: relative">
         <div class="newTab" style="width: 100%;height: 187px;background: white;margin-top: -101px;">
           <div style="height: 88px;width: 100%;position: absolute;bottom: 0px;" class="newTabdis">
-            <div style="position: relative;line-height: 0px;">
+            <div style="position: relative;line-height: 0px;" @click="openTonghua()">
               <image lazy-load="true" class="img5" src="/static/images/my_phone@3x.png" alt=""></image>
               <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;left: 0px;padding-top: 6px;">通话管理</p>
             </div>
-            <div style="position: relative;line-height: 0">
+            <div style="position: relative;line-height: 0" @click="openMyteam()">
               <image lazy-load="true" class="img5" src="/static/images/my_team@3x.png" alt=""></image>
               <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;padding-top: 6px;">我的团队</p>
             </div>
@@ -333,6 +333,20 @@
         } else {
           this.getUserinfo(this.params)
         }
+      },
+      //跳转我的团队
+      openMyteam () {
+        wx.navigateTo({
+          url: '../myteam/main',
+          redirect: false
+        })
+      },
+      //跳转通话管理
+      openTonghua () {
+        wx.navigateTo({
+          url: '../shopguanli/main',
+          redirect: false
+        })
       },
       async getUserinfo (params) {
         const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getUserInformation', params)

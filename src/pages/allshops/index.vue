@@ -18,7 +18,7 @@
           <div style="height: 100%;margin-left: 133px;" class="Listall">
             <p style="font-size: 12px;">
               <img v-if="item.source=='京东'" src="/static/images/jingdong@3x.png" alt="">
-              <img v-if="item.source=='淘宝'" src="http://pa8vmyrlm.bkt.clouddn.com/taobao@3x.png" alt="">
+              <img v-if="item.source=='淘宝'" src="/static/images/taobao@3x.png" alt="">
               <img v-if="item.source=='拼多多'" src="/static/images/pinduoduo@3x.png" alt="">
               <span>{{item.name}}</span>
             </p>

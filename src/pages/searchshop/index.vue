@@ -61,7 +61,7 @@
                 <image lazy-load="true" :src="item.imageUrl" class="img1 srtImg"></image>
                 <p style="font-size: 12px;" class="shopname">
                   <image v-if="item.source=='京东'" lazy-load="true" src="/static/images/jingdong@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
-                  <image v-if="item.source=='淘宝'" lazy-load="true" src="http://pa8vmyrlm.bkt.clouddn.com/taobao@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
+                  <image v-if="item.source=='淘宝'" lazy-load="true" src="/static/images/taobao@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
                   <image v-if="item.source=='拼多多'" lazy-load="true" src="/static/images/pinduoduo@3x.png" style=" width: 14px;height: 14px;vertical-align: middle"></image>
                   <span style="vertical-align: middle;letter-spacing: 1px;margin-left: 6px;">{{item.name}}</span>
                 </p>
