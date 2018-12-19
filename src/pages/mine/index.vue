@@ -90,14 +90,16 @@
               <image lazy-load="true" class="img5" src="/static/images/my_order@3x.png" alt=""></image>
               <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;padding-top: 6px;">我的订单</p>
             </div>
-            <div style="position: relative">
-              <button open-type="share" style="background: white;height: 100%;line-height: 0">
-                <image lazy-load="true" class="img5" src="/static/images/my_friends@3x.png" alt=""></image>
-                <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;left: 0px;padding-top: 6px;">邀请好友</p>
-                <!--<image lazy-load="true" class="img5" src="/static/images/my_friends@3x.png" alt=""></image>-->
-                <!--<p>邀请好友</p>-->
-              </button>
+            <div @click="shareImage()" style="position: relative;line-height: 0">
+              <image lazy-load="true" class="img5" src="/static/images/my_friends@3x.png" alt=""></image>
+              <p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;padding-top: 6px;">邀请好友</p>
             </div>
+            <!--<div style="position: relative">-->
+                <!--<image lazy-load="true" class="img5" src="/static/images/my_friends@3x.png" alt=""></image>-->
+                <!--<p style="position: absolute;height: 1.4rem;line-height: 1.4rem;text-align: center;width: 100%;left: 0px;padding-top: 6px;">邀请好友</p>-->
+                <!--&lt;!&ndash;<image lazy-load="true" class="img5" src="/static/images/my_friends@3x.png" alt=""></image>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p>邀请好友</p>&ndash;&gt;-->
+            <!--</div>-->
           </div>
         </div>
       </div>
@@ -136,7 +138,7 @@
               <image lazy-load="true" class="img5" src="/static/images/my_beginnerstrategy@3x.png" alt=""></image>
               <p>新手攻略</p>
             </div>
-            <div>
+            <div @click="shareImage()">
               <image lazy-load="true" class="img5" src="/static/images/collection@3x.png" alt=""></image>
               <p>我的收藏</p>
             </div>
@@ -319,6 +321,13 @@
       openIncome () {
         wx.navigateTo({
           url: '../myincome/main?name=' + this.userInfo.user.userType,
+          redirect: false
+        })
+      },
+      //跳转我的好友邀请
+      shareImage () {
+        wx.navigateTo({
+          url: '../shareimg/main',
           redirect: false
         })
       },

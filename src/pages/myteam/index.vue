@@ -1,119 +1,24 @@
 <template>
     <div class="fans">
       <div class="tabs">
-        <div @click="sumfans(0)" :class="type==0?'active':''">全部(4000)</div>
-        <div @click="sumfans(1)" :class="type==1?'active':''">粉丝(200)</div>
-        <div @click="sumfans(2)" :class="type==2?'active':''">创客(200)</div>
-        <div @click="sumfans(3)" :class="type==3?'active':''">商家(200)</div>
+        <div @click="sumfans(0)" :class="params.type==0?'active':''">全部({{data.quanbushuliang}})</div>
+        <div @click="sumfans(1)" :class="params.type==1?'active':''">粉丝({{data.fensiquanbu}})</div>
+        <div @click="sumfans(4)" :class="params.type==4?'active':''">创客({{data.chuangkequanbu}})</div>
+        <div @click="sumfans(7)" :class="params.type==7?'active':''">商家({{data.shangjiaquanbu}})</div>
       </div>
 
       <!--粉丝列表数据-->
       <div style="margin-top: 36px;">
-        <div class="fanslist">
+        <div class="fanslist" v-for="item in fanslist">
           <div class="fanstab">
-            <image lazy-load="true" src="http://tx.haiqq.com/uploads/allimg/150327/211551I17-12.jpg" class="img1"></image>
+            <image lazy-load="true" :src="item.image" class="img1"></image>
             <div class="fanstype">
               <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
+                <span style="vertical-align: middle;color: #393939;">{{item.nickName}}</span>
+                <img v-if="item.type==3" src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
+                <img v-if="item.type==0" src="/static/images/my_become_partner copy 3@3x.png" style="width: 67px;height: 18px;vertical-align: middle;margin-left: 8px;" alt="">
               </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://tx.haiqq.com/uploads/allimg/150325/12211H320-5.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://img2.imgtn.bdimg.com/it/u=2226459220,4182755798&fm=26&gp=0.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://tx.haiqq.com/uploads/allimg/150327/211551I17-12.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://tx.haiqq.com/uploads/allimg/150325/12211H320-5.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://img2.imgtn.bdimg.com/it/u=2226459220,4182755798&fm=26&gp=0.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://tx.haiqq.com/uploads/allimg/150327/211551I17-12.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://tx.haiqq.com/uploads/allimg/150325/12211H320-5.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="fanslist">
-          <div class="fanstab">
-            <image lazy-load="true" src="http://img2.imgtn.bdimg.com/it/u=2226459220,4182755798&fm=26&gp=0.jpg" class="img1"></image>
-            <div class="fanstype">
-              <p>
-                <span style="vertical-align: middle;color: #393939;">昵称昵称昵称</span>
-                <img src="/static/images/my_become_partner@3x.png" style="width: 67px;height: 27px;vertical-align: middle;margin-top: -10px;margin-left: 8px;" alt="">
-              </p>
-              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">130****0000<span style="margin-left: 25px;">2018年08月07日</span></p>
+              <p style="color: #8F8F8F;font-size: 12px!important;position: absolute;bottom: 0px;">{{item.phone}}<span style="margin-left: 25px;">{{item.date}}</span></p>
             </div>
           </div>
         </div>
@@ -125,13 +30,48 @@
   export default {
     data () {
       return {
-        type: 0
+        params: {
+          userId: '',
+          type: 0,
+          pageNum: 1,
+          num: 10
+        },
+        fanslist: [],
+        data: {}
       }
     },
     methods: {
+      async getfanslist (params) {
+        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/newFans', params)
+        this.data = data
+        console.log(JSON.stringify(data))
+        for (var i = 0; i < data.list.length; i++) {
+          this.fanslist.push(data.list[i])
+        }
+      },
       sumfans (type) {
-        this.type = type
+        this.fanslist = []
+        this.params.type = type
+        this.params.pageNum = 1
+        this.getfanslist(this.params)
       }
+    },
+    onLoad () {
+      this.params.userId = this.$saveToken.getToken().token
+      this.fanslist = []
+      this.getfanslist(this.params)
+    },
+    onPullDownRefresh () {
+      this.fanslist = []
+      this.params.pageNum = 1
+      this.getfanslist(this.params)
+    },
+    onReachBottom () {
+      wx.showLoading({
+        title: '玩命加载中'
+      })
+      this.params.pageNum+=1
+      this.getfanslist(this.params)
     }
   }
 </script>

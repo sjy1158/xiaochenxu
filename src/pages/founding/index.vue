@@ -41,29 +41,29 @@
       <div v-show="type==1">
         <div class="tabtype" style="height: auto;background: white;position: fixed;top: 40px;z-index: 9999999">
         <div class="tabitem" style="margin-left: 10px;background: white;">
-          <span :class="fonttype==0?'activefont':''" @click="fontClick(0)">电商购</span>
-          <span :class="fonttype==1?'activefont':''" @click="fontClick(1)">商家</span>
-          <span :class="fonttype==2?'activefont':''" @click="fontClick(2)">日历</span>
+          <span :class="params3.type==1?'activefont':''" @click="fontClick(1)">电商购</span>
+          <span :class="params3.type==2?'activefont':''" @click="fontClick(2)">商家</span>
+          <span :class="params3.type==3?'activefont':''" @click="fontClick(3)">日历</span>
         </div>
         </div>
         <!--活动素材列表-->
         <div class="contentlist" style="position: absolute;top: 47px;">
           <!--单个开始&#45;&#45;&#45;&#45;&#45;&#45;-->
-          <div class="content_item">
+          <div class="content_item" v-for="item in activetylist">
             <div style="padding-left: 10px;padding-right: 10px;">
-              <image lazy-load="true" src="http://www.33lc.com/article/UploadPic/2012-9/201291113223169717.jpg" class="titleImg"></image>
+              <image lazy-load="true" :src="item.headImage" class="titleImg"></image>
               <div class="content_item1">
-                <p>名称名称</p>
-                <p>今天<span>14:20</span></p>
-                <div class="zhuanfa">
+                <p>{{item.name}}</p>
+                <p>{{item.time}}</p>
+                <div class="zhuanfa" @click="shareUrl(item.shareUrl)">
                   <img src="/static/images/merchant_notice@2x.png" style="height: 11px;width: 11px;vertical-align: middle" alt="">
-                  <span style="font-size: 12px;color: #F08400;vertical-align: middle;margin-left: 3px;">15</span>
+                  <span style="font-size: 12px;color: #F08400;vertical-align: middle;margin-left: 3px;">{{item.shareNum}}</span>
                 </div>
               </div>
-              <p style="width: 70%;padding-bottom: 10px;font-size: 12px;letter-spacing: 1px;color: #393939">文案文案文案文案文案文案文案文案文 案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案</p>
+              <p style="width: 100%;padding-bottom: 10px;font-size: 12px;letter-spacing: 1px;color: #393939">{{item.content}}<span style="color: #F08400">查看详情</span></p>
               <div class="imgtab">
-                <div v-for="item in imgList">
-                  <image lazy-load="true" class="srtImg" :src="item" @click="priImg"></image>
+                <div v-for="(itemname,idx) in item.image" :key="idx" :data-index="idx">
+                  <image lazy-load="true" class="srtImg" :src="itemname" @click="priImg"></image>
                 </div>
               </div>
             </div>
@@ -96,18 +96,20 @@
           pageNum: 1,
           num: 5
         },
+        params3: {
+          type: 1,
+          pageNum: 1,
+          num: 5
+        },
         headerList: [],
         actList: [],
         // 头部选择
         type: 0,
         fonttype: 0,
-        imgList: [
-          'http://image.tupian114.com/20130511/11494201.jpg',
-          'http://img4.imgtn.bdimg.com/it/u=307412156,3167897666&fm=26&gp=0.jpg',
-          'http://pic9.photophoto.cn/20081127/0036036860920845_b.jpg'
-        ],
         src: '',
-        canvasUrl: ''
+        canvasUrl: '',
+        activetylist: [],
+        imgList: []
       }
     },
     methods: {
@@ -126,6 +128,15 @@
         this.actList = this.actList.concat(actList.list)
         // console.log(JSON.stringify(this.actList))
       },
+      // 获取宣传素材
+      async getXuanchuan (params) {
+        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/FindPublicityMaterial', params)
+        // console.log(JSON.stringify(data))
+        for (var i = 0; i < data.list.length; i++) {
+          data.list[i].image = data.list[i].image.split(',')
+          this.activetylist.push(data.list[i])
+        }
+      },
       getqrcode () {
         wx.navigateTo({
           url: '../qrcode/main',
@@ -134,36 +145,30 @@
       },
       tabClick (type) {
         this.type = type
+        if (this.type==0) {
+          this.headerList = []
+          this.getList(this.params)
+          this.actList = []
+          this.params2.pageNum = 1
+          this.getListact(this.params2)
+        } else {
+          // this.activetylist = []
+          this.params3.type = type
+          this.getXuanchuan(this.params3)
+        }
+        // this.type = type
       },
       fontClick (type) {
-        this.fonttype = type
+        this.activetylist = []
+        this.params3.pageNum = 1
+        this.params3.type = type
+        this.getXuanchuan(this.params3)
       },
-      //查看图片
-      priImg () {
+      //分享
+      shareUrl (url) {
         wx.previewImage({
-          urls: this.imgList
-        })
-      },
-      // canvas
-      getCanvas () {
-        const _this = this
-        // const wxGetImageInfo = promisify(wx.getImageInfo)
-        wx.getImageInfo({
-          src: 'http://image.tupian114.com/20130511/11494201.jpg',
-          success: function (res) {
-            const ctx = wx.createCanvasContext('firstCanvas')
-            // 底图
-            ctx.drawImage(res.path, 0, 0, 600, 900)
-            // 作者名称
-            ctx.setTextAlign('center')    // 文字居中
-            ctx.setFillStyle('#000000')  // 文字颜色：黑色
-            ctx.setFontSize(22)         // 文字字号：22px
-            ctx.fillText("作者：张杰", 600 / 2, 500)
-            const qrImgSize = 100
-            ctx.drawImage('/static/images/qrcode.jpg', (600 - qrImgSize) / 5, 530, qrImgSize, qrImgSize)
-            ctx.stroke()
-            ctx.draw()
-          }
+          current: url,
+          urls: [url]
         })
       }
     },
@@ -177,18 +182,28 @@
       this.type = 0
       this.getList(this.params)
       this.getListact(this.params2)
-      this.getCanvas()
     },
     onPullDownRefresh () {
-      this.headerList = []
-      this.getList(this.params)
-      this.actList = []
-      this.params2.pageNum = 1
-      this.getListact(this.params2)
+      if (this.type==0) {
+        this.headerList = []
+        this.getList(this.params)
+        this.actList = []
+        this.params2.pageNum = 1
+        this.getListact(this.params2)
+      } else {
+        this.activetylist = []
+        this.params3.pageNum = 1
+        this.getXuanchuan(this.params3)
+      }
     },
     onReachBottom () {
-      this.params2.pageNum += 1
-      this.getListact(this.params2)
+      if (this.type==0) {
+        this.params2.pageNum += 1
+        this.getListact(this.params2)
+      } else {
+        this.params3.pageNum += 1
+        this.getXuanchuan(this.params3)
+      }
     }
   }
 </script>
@@ -387,11 +402,11 @@
     border-radius: 20px;
   }
   .imgtab{
-    display: flex;
+    /*display: flex;*/
   }
   .imgtab div{
-    flex: 1;
-    text-align: center;
+    /*flex: 1;*/
+    /*text-align: center;*/
   }
   .imgtab div .srtImg{
     height: 112px;
