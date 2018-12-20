@@ -19,7 +19,7 @@
               拼多多
             </li>
           </ul>
-          <image lazy-load="true" src="/static/images/flicking@3x.png" alt="" style="width: 18px;height: 18px;position: absolute;right: 20px;top: 50%;margin-top: -9px;">
+          <image lazy-load="true" src="/static/images/Shape@3x.png" alt="" style="width: 18px;height: 18px;position: absolute;right: 20px;top: 50%;margin-top: -9px;" @click="shareXiaochengxu">
           </image>
         </div>
 
@@ -249,6 +249,13 @@ export default {
       this.params.productName = e.target.value;
       this.value = e.target.value;
       this.getList(this.params);
+    },
+    //分享小程序吗
+    shareXiaochengxu () {
+      wx.previewImage({
+        current: 'http://image.kuayet.com/FsPmo8U1_89Ytinmr20Xy-UFdXE0',
+        urls: ['http://image.kuayet.com/FsPmo8U1_89Ytinmr20Xy-UFdXE0']
+      })
     }
   },
   watch: {

@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import App from './App'
-import '../static/weui/weui.css'
-import 'zanui-weapp/dist/index.wxss'
 import net from '@/utils/getData.js'
 import saveToken from '@/utils/saveToken.js'
 
@@ -24,7 +22,7 @@ export default {
       'pages/singlequery/main', 'pages/novice/main', 'pages/feedback/main', 'pages/officialannouncement/main', 'pages/alldingdan/main', 'pages/lookadddingdan/main',
       'pages/shopguanli/main', 'pages/skychongzhi/main', 'pages/changeuserpass/main', 'pages/zifeishuoming/main', 'pages/changjianpro/main', 'pages/aboutus/main',
       'pages/founding/main', 'pages/activity/main', 'pages/allshops/main', 'pages/player/main', 'pages/suredingdan/main', 'pages/waitlisten/main', 'pages/inline/main',
-      'pages/searchshop/main', 'pages/myincome/main', 'pages/shopincome/main', 'pages/myteam/main'],
+      'pages/searchshop/main', 'pages/myincome/main', 'pages/shopincome/main', 'pages/myteam/main', 'pages/zhanghuxinxi/main', 'pages/yunweiyuan/main'],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
@@ -39,10 +37,10 @@ export default {
       borderStyle: "grey",
       list: [
         {
-          pagePath: "pages/index/main",
-          text: "电商购",
-          iconPath: "static/images/control_commerce_normal@3x.png",
-          selectedIconPath: "static/images/control_commerce_select@3x.png"
+          pagePath: "pages/phone/main",
+          text: "电话",
+          iconPath: "static/images/control_phone_normal@3x.png",
+          selectedIconPath: "static/images/control_phone_select@3x.png"
         },
         {
           pagePath: "pages/logs/main",
@@ -51,10 +49,10 @@ export default {
           selectedIconPath: "static/images/control_merchant_select@3x.png"
         },
         {
-          pagePath: "pages/phone/main",
-          text: "电话",
-          iconPath: "static/images/control_phone_normal@3x.png",
-          selectedIconPath: "static/images/control_phone_select@3x.png"
+          pagePath: "pages/index/main",
+          text: "电商购",
+          iconPath: "static/images/control_commerce_normal@3x.png",
+          selectedIconPath: "static/images/control_commerce_select@3x.png"
         },
         {
           pagePath: "pages/founding/main",

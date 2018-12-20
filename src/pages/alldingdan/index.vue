@@ -1,13 +1,13 @@
 <template>
   <div class="alldingdan">
-    <div style="height:20px;width: 100%;background: white;padding-bottom: 10px;padding-top: 10px;">
+    <div style="height:20px;width: 100%;background: white;padding-bottom: 10px;padding-top: 10px;position: fixed;z-index: 999999999">
       <div class="tabcut">
         <div :class="tabcurrentTab==0?'tabcut2':''" @click="tabCut(0)">电商购</div>
         <div style="border-radius: 0px 20px 20px 0px;" :class="tabcurrentTab==1?'tabcut2':''" @click="tabCut(1)">商家</div>
       </div>
     </div>
     <div v-show="tabcurrentTab==0">
-    <scroll-view scroll-x class="top">
+    <scroll-view scroll-x class="top" style="position: fixed;width: 100%;z-index: 9999999;top: 40px;">
       <div class="tabbar" :class="params.type==0?'activeTab':''" @click="tabClick(0)">
         <div v-show="params.type==0" style="width: 28px;height: 2px;background: #F08400;position: absolute;left: 50%;margin-left: -14px;bottom: 0px;"></div>
         全部
@@ -25,8 +25,8 @@
         已失效
       </div>
     </scroll-view>
-    <div :current="params.type" @change="changeTab" id="swiperContent">
-      <swiper-item :style="{height:132*list.length+'px'}">
+    <div :current="params.type" @change="changeTab" id="swiperContent" style="margin-top: 80px;">
+      <div style="height: auto">
         <div class="swiperItem" v-for="(item, index) in list" :key="index" :data-index="index">
           <div class="swipercontent">
             <div class="swiperleft">
@@ -48,14 +48,14 @@
             </div>
           </div>
         </div>
-      </swiper-item>
+      </div>
       <div v-show="sum==0" style="width: 100%;height: 100%;background: #F1F0F0;position: fixed;">
         <img src="/static/images/zanwushuju@3x.png" alt="" style="height: 82px;width: 100px;position: absolute;left: 50%;margin-left: -50px;top: 40%;margin-top: -41px;">
       </div>
     </div>
     </div>
 
-    <div v-show="tabcurrentTab==1">
+    <div v-show="tabcurrentTab==1" style="margin-top: 40px;">
       <div class="tabcontent2">
         <div class="tabcontentitem">
           <div class="tabcontentleft">

@@ -21,7 +21,7 @@
     methods: {
       adLogin () {
         wx.navigateTo({
-          url: '../shopguanli/main',
+          url: '../yunweiyuan/main',
           redirect: false
         })
       }

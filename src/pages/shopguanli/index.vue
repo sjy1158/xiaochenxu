@@ -1,19 +1,16 @@
 <template>
   <div class="novice">
     <div class="mod1">
-      <div><img src="/static/images/calendar@3x.png" alt=""><span>卡号列表</span></div>
+      <div @click="adlogin"><img src="/static/images/my_manage_card_number@3x.png" alt=""><span>运维员登录</span></div>
     </div>
     <div class="mod2">
-      <div><img src="/static/images/merchants_icon@3x.png" alt=""><span>用户管理</span></div>
+      <div @click="zhanghuxinxi"><img src="/static/images/my_management_users@3x.png" alt=""><span>账户信息</span></div>
     </div>
     <div class="mod3">
-      <div><img src="/static/images/calendar@3x.png" alt=""><span>修改图片</span></div>
+      <div @click="singlEquery"><img src="/static/images/my_account_information@3x.png" alt=""><span>话单查询</span></div>
     </div>
     <div class="mod4">
-      <div @click="changeuserpass()"><img src="/static/images/electricity_purchase_icon@3x.png" alt=""><span>修改密码</span></div>
-    </div>
-    <div class="mod5">
-      <div @click="skychongzhi()"><img src="/static/images/change_password@3x.png" alt=""><span>空中充值</span></div>
+      <div @click="zifeishuoming"><img src="/static/images/my_fee_statement@3x.png" alt=""><span>资费说明</span></div>
     </div>
   </div>
 </template>
@@ -34,6 +31,34 @@
       changeuserpass () {
         wx.navigateTo({
           url: '../changeuserpass/main',
+          redirect: false
+        })
+      },
+      //跳转账户信息
+      zhanghuxinxi () {
+        wx.navigateTo({
+          url: '../zhanghuxinxi/main',
+          redirect: false
+        })
+      },
+      //跳转运维员登录
+      adlogin () {
+        wx.navigateTo({
+          url: '../adlogin/main',
+          redirect: false
+        })
+      },
+      //跳转话单查询
+      singlEquery () {
+        wx.navigateTo({
+          url: '../singlequery/main',
+          redirect: false
+        })
+      },
+      //跳转资费说明
+      zifeishuoming () {
+        wx.navigateTo({
+          url: '../zifeishuoming/main',
           redirect: false
         })
       }

@@ -5,8 +5,10 @@
       <div class="headertitle">
         <image lazy-load="true" src="/static/images/my_bg@3x.png" alt="" class="bgtitle"></image>
         <!--设置按钮-->
-        <div class="settingicon" @click="shezhi()">
-          <image  lazy-load="true" class="img1" src="/static/images/my_settings@3x.png" alt=""></image>
+        <div class="settingicon">
+          <!--<image  lazy-load="true" class="img1" src="/static/images/Shape_w@3x.png" style="margin-right: 46px;" alt=""></image>-->
+          <image  lazy-load="true" class="img1" src="/static/images/my_settings@3x.png" alt="" @click="shezhi()"></image>
+          <image  lazy-load="true" class="img1" src="/static/images/Shape_w@3x.png" style="" alt="" @click="shareXiaochengxu()"></image>
         </div>
         <!--头像-->
         <div class="headerImg">
@@ -355,6 +357,13 @@
         wx.navigateTo({
           url: '../shopguanli/main',
           redirect: false
+        })
+      },
+      //小程序吗转发
+      shareXiaochengxu () {
+        wx.previewImage({
+          current: 'http://image.kuayet.com/FsPmo8U1_89Ytinmr20Xy-UFdXE0',
+          urls: ['http://image.kuayet.com/FsPmo8U1_89Ytinmr20Xy-UFdXE0']
         })
       },
       async getUserinfo (params) {
