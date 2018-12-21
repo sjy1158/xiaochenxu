@@ -1,11 +1,11 @@
 <template>
   <div class="skychongzhi">
     <div class="mod">
-      <div><input type="text" placeholder="请输入手机号码"></div>
-      <div><input type="text" placeholder="请输入金额（元）"></div>
-      <div><input type="text" placeholder="请输入有效期（天）"></div>
-      <p>当前可用余额：20元</p>
-      <button type="button">充值</button>
+      <div><input type="text" v-model="params.phoneId" placeholder="请输入手机号码"></div>
+      <div><input type="text" v-model="params.money" placeholder="请输入金额（元）"></div>
+      <div><input type="text" v-model="params.days" placeholder="请输入有效期（天）"></div>
+      <p>当前可用余额：{{price}}元</p>
+      <button type="button" @click="chongzhi">充值</button>
     </div>
   </div>
 </template>
@@ -13,10 +13,56 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        params: {
+          money: '',
+          phoneId: '',
+          days: '',
+          account: ''
+        },
+        price: ''
+      }
     },
     methods: {
-
+      async skychongzhi (params) {
+        var data = await this.$net.get('/crossindustry/userPage/directRecharge', params)
+        console.log(JSON.stringify(data))
+        if (data.code == 400) {
+          wx.showToast({
+            title: data.msg,
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.showToast({
+            title: '充值成功',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      chongzhi () {
+        if (this.params.money!=''&&this.params.phoneId!=''&&this.params.days) {
+          this.skychongzhi(this.params)
+        } else {
+          wx.showToast({
+            title: '输入有误',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      async getUserinfo (token) {
+        var params = {userId: token}
+        const data = await this.$net.get('/crossindustry/phonePage/getUserInformation', params)
+        console.log(JSON.stringify(data))
+        this.price = data.user.balance
+      }
+    },
+    onLoad () {
+      const token = this.$saveToken.getToken().token
+      this.getUserinfo(token)
+      this.params.account = wx.getStorageSync('adphone')
     }
   }
 </script>

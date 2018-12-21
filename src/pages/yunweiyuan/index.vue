@@ -9,10 +9,10 @@
     <div class="mod3">
       <div><img src="/static/images/calendar@3x.png" alt=""><span>日历素材</span></div>
     </div>
-    <div class="mod4">
+    <div class="mod4" @click="changepass">
       <div><img src="/static/images/change_password@3x.png" alt=""><span>修改密码</span></div>
     </div>
-    <div class="mod4">
+    <div class="mod4" @click="skychongzhi">
       <div><img src="/static/images/top_up@3x.png" alt=""><span>空中充值</span></div>
     </div>
   </div>
@@ -24,6 +24,19 @@
       return {}
     },
     methods: {
+      changepass () {
+        wx.navigateTo({
+          url: '../changepassword/main',
+          redirect: false
+        })
+      },
+      //跳转空中充值
+      skychongzhi () {
+        wx.navigateTo({
+          url: '../skychongzhi/main',
+          redirect: false
+        })
+      }
     }
   }
 </script>

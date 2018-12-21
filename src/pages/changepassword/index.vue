@@ -2,13 +2,14 @@
   <div class="xinxi">
     <div class="mod1">
       <div class="form">
-        <div><input type="text" v-model="params.accountNumber" placeholder="手机号／昵称"></div>
-        <div style="border: none"><input type="password" v-model="params.password" placeholder="请输入密码"></div>
+        <div><label>原始密码</label><input type="text" v-model="params.originalPassword" placeholder="请输入原始密码"></div>
+        <div><label>新密码</label><input type="password" v-model="params.newPassword" placeholder="请输入新密码"></div>
+        <div style="border: none"><label>确认密码</label><input type="password" v-model="params.accountNumber" placeholder="请确认密码"></div>
       </div>
     </div>
 
     <div class="mod2">
-      <button type="button" @click="adLogin()">登录</button>
+      <button type="button" @click="change">确认修改</button>
     </div>
   </div>
 </template>
@@ -18,41 +19,28 @@
     data () {
       return {
         params: {
-          accountNumber: '',
-          password: ''
+          originalPassword: '',
+          newPassword: '',
+          accountNumber: ''
         }
       }
     },
     methods: {
-      async loginAdmain (params) {
-        const _this = this
-        var data = await this.$net.get('/crossindustry/userPage/managerLogin', params)
-        if (data.code == 400) {
+      async changeAdpass (params) {
+        var data = await this.$net.get('/crossindustry/userPage/changeManagePassword', params)
+        console.log(JSON.stringify(data))
+        if (data.code==400) {
           wx.showToast({
             title: data.msg,
-            icon: 'none'
-          })
-          return
-        } else {
-          wx.showToast({
-            title: '登录成功',
             icon: 'none',
-            success: function () {
-              wx.setStorageSync('adphone', _this.params.accountNumber)
-              setTimeout(function () {
-                wx.navigateTo({
-                  url: '../yunweiyuan/main',
-                  redirect: false
-                })
-              }, 2000)
-            }
+            duration: 2000
           })
           return
         }
       },
-      adLogin () {
-        if (this.params.accountNumber!=''&&this.params.password!='') {
-          this.loginAdmain(this.params)
+      change () {
+        if (this.params.originalPassword!=''&&this.params.newPassword!=''&&this.params.accountNumber!='') {
+          this.changeAdpass(this.params)
         } else {
           wx.showToast({
             title: '输入有误',
@@ -60,11 +48,9 @@
             duration: 2000
           })
         }
-        // wx.navigateTo({
-        //   url: '../yunweiyuan/main',
-        //   redirect: false
-        // })
       }
+    },
+    onLoad () {
     }
   }
 </script>
@@ -93,15 +79,28 @@
     width: 100%;
     line-height: 49px;
     border-bottom: 1px solid #F2F2F2;
+    position: relative;
   }
   .form div input{
-    width: 100%;
+    width: 70%;
     height: 100%;
     vertical-align: middle;
     padding-left: 20px;
     color: #8F8F8F;
     font-size: 14px;
     letter-spacing: 1px;
+    position: absolute;
+    left: 80px;
+    top: 0px;
+  }
+  .form div label{
+    height: 100%;
+    width: 70px;
+    position: absolute;
+    letter-spacing: 1px;
+    color: #393939;
+    font-size: 14px;
+    padding-left: 20px;
   }
   .mod2{
     padding-left: 24px;
