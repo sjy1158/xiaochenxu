@@ -99,7 +99,7 @@
     },
     methods: {
       async getDingdan (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/wxAppPay/appPay', params)
+        var data = await this.$net.get('/crossindustry/wxAppPay/appPay', params)
         this.pay(data)
       },
       bindRegionChange (e) {

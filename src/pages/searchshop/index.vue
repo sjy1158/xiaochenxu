@@ -100,12 +100,12 @@
     },
     methods: {
       async getHot () {
-        var hotarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getHotWordByProduct")
+        var hotarr = await this.$net.get("/crossindustry/powerPurchaser/getHotWordByProduct")
         this.hotarr = hotarr.list
       },
       // 获取列表
       async getList (params) {
-        var List = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getProductListByType",params)
+        var List = await this.$net.get("/crossindustry/powerPurchaser/getProductListByType",params)
         for (var i = 0; i<List.list.length;i++) {
           this.list.push(List.list[i])
         }

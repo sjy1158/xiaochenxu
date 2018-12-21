@@ -42,7 +42,7 @@
     },
     methods: {
       async getfanslist (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/newFans', params)
+        var data = await this.$net.get('/crossindustry/userPage/newFans', params)
         this.data = data
         console.log(JSON.stringify(data))
         for (var i = 0; i < data.list.length; i++) {

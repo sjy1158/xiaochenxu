@@ -110,7 +110,7 @@
         this.params.phoneId = ''
       },
       async cradchongzhi () {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/phoneRecharge', this.params)
+        var data = await this.$net.get('/crossindustry/userPage/phoneRecharge', this.params)
         if (this.params.cardId!=''&&this.params.password!='') {
           if (data.code == 400) {
             wx.showToast({

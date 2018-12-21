@@ -96,7 +96,7 @@
         </div>
         <div style="font-size: 12px;position: absolute;border-bottom: 1px solid #F2F2F2;width: 70%;height: 70px;" class="itemText">
           <p>{{item.title}}</p>
-          <p>
+          <p class="centerItem">
             <image lazy-load="true" class="itemimg" src="/static/images/businesses_icon@2x.png" alt="" style="width: 12px;height: 12px;"></image>
             <span style="font-size: 10px;color: #393939;padding-left: 6px;">{{item.shopType}}</span>
             <span style="font-size: 10px;color: #393939;padding-left: 17px;">人均消费{{item.averageMoney}}元</span>
@@ -157,16 +157,16 @@ export default {
   methods: {
     //获取banner
     async getBanner (params) {
-      var bannerArr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/getShopAdvertiseImage",params);
+      var bannerArr = await this.$net.get("/crossindustry/shopPage/getShopAdvertiseImage",params);
       this.bannerArr = bannerArr.list;
       // console.log(bannerArr.list);
     },
     async getTabtype () {
-      var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/getShopTypeByLevel?level=1",{});
+      var tabarr = await this.$net.get("/crossindustry/shopPage/getShopTypeByLevel?level=1",{});
       this.tabArr = tabarr.list.slice(0,10);
     },
     async getHot () {
-      var hotarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/getHotWord",{});
+      var hotarr = await this.$net.get("/crossindustry/shopPage/getHotWord",{});
       this.hotarr = hotarr.list
     },
     getDate () {
@@ -180,14 +180,14 @@ export default {
       this.getNearList(this.params);
     },
     async getNearList (params) {
-      var nearList = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/nearbyShops",params);
+      var nearList = await this.$net.get("/crossindustry/shopPage/nearbyShops",params);
       for (var i = 0;i<nearList.list.length;i++) {
         nearList.list[i].distance = nearList.list[i].distance.toFixed(2);
       }
       this.nearList = this.nearList.concat(nearList.list);
     },
     async getHeaderLine () {
-      var headerList = await this.$net.get("http://api.kuayet.com:8080/crossindustry/shopPage/getHeadLine",{});
+      var headerList = await this.$net.get("/crossindustry/shopPage/getHeadLine",{});
       this.headerList = headerList.list;
     },
     getlocation () {
@@ -490,7 +490,7 @@ export default {
     white-space: nowrap;
     background: #fff;
     position: absolute;
-    padding-bottom: 10px;
+    padding-bottom: 13px;
     /*bottom: 0px;*/
     /*border-bottom: 1px solid #F2F2F2;*/
   }
@@ -501,6 +501,9 @@ export default {
     .itemText{
       left: 84px;
     }
+    .centerItem{
+      margin-top: 7px;
+    }
   }
   @media (min-width: 700px) and (max-width: 1000px) {
     .top2{
@@ -509,6 +512,9 @@ export default {
     .itemText{
       left: 84px;
     }
+    .centerItem{
+      margin-top: 7px;
+    }
   }
   @media (min-width: 350px) and (max-width: 700px) {
     .top2{
@@ -516,6 +522,9 @@ export default {
     }
     .itemText{
       left: 94px;
+    }
+    .centerItem{
+      margin-top: 7px;
     }
   }
   .tabbar{

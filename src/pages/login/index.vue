@@ -40,7 +40,7 @@
     methods: {
       async Login (params) {
         const _this = this
-        const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userOperation/login', params)
+        const data = await this.$net.get('/crossindustry/userOperation/login', params)
         if (data.code == 400) {
           wx.showToast({
             title: data.msg,

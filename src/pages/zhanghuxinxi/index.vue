@@ -53,7 +53,7 @@
     },
     methods: {
       async getXiaofei (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/yuemingxiliebiao', params)
+        var data = await this.$net.get('/crossindustry/userPage/yuemingxiliebiao', params)
         // console.log(JSON.stringify(data))
         for (var i = 0; i < data.list.length; i++) {
           this.List.push(data.list[i])
@@ -61,7 +61,7 @@
       },
       async getUserinfo (token) {
         var obj = {userId: token}
-        const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getUserInformation', obj)
+        const data = await this.$net.get('/crossindustry/phonePage/getUserInformation', obj)
         this.userInfo = data
         console.log(JSON.stringify(this.userInfo))
         this.userInfo.user.balance = this.userInfo.user.balance.toFixed(2)

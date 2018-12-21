@@ -16,7 +16,7 @@
     },
     mounted () {
       var id = getRouter().id;
-      this.webUrL = 'http://api.kuayet.com/pc/#/advertisingDetails?id=' + id + '&userId=57246fd6'
+      this.webUrL = 'https://www.kuayet.com/pc/#/advertisingDetails?id=' + id + '&userId=57246fd6'
       // this.webUrL = this.$getOptions.getRouter()
       // this.getRouter();
     },

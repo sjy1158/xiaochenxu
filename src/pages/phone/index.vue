@@ -101,12 +101,12 @@
     },
     methods: {
       async getBanner (params) {
-        var bannerArr = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getImageUrl', params)
+        var bannerArr = await this.$net.get('/crossindustry/phonePage/getImageUrl', params)
         this.bannerArr = bannerArr.list
         // console.log(bannerArr.list);
       },
       async callMe (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/doPhone', params)
+        var data = await this.$net.get('/crossindustry/phonePage/doPhone', params)
         if (data.code==400){
           wx.showToast({
             title: data.msg,
@@ -157,7 +157,7 @@
           itemList: ['呼叫', '添加联系人'],
           success: function (res) {
             if (res.tapIndex == 0) {
-              var data = _this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/doPhone', _this.params)
+              var data = _this.$net.get('/crossindustry/phonePage/doPhone', _this.params)
               console.log(data)
             } else if (res.tapIndex == 1) {
               wx.addPhoneContact({

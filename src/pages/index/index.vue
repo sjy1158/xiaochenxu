@@ -189,13 +189,13 @@ export default {
       this.params.productType = e.mp.detail.current+1;
     },
     async getList (params) {
-      var List = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getProductListByType",params)
+      var List = await this.$net.get("/crossindustry/powerPurchaser/getProductListByType",params)
       for (var i = 0; i<List.list.length;i++) {
         this.imgUrls.push(List.list[i])
       }
     },
     async getBanner (params) {
-      var bannerArr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getBanner",params)
+      var bannerArr = await this.$net.get("/crossindustry/powerPurchaser/getBanner",params)
       console.log(JSON.stringify(bannerArr))
       let adlist = []
       adlist.push(bannerArr.advertiseList[0].image)
@@ -204,11 +204,11 @@ export default {
       // console.log(bannerArr.list);
     },
     async getBigtype (params) {
-      var bigTypearr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getPowerPurchaserBigType",params)
+      var bigTypearr = await this.$net.get("/crossindustry/powerPurchaser/getPowerPurchaserBigType",params)
       this.bigTypearr = bigTypearr.list;
     },
     async getTabarr (params) {
-      var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getType",params)
+      var tabarr = await this.$net.get("/crossindustry/powerPurchaser/getType",params)
       this.tabArr = tabarr.list
       this.params.productType = this.tabArr[0].typeId
       this.getList(this.params)

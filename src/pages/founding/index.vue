@@ -120,17 +120,17 @@
         })
       },
       async getList (params) {
-        var headerList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/activityNotice', params)
+        var headerList = await this.$net.get('/crossindustry/findPage/activityNotice', params)
         this.headerList = this.headerList.concat(headerList)
       },
       async getListact (params) {
-        var actList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/activityNotice', params)
+        var actList = await this.$net.get('/crossindustry/findPage/activityNotice', params)
         this.actList = this.actList.concat(actList.list)
         // console.log(JSON.stringify(this.actList))
       },
       // 获取宣传素材
       async getXuanchuan (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/FindPublicityMaterial', params)
+        var data = await this.$net.get('/crossindustry/findPage/FindPublicityMaterial', params)
         // console.log(JSON.stringify(data))
         for (var i = 0; i < data.list.length; i++) {
           data.list[i].image = data.list[i].image.split(',')

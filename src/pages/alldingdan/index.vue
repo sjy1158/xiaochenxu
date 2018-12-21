@@ -134,7 +134,7 @@
     },
     methods: {
       async getList (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/allOrder', params)
+        var data = await this.$net.get('/crossindustry/userPage/allOrder', params)
         this.sum = data.sum
         for (var i = 0; i < data.list.length; i++) {
           this.list.push(data.list[i])

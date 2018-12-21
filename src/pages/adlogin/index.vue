@@ -2,8 +2,8 @@
   <div class="xinxi">
     <div class="mod1">
       <div class="form">
-        <div><input type="text" placeholder="手机号／昵称"></div>
-        <div style="border: none"><input type="text" placeholder="请输入密码"></div>
+        <div><input type="text" v-model="params.accountNumber" placeholder="手机号／昵称"></div>
+        <div style="border: none"><input type="password" v-model="params.password" placeholder="请输入密码"></div>
       </div>
     </div>
 
@@ -16,14 +16,52 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        params: {
+          accountNumber: '',
+          password: ''
+        }
+      }
     },
     methods: {
+      async loginAdmain (params) {
+        var data = await this.$net.get('/crossindustry/userPage/managerLogin', params)
+        if (data.code == 400) {
+          wx.showToast({
+            title: data.msg,
+            icon: 'none'
+          })
+          return
+        } else {
+          wx.showToast({
+            title: '登录成功',
+            icon: 'none',
+            success: function () {
+              setTimeout(function () {
+                wx.navigateTo({
+                  url: '../yunweiyuan/main',
+                  redirect: false
+                })
+              }, 2000)
+            }
+          })
+          return
+        }
+      },
       adLogin () {
-        wx.navigateTo({
-          url: '../yunweiyuan/main',
-          redirect: false
-        })
+        if (this.params.accountNumber!=''&&this.params.password!='') {
+          this.loginAdmain(this.params)
+        } else {
+          wx.showToast({
+            title: '输入有误',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+        // wx.navigateTo({
+        //   url: '../yunweiyuan/main',
+        //   redirect: false
+        // })
       }
     }
   }

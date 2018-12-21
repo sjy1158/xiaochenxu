@@ -39,7 +39,7 @@
     },
     methods: {
       async getShare (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/invitePoster', params)
+        var data = await this.$net.get('/crossindustry/userPage/invitePoster', params)
         for (var i = 0; i < data.list.length; i++) {
           this.bannerArr.push(data.list[i].url)
         }

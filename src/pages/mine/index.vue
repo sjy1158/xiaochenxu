@@ -367,7 +367,7 @@
         })
       },
       async getUserinfo (params) {
-        const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getUserInformation', params)
+        const data = await this.$net.get('/crossindustry/phonePage/getUserInformation', params)
         this.userInfo = data
         this.userInfo.user.balance = this.userInfo.user.balance.toFixed(2)
         this.code = this.userInfo.user.invitationCode

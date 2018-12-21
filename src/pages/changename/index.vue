@@ -24,7 +24,7 @@
     methods: {
       async changeName () {
         if (this.params.nickName != '') {
-          const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/changeUserNickName', this.params)
+          const data = await this.$net.get('/crossindustry/userPage/changeUserNickName', this.params)
           if (data.code == 400) {
             wx.showToast({
               title: data.msg,

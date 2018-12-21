@@ -1,3 +1,4 @@
+var onlinelocation = "https://www.kuayet.com"
 const net = {
   get(url, data) {
     wx.showLoading({
@@ -5,7 +6,7 @@ const net = {
     })
     return new Promise((resolve, reject) => {
       wx.request({
-        url: url,
+        url: onlinelocation + url,
         data: data,
         method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         header: {
@@ -66,7 +67,7 @@ const net = {
     })
     return new Promise((resolve, reject) => {
       wx.request({
-        url: url,
+        url: onlinelocation + url,
         data: data,
         method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         header: {

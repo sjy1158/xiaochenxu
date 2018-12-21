@@ -149,13 +149,13 @@
     },
     methods: {
       async getList (params) {
-        var shophome = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopInformation', params)
+        var shophome = await this.$net.get('/crossindustry/shopPage/getShopInformation', params)
         this.shopObj = shophome
         this.getLocation(shophome.specificAddress,shophome.latitude,shophome.longitude)
       },
       //获取商家主页列表
       async getallList (params) {
-        var allshopList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopProduct', params)
+        var allshopList = await this.$net.get('/crossindustry/shopPage/getShopProduct', params)
         this.allList = allshopList.list
       },
       // 电弧拨打

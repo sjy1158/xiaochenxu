@@ -84,12 +84,12 @@
     },
     methods: {
       async getHeaderList (params) {
-        var headerArr = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopTypeListByShopType', params)
+        var headerArr = await this.$net.get('/crossindustry/shopPage/getShopTypeListByShopType', params)
         this.headerArr = headerArr.list
       },
       // 获取商品列表
       async getShoplist (params) {
-        var shopList = await this.$net.get('http://api.kuayet.com:8080/crossindustry/shopPage/getShopByShopType', params)
+        var shopList = await this.$net.get('/crossindustry/shopPage/getShopByShopType', params)
         for (var i = 0; i < shopList.list.length; i++) {
           shopList.list[i].distance = shopList.list[i].distance.toFixed(2)
         }

@@ -56,13 +56,13 @@
     },
     methods: {
       async getList (params) {
-        var List = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getProductListByType",params);
+        var List = await this.$net.get("/crossindustry/powerPurchaser/getProductListByType",params);
         for (var i = 0; i<List.list.length;i++) {
           this.imgUrls.push(List.list[i])
         }
       },
       async getTabarr (params) {
-        var tabarr = await this.$net.get("http://api.kuayet.com:8080/crossindustry/powerPurchaser/getType", params)
+        var tabarr = await this.$net.get("/crossindustry/powerPurchaser/getType", params)
         this.tabArr = tabarr.list
         this.params2.productType = this.tabArr[0].typeId
         this.getList(this.params2)

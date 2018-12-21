@@ -102,7 +102,7 @@
       },
       //获取用户信息
       async getUserinfo (params) {
-        const data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/phonePage/getUserInformation', params)
+        const data = await this.$net.get('/crossindustry/phonePage/getUserInformation', params)
         this.userInfo = data
         this.src = this.userInfo.user.headImage
       },

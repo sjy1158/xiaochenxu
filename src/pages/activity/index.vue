@@ -32,7 +32,7 @@
     },
     methods: {
       async getActive (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/findPage/FindActivityDetalis', params)
+        var data = await this.$net.get('/crossindustry/findPage/FindActivityDetalis', params)
         console.log(data)
         data.activityNotice.time = this.changeTime(data.activityNotice.time)
         data.activityNotice.detalis = JSON.parse(data.activityNotice.detalis)

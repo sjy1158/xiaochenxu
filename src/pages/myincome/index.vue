@@ -134,7 +134,7 @@
         this.getXinxi(this.params)
       },
       async getXinxi (params) {
-        var data = await this.$net.get('http://api.kuayet.com:8080/crossindustry/userPage/incomDetail', params)
+        var data = await this.$net.get('/crossindustry/userPage/incomDetail', params)
         console.log(JSON.stringify(data))
         this.userdata = data
       },
