@@ -1,7 +1,7 @@
 <template>
   <div class="setTings">
     <div class="mod1" @click="chooseImage()">
-      <img :src="src" alt="" style="border-radius: 50%;">
+      <img :src="params2.headImage" alt="" style="border-radius: 50%;">
       <p>点击修改头像</p>
     </div>
 
@@ -31,6 +31,14 @@
         currentSize: '',
         params: {
           userId: ''
+        },
+        params2: {
+          userId: '',
+          headImage: ''
+        },
+        postData: {
+          token: '',
+          key: ''
         }
       }
     },
@@ -60,15 +68,44 @@
         })
       },
       // 头像选择
+      async getKey (src) {
+        const _this = this
+        var key = Date.parse(new Date())
+        var data = await this.$net.get('/crossindustry/userPage/getQiNiuToken')
+        console.log(JSON.stringify(data))
+        wx.uploadFile({
+          url: 'http://up.qiniu.com',
+          filePath: src,
+          name: 'file',
+          formData: {
+            token: data.token,
+            key: key
+          },
+          success: function (res) {
+            var data = JSON.parse(res.data)
+            _this.params2.userId = _this.params.userId
+            _this.params2.headImage = 'http://image.kuayet.com/' + data.key
+            _this.changHeader(_this.params2)
+          }
+        })
+      },
+      async changHeader (params) {
+        var data = await this.$net.get('/crossindustry/userPage/changeUserHeadImage', params)
+        setTimeout(function () {
+          wx.navigateBack()
+        }, 2000)
+      },
       chooseImage () {
+        // console.log(this.getKey())
         const _this = this
         wx.chooseImage({
           count: 1,
           sizeType: ['compressed'],
           sourceType: ['album', 'camera'],
           success: function (res) {
-            const avatar = res.tempFilePaths
-            _this.src = avatar
+            _this.getKey(res.tempFilePaths[0])
+            // const avatar = res.tempFilePaths
+            // _this.src = avatar
           }
         })
       },
@@ -104,7 +141,7 @@
       async getUserinfo (params) {
         const data = await this.$net.get('/crossindustry/phonePage/getUserInformation', params)
         this.userInfo = data
-        this.src = this.userInfo.user.headImage
+        this.params2.headImage = this.userInfo.user.headImage
       },
       getSys () {
         var res = wx.getStorageInfoSync()

@@ -4,15 +4,15 @@
         <image lazy-load="true" src="/static/images/my_bg@3x.png" class="imgtitle"></image>
         <ul class="tabs">
           <li>
-            <p>99</p>
+            <p>0</p>
             <p>商家数量(家)</p>
           </li>
           <li>
-            <p>99</p>
+            <p>0</p>
             <p>商家订单(笔)</p>
           </li>
           <li>
-            <p>99.00</p>
+            <p>0</p>
             <p>商家收益(元)</p>
           </li>
         </ul>
@@ -22,29 +22,32 @@
       <div class="shoplist">
         <ul class="shoplist2">
           <li>
-            <image lazy-load="true" src="/static/images/appcode.png" class="shopimg"></image>
-            <div class="name" style="border-bottom: 1px solid #EDEDED">
-              <span style="float: right;line-height: 47px;font-size: 14px;letter-spacing: 1px;color: #FF0000">+5.15元</span>
-              <p style="color: #393939;font-size: 14px;position: absolute;top: 0px;font-weight: bold">星巴克Starbucks（新塘路2店）</p>
-              <p style="color: #717171;font-size: 12px;position: absolute;bottom:5px;">订单已完成<span style="margin-left: 0.5rem">2018-12-23 12:00</span></p>
-            </div>
+            <div style="width: 100%;height: 20px;background: white"></div>
           </li>
-          <li>
-            <image lazy-load="true" src="/static/images/appcode.png" class="shopimg"></image>
-            <div class="name" style="border-bottom: 1px solid #EDEDED">
-              <span style="float: right;line-height: 47px;font-size: 14px;letter-spacing: 1px;color: #FF0000">+5.15元</span>
-              <p style="color: #393939;font-size: 14px;position: absolute;top: 0px;font-weight: bold">星巴克Starbucks（新塘路2店）</p>
-              <p style="color: #717171;font-size: 12px;position: absolute;bottom:5px;">订单已完成<span style="margin-left: 0.5rem">2018-12-23 12:00</span></p>
-            </div>
-          </li>
-          <li>
-            <image lazy-load="true" src="/static/images/appcode.png" class="shopimg"></image>
-            <div class="name" style="border-bottom: 1px solid #EDEDED">
-              <span style="float: right;line-height: 47px;font-size: 14px;letter-spacing: 1px;color: #FF0000">+5.15元</span>
-              <p style="color: #393939;font-size: 14px;position: absolute;top: 0px;font-weight: bold">星巴克Starbucks（新塘路2店）</p>
-              <p style="color: #717171;font-size: 12px;position: absolute;bottom:5px;">订单已完成<span style="margin-left: 0.5rem">2018-12-23 12:00</span></p>
-            </div>
-          </li>
+          <!--<li>-->
+            <!--<image lazy-load="true" src="/static/images/appcode.png" class="shopimg"></image>-->
+            <!--<div class="name" style="border-bottom: 1px solid #EDEDED">-->
+              <!--<span style="float: right;line-height: 47px;font-size: 14px;letter-spacing: 1px;color: #FF0000">+5.15元</span>-->
+              <!--<p style="color: #393939;font-size: 14px;position: absolute;top: 0px;font-weight: bold">星巴克Starbucks（新塘路2店）</p>-->
+              <!--<p style="color: #717171;font-size: 12px;position: absolute;bottom:5px;">订单已完成<span style="margin-left: 0.5rem">2018-12-23 12:00</span></p>-->
+            <!--</div>-->
+          <!--</li>-->
+          <!--<li>-->
+            <!--<image lazy-load="true" src="/static/images/appcode.png" class="shopimg"></image>-->
+            <!--<div class="name" style="border-bottom: 1px solid #EDEDED">-->
+              <!--<span style="float: right;line-height: 47px;font-size: 14px;letter-spacing: 1px;color: #FF0000">+5.15元</span>-->
+              <!--<p style="color: #393939;font-size: 14px;position: absolute;top: 0px;font-weight: bold">星巴克Starbucks（新塘路2店）</p>-->
+              <!--<p style="color: #717171;font-size: 12px;position: absolute;bottom:5px;">订单已完成<span style="margin-left: 0.5rem">2018-12-23 12:00</span></p>-->
+            <!--</div>-->
+          <!--</li>-->
+          <!--<li>-->
+            <!--<image lazy-load="true" src="/static/images/appcode.png" class="shopimg"></image>-->
+            <!--<div class="name" style="border-bottom: 1px solid #EDEDED">-->
+              <!--<span style="float: right;line-height: 47px;font-size: 14px;letter-spacing: 1px;color: #FF0000">+5.15元</span>-->
+              <!--<p style="color: #393939;font-size: 14px;position: absolute;top: 0px;font-weight: bold">星巴克Starbucks（新塘路2店）</p>-->
+              <!--<p style="color: #717171;font-size: 12px;position: absolute;bottom:5px;">订单已完成<span style="margin-left: 0.5rem">2018-12-23 12:00</span></p>-->
+            <!--</div>-->
+          <!--</li>-->
         </ul>
       </div>
     </div>
@@ -52,6 +55,35 @@
 
 <script>
   export default {
+    data () {
+      return {
+        params: {
+          userId: '',
+          type: 1,
+          pageNum: 1,
+          num: 10,
+          month: ''
+        }
+      }
+    },
+    methods: {
+      async getDatelist (params) {
+        var data = await this.$net.get('/crossindustry/userPage/partnerIncome', params)
+        if (data.code == 400) {
+          wx.showToast({
+            title: data.msg,
+            icon: 'none'
+          })
+          setTimeout(function () {
+            wx.navigateBack()
+          }, 2000)
+        }
+      }
+    },
+    onLoad () {
+      this.params.userId = this.$saveToken.getToken().token
+      this.getDatelist(this.params)
+    }
   }
 </script>
 

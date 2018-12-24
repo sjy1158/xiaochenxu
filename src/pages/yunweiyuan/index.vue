@@ -1,12 +1,12 @@
 <template>
   <div class="novice">
-    <div class="mod1">
+    <div class="mod1" @click="choseimg">
       <div><img src="/static/images/electricity_purchase_icon@3x.png" alt=""><span>电商购素材</span></div>
     </div>
-    <div class="mod2">
+    <div class="mod2" @click="dsgsucai">
       <div><img src="/static/images/merchants_icon@3x.png" alt=""><span>联盟商家素材</span></div>
     </div>
-    <div class="mod3">
+    <div class="mod3" @click="rilisucai">
       <div><img src="/static/images/calendar@3x.png" alt=""><span>日历素材</span></div>
     </div>
     <div class="mod4" @click="changepass">
@@ -34,6 +34,27 @@
       skychongzhi () {
         wx.navigateTo({
           url: '../skychongzhi/main',
+          redirect: false
+        })
+      },
+      //跳转电商购素材
+      dsgsucai () {
+        wx.navigateTo({
+          url: '../dsgsucai/main',
+          redirect: false
+        })
+      },
+      //跳转日历素材
+      rilisucai () {
+        wx.navigateTo({
+          url: '../rilisucai/main',
+          redirect: false
+        })
+      },
+      //跳转电商购素材
+      choseimg () {
+        wx.navigateTo({
+          url: '../shoplist/main',
           redirect: false
         })
       }

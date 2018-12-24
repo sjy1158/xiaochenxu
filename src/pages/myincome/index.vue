@@ -144,17 +144,20 @@
       },
       //调换全部订单
       alldingdan (type) {
+        console.log(type)
         switch (type) {
           case 0 :
             wx.navigateTo({
               url: '../alldingdan/main',
               redirect: false
             })
+            break
           case 1 :
             wx.navigateTo({
               url: '../shopincome/main',
               redirect: false
             })
+            break
         }
       }
     },
