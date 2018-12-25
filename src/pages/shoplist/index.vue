@@ -1,6 +1,22 @@
 <template>
   <div>
     <div style="position: fixed;width: 100%;z-index: 9999999999;background: white;left: 0px;top: 0px;">
+      <div class="mod2">
+        <ul>
+          <li @click="showList(1,'京东',2)" v-bind:class="activeIndex==1 ? 'active':''">
+            <div v-show="activeIndex==1" style="height: 2px;width: 26px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -13px;"></div>
+            京东
+          </li>
+          <li @click="showList(0,'淘宝',1)" v-bind:class="activeIndex==0 ? 'active':''">
+            <div v-show="activeIndex==0" style="height: 2px;width: 26px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -13px;"></div>
+            淘宝
+          </li>
+          <li @click="showList(2,'拼多多',3)" v-bind:class="activeIndex==2 ? 'active':''">
+            <div v-show="activeIndex==2" style="height: 2px;width: 26px;background: #F08400;position: absolute;bottom: 0px;left: 50%;margin-left: -13px;"></div>
+            拼多多
+          </li>
+        </ul>
+      </div>
       <div class="mod1">
         <input type="text" placeholder="输入淘宝天猫商品名称／宝贝标题搜索">
       </div>
@@ -25,7 +41,7 @@
             <p>{{item.source}}价:<span style="font-size: 14px;color: #FF0000">{{item.price}}</span>元<span style="float: right">销量：{{item.salesVolume}}件</span></p>
             <p>
               <span style="vertical-align: middle">可抵:{{item.deduction}}元</span>
-              <span style="float: right;background: #F08400;letter-spacing: 1px;vertical-align: middle" @click="chooseshangchuan(item.imageUrl, item.name)">选择</span>
+              <span style="float: right;background: #F08400;letter-spacing: 1px;vertical-align: middle" @click="chooseshangchuan(item.imageUrl, item.name, item.id)">选择</span>
             </p>
           </div>
         </div>
@@ -53,12 +69,14 @@
         imgUrls: [],
         height: '127',
         scrollLeft: 0,
-        animate: true
+        animate: true,
+        activeIndex: 0
       }
     },
     methods: {
       async getList (params) {
-        var List = await this.$net.get("/crossindustry/powerPurchaser/getProductListByType",params);
+        var List = await this.$net.get("/crossindustry/powerPurchaser/getProductListByType", params)
+        console.log(JSON.stringify(List))
         for (var i = 0; i<List.list.length;i++) {
           this.imgUrls.push(List.list[i])
         }
@@ -91,16 +109,35 @@
         this.params2.productType = e.mp.detail.current+1;
       },
       //跳转电商购素材
-      chooseshangchuan (url, name) {
+      chooseshangchuan (url, name, proid) {
         wx.navigateTo({
-          url: '../choosesucai/main?imgurl=' + url + '&name=' + name,
+          url: '../choosesucai/main?imgurl=' + url + '&name=' + name + '&proid=' + proid,
           redirect: false
         })
+      },
+      showList (index, source, bigType) {
+        this.scrollLeft = 0
+        this.activeIndex = index
+        this.tabArr = []
+        this.imgUrls = []
+        this.params2.pageNum = 1
+        this.params.source = source
+        this.params2.source = source
+        this.getTabarr(this.params)
+        // this.params2.bigestTypeId = bigType
+        // this.getBigtype(this.params2)
+        // this.params3.source = source
+        // this.getTabarr(this.params3)
+        // this.imgUrls = []
+        // this.params.pageNum = 1
+        // this.params.source = source
+        // this.getList(this.params)
       }
     },
     onLoad () {
       this.imgUrls = []
       this.scrollLeft = 0
+      this.activeIndex = 0
       this.params.source = '淘宝'
       this.params2.source = '淘宝'
       this.getTabarr(this.params)
@@ -119,10 +156,15 @@
 </script>
 
 <style scoped>
+  .active{
+    color: #393939!important;
+    -webkit-background-clip: text;
+    /*-webkit-text-fill-color: transparent;*/
+  }
   #swiperContent{
     /*margin-top: 15px;*/
     position: absolute;
-    top: 1.7rem;
+    top: 111px;
   }
   .tabbar-bottom{
     color: #F08400!important;
@@ -131,11 +173,12 @@
   .top{
     width: 100%;
     text-align: center;
+    height: 30px;
     /*line-height: 42px;*/
     white-space: nowrap;
     position: relative;
     background: #fff;
-    margin-top: 16px;
+    margin-top: 10px;
     /*margin-left: 90px;*/
   }
   /*::-webkit-scrollbar {*/
@@ -157,7 +200,7 @@
   .mod1{
     padding-left: 48px;
     padding-right: 48px;
-    margin-top: 10px;
+    margin-top: 15px;
   }
   .mod1 input{
     width: 100%;
@@ -226,5 +269,31 @@
     to {
       opacity: 1;
     }
+  }
+
+
+
+  .mod2{
+    height: 30px;
+    /*background: pink;*/
+    /*line-height: 30px;*/
+  }
+  .mod2 ul{
+    display: flex;
+    width: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    top: 0px;
+  }
+  .mod2 ul li{
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    line-height: 36px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #717171;
+    position: relative;
   }
 </style>

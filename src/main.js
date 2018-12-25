@@ -23,7 +23,7 @@ export default {
       'pages/shopguanli/main', 'pages/skychongzhi/main', 'pages/changeuserpass/main', 'pages/zifeishuoming/main', 'pages/changjianpro/main', 'pages/aboutus/main',
       'pages/founding/main', 'pages/activity/main', 'pages/allshops/main', 'pages/player/main', 'pages/suredingdan/main', 'pages/waitlisten/main', 'pages/inline/main',
       'pages/searchshop/main', 'pages/myincome/main', 'pages/shopincome/main', 'pages/myteam/main', 'pages/zhanghuxinxi/main', 'pages/yunweiyuan/main', 'pages/changepassword/main',
-      'pages/dsgsucai/main', 'pages/rilisucai/main', 'pages/shoplist/main', 'pages/choosesucai/main'],
+      'pages/dsgsucai/main', 'pages/rilisucai/main', 'pages/shoplist/main', 'pages/choosesucai/main', 'pages/newnovice/main'],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',

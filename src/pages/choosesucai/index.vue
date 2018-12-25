@@ -1,21 +1,21 @@
 <template>
   <div class="sucai">
     <div class="mod1">
-        <textarea rows="3" cols="20" class="inputText" v-model="text" placeholder="在这里填写内容…">
+        <textarea rows="3" cols="20" class="inputText" v-model="params.content" placeholder="在这里填写内容…">
         </textarea>
-      <div style="color: #B2B2B2;font-size: 12px;letter-spacing: 1px;">{{text.length}}/800</div>
+      <div style="color: #B2B2B2;font-size: 12px;letter-spacing: 1px;">{{params.content.length}}/800</div>
     </div>
     <!--图片上传-->
     <div class="mod2">
       <ul style="background: white">
         <li>
-          <img :src="src" alt="">
+          <img :src="params.image" alt="">
         </li>
       </ul>
     </div>
     <!--发布按钮-->
     <div class="mod3">
-      <button type="button">确认发布</button>
+      <button type="button" @click="fabubtn">确认发布</button>
     </div>
   </div>
 </template>
@@ -25,16 +25,53 @@
   export default {
     data () {
       return {
-        text: '',
-        src: '',
+        params: {
+          account: '',
+          content: '',
+          image: '',
+          proId: '',
+          type: 1
+        },
         imgList: []
       }
     },
     methods: {
+      async fabu (params) {
+        var data = await this.$net.get('/crossindustry/userPage/addPublicity', params)
+        wx.showToast({
+          title: '发布成功',
+          icon: 'none',
+          duration: 2000
+        })
+        setTimeout(function () {
+          wx.switchTab({
+            url: '../founding/main'
+          })
+        }, 2000)
+      },
+      fabubtn () {
+        if (this.params.content!= '') {
+          if (this.params.image!= '') {
+            this.fabu(this.params)
+          } else {
+            wx.showToast({
+              title: '请选择图片',
+              icon: 'none'
+            })
+          }
+        } else {
+          wx.showToast({
+            title: '请输入内容',
+            icon: 'none'
+          })
+        }
+      }
     },
     onLoad () {
-      this.text = getRouter().name
-      this.src = getRouter().imgurl
+      this.params.account = wx.getStorageSync('adphone')
+      this.params.content = getRouter().name
+      this.params.image = getRouter().imgurl
+      this.params.proId = getRouter().proid
     },
     onPullDownRefresh () {
       this.imgList = []
