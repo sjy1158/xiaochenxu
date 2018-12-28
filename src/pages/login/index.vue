@@ -54,13 +54,7 @@
             duration: 2000,
             success: function (res) {
               setTimeout(function () {
-                wx.switchTab({
-                  url: _this.url,
-                  success: function (res) {
-                    const page = getCurrentPages().pop()
-                    page.onLoad()
-                  }
-                })
+                wx.navigateBack()
               }, 2000)
             }
           })

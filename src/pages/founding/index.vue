@@ -56,11 +56,11 @@
                 <p>{{item.name}}</p>
                 <p>{{item.time}}</p>
                 <div class="zhuanfa" @click="shareUrl(item.shareUrl)">
-                  <img src="/static/images/merchant_notice@2x.png" style="height: 11px;width: 11px;vertical-align: middle" alt="">
+                  <img src="/static/images/share@3x.png" style="height: 11px;width: 11px;vertical-align: middle" alt="">
                   <span style="font-size: 12px;color: #F08400;vertical-align: middle;margin-left: 3px;">{{item.shareNum}}</span>
                 </div>
               </div>
-              <p style="width: 100%;padding-bottom: 10px;font-size: 12px;letter-spacing: 1px;color: #393939">{{item.content}}<span style="color: #F08400">查看详情</span></p>
+              <p style="width: 100%;padding-bottom: 10px;font-size: 12px;letter-spacing: 1px;color: #393939">{{item.content}}<span style="color: #F08400" @click="xiangqing(item.proId)">查看详情</span></p>
               <div class="imgtab">
                 <div v-for="(itemname,idx) in item.image" :key="idx" :data-index="idx">
                   <image lazy-load="true" class="srtImg" :src="itemname" @click="priImg"></image>
@@ -169,6 +169,13 @@
         wx.previewImage({
           current: url,
           urls: [url]
+        })
+      },
+      //查看详情
+      xiangqing (id) {
+        wx.navigateTo({
+          url: '../out/main?id=' + id,
+          redirect: false
         })
       }
     },
@@ -393,7 +400,7 @@
     height: 19px;
     width: 61px;
     text-align: center;
-    line-height: 15px;
+    line-height: 16px;
     background: #FDF4E9;
     position: absolute;
     right: 0px;

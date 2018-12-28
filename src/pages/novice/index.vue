@@ -22,9 +22,9 @@
         this.imgList = data.list
       },
       addNovice (image) {
-        wx.navigateTo({
-          url: '../newnovice/main?imageicon=' + image,
-          redirect: false
+        wx.previewImage({
+          current: image,
+          urls: [image]
         })
       }
     },

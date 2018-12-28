@@ -1,5 +1,8 @@
 <template>
   <div>
+    <button open-type="contact" style="position: fixed;z-index: 9999999999999999999;top: 70%;right: 20px;">
+      <image lazy-load="true" src="/static/images/weixin@3x.png" style="border-radius: 50%;height: 30px;width: 30px;"></image>
+    </button>
     <div class="content">
       <div style="position: fixed;left: 0px;z-index: 99999999999999999999;width: 100%;background: white;top: 0px;">
         <div class="mod2">
@@ -79,7 +82,7 @@
     <div style="padding: 0px 5px;height: auto">
       <div class="contnetList">
         <ul>
-          <li v-for="item in imgUrls" @click="openXiangqing(item.id)">
+          <li v-for="item in imgUrls" @click.stop="openXiangqing(item.id)">
               <image lazy-load="true" src="/static/images/bgre.png" style="" class="img"></image>
               <image v-if="item.imageUrl" lazy-load="true" :src="item.imageUrl" class="img1 srtImg"></image>
               <p style="font-size: 12px;" class="shopname">
@@ -94,7 +97,8 @@
               </p>
               <div class="discon">
                 <image lazy-load="true" src="/static/images/deduction_bg@3x.png" class="img2"></image>
-                <div style="color: white;height: 20px;position: absolute;left: 0px;font-size: 12px;text-align: center" class="disconmoney">可抵 : {{item.deduction}}</div>
+                <div style="color: white;height: 20px;position: absolute;left: 0px;font-size: 12px;text-align: center;line-height: 20px;" class="disconmoney">可抵 : {{item.deduction}}</div>
+                <button open-type='share' :data-name="item.name" :data-image="item.imageUrl" :data-id="item.id" style="position: absolute;right: 0px;height: 20px;font-size: 12px;line-height: 20px;color: white;background: #F08400;text-align: center" @click.stop="onShareAppMessage">分享</button>
               </div>
           </li>
         </ul>
@@ -256,6 +260,20 @@ export default {
         current: 'http://image.kuayet.com/FsPmo8U1_89Ytinmr20Xy-UFdXE0',
         urls: ['http://image.kuayet.com/FsPmo8U1_89Ytinmr20Xy-UFdXE0']
       })
+    }
+  },
+  //分享
+  onShareAppMessage (res) {
+    var name = res.target.dataset.name
+    var image = res.target.dataset.image
+    var id = res.target.dataset.id
+    return {
+      title: name,
+      path: '/pages/out/main?id=' + id,
+      imageUrl: image,
+      success: function (res) {
+        console.log('转发成功')
+      }
     }
   },
   watch: {
@@ -520,7 +538,7 @@ export default {
   }
   .discon{
     position: absolute;
-    width: 50%;
+    width: 84%;
     /*width: 76px;*/
     height: 20px;
     left: 8%;

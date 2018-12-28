@@ -502,7 +502,7 @@ export default {
       left: 84px;
     }
     .centerItem{
-      margin-top: 7px;
+      margin-top: 4px;
     }
   }
   @media (min-width: 700px) and (max-width: 1000px) {
@@ -513,7 +513,7 @@ export default {
       left: 84px;
     }
     .centerItem{
-      margin-top: 7px;
+      margin-top: 4px;
     }
   }
   @media (min-width: 350px) and (max-width: 700px) {

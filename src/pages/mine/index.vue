@@ -28,7 +28,7 @@
           <image lazy-load="true" src="/static/images/my_become_partner@3x.png" alt="" style="width: 81px;height: 32px;float: right;position: absolute;bottom:0.1rem;right: 18px;"></image>
           <!--按钮组-->
           <div class="btncontent">
-            <div style="float: left;">
+            <div style="float: left;" @click="zhanghuxinxi">
               <div>余额：{{userInfo.user.balance}}</div>
               <image lazy-load="true" class="img2" src="/static/images/my_balance@3x.png" alt=""></image>
             </div>
@@ -185,7 +185,6 @@
       <div style="width: 100%;text-align: center">
         <image lazy-load="true" src="/static/images/kuayet.com@3x.png" alt="" style="width: 163px;height: 35px;padding-top: 15px;padding-bottom: 20px;"></image>
       </div>
-      </div>
     </div>
 </template>
 
@@ -209,7 +208,7 @@
         })
       },
       fuzhi () {
-        const _this = this;
+        const _this = this
         wx.setClipboardData({
           data: _this.code,
           success: function (res) {
@@ -323,6 +322,12 @@
       openIncome () {
         wx.navigateTo({
           url: '../myincome/main?name=' + this.userInfo.user.userType,
+          redirect: false
+        })
+      },
+      zhanghuxinxi () {
+        wx.navigateTo({
+          url: '../zhanghuxinxi/main',
           redirect: false
         })
       },

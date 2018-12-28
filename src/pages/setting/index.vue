@@ -15,7 +15,6 @@
         <span style="color: #F08400" @click="cleanSys()">清除缓存</span>
       </div>
     </div>
-
     <div class="mod3">
       <button type="button" @click="outLogin()">退出登录</button>
     </div>
